@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // provider = "mysql"
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  sc      String       @id @unique
+  name    String
+  teacher Teacher[]
+}
+
+
+model Teacher {
+  key_id        Int                 @id @unique @default(autoincrement())
+  empId         String?             @unique
+  credPersonId  String?             @unique
+  caltidesNumId String?
+  tn            Int?
+  firstName     String
+  middleName    String?
+  lastName      String
+  dateBirth     String?
+  statusCode    String?
+  seid          String?             @unique                 
+  sc            String?
+  school        School?             @relation(fields: [sc], references: [sc])
+  credentials   TeacherCredential[]
+  sections      Section[]
+  created_at    DateTime            @default(now())
+  updated_at    DateTime            @updatedAt
+}
+
+
+model TeacherCredential {
+  key_id           Int      @id @unique @default(autoincrement())
+  credPersonId     String
+  teacher          Teacher @relation(fields: [credPersonId], references: [credPersonId])
+  caltidesNumId    String?
+  docTitle         String
+  authCode         String
+  subjectCodeMajor String?
+  subjectCodeMinor String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+}
+
+model Course {
+  key_id             Int             @id @unique @default(autoincrement())
+  stateCourseIdSec   String?         @unique
+  stateCourseIdAuth  String?        @unique
+  authTableId     StateCourseAuth[]   
+  sectionTableId  Section[]         
+  // @@unique([stateCourseId, courseNumber])
+}
+
+model Section {
+  key_id            Int               @id @unique @default(autoincrement())
+  stateCode         String?
+  sc                String
+  sectionId         String
+  empId             String
+  empId2            String
+  seid              String
+  sectionNumber     String
+  grade             String
+  courseName        String
+  courseNumber      String
+  period            String
+  course            Course?           @relation(fields: [stateCode], references: [stateCourseIdSec])
+  teacher           Teacher?          @relation(fields: [seid], references: [seid])
+  created_at        DateTime          @default(now())
+  updated_at        DateTime          @updatedAt
+}
+
+model StateCourseAuth {
+  key_id            Int      @id @unique @default(autoincrement())
+  stateCourseNumber String   
+  localCourse       Course?  @relation(fields: [stateCourseNumber], references: [stateCourseIdAuth])
+  authType          String
+  docTitle          String
+  authTitle         String
+  authCode          String
+  subjectCode       String
+  subject           String
+  notes             String?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+}
