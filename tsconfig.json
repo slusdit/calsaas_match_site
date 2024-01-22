@@ -23,6 +23,12 @@
     ],
     "strictNullChecks": true
   },
+  "baseUrl": "app/",
+  "paths": {
+    "@/*": ["app/*"],
+    "@/components/*": ["components/*"],
+    "@/utils/*": ["utils/*"]
+  },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
@@ -32,4 +38,5 @@
   "exclude": [
     "node_modules"
   ]
+  
 }

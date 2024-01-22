@@ -9,6 +9,7 @@ export interface TeacherCardType {
   empId: Teacher['empId']
   sc: Teacher['sc']
   sections: Section[]
+  credentials: Credential[]
 }
 
 const prisma = new PrismaClient
@@ -21,7 +22,8 @@ const fetchTeachers = async (): Promise<TeacherCardType[]> => {
       lastName: 'asc'
     }, 
     include: {
-      sections: true
+      sections: true,
+      credentials: true
       }
   });
   console.log(teachers)
