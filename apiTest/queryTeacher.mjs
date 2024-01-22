@@ -3,7 +3,9 @@
 import { PrismaClient } from '@prisma/client';
 
 let searchSeid = "1779309648"
-// searchSeid = "1501894172"
+searchSeid = "1501894172"
+// searchSeid = "3289698262"
+// searchSeid = "8191491490"
 
 const prisma = new PrismaClient();
 
@@ -42,14 +44,19 @@ lookupTeacherBySeid(searchSeid)
             console.log(`sc: ${teacher.sc} `)
             console.log('credentials:')
             for (const credential of teacher.credentials) {
-                console.log(`   TeacherAuthCode: ${credential.authCode}, TeacherDocTitle: ${credential.docTitle},`)
+                console.log(`   Auth Code: ${credential.authCode}, Doc Title: ${credential.docTitle}, Subject Code Major: ${credential.subjectCodeMajor}, Minor: ${credential.subjectCodeMinor}`)
             }
             console.log("\n~~~ Section & State info ~~~")
             for (const section of teacher.sections) {
                 console.log(`\nCourse Name: ${section.courseName}, State Course Code: ${section.course.stateCourseIdSec}`);
                 console.log(`Local Course Code: ${section.courseNumber}, Section ID: ${section.key_id},\n`);
-                for (const stateAuth of section.course.authTableId) {
-                    console.log(`   StateAuthCode: ${stateAuth.authCode}, StateDocTitle: ${stateAuth.docTitle}`)
+                if (section.course.authTableId) {
+                    for (const stateAuth of section.course.authTableId) {
+                        console.log(`   StateAuthCode: ${stateAuth.authCode}, StateDocTitle: ${stateAuth.docTitle}, SubjectCode: ${stateAuth.subjectCode}`)
+                    }
+                }
+                if (section.course.authTableId.length === 0) {
+                    console.log(` !! No State Auth Codes found for state course code: ${section.stateCode}`)
                 }
             }  
         } 

@@ -42,7 +42,7 @@ model Teacher {
 model TeacherCredential {
   key_id           Int      @id @unique @default(autoincrement())
   credPersonId     String
-  teacher          Teacher @relation(fields: [credPersonId], references: [credPersonId])
+  teacher          Teacher? @relation(fields: [credPersonId], references: [credPersonId])
   caltidesNumId    String?
   docTitle         String
   authCode         String
@@ -54,7 +54,7 @@ model TeacherCredential {
 
 model Course {
   key_id             Int             @id @unique @default(autoincrement())
-  stateCourseIdSec   String?         @unique
+  stateCourseIdSec   String ?        @unique
   stateCourseIdAuth  String?        @unique
   authTableId     StateCourseAuth[]   
   sectionTableId  Section[]         
@@ -67,8 +67,8 @@ model Section {
   sc                String
   sectionId         String
   empId             String
-  empId2            String
-  seid              String
+  empId2            String?
+  seid              String?
   sectionNumber     String
   grade             String
   courseName        String
