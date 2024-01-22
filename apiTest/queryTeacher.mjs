@@ -19,7 +19,7 @@ async function lookupTeacherBySeid(id) {
                 include: {
                     course: {
                         include: {
-                            sectionTableId: true,
+                            // sectionTableId: true,
                             authTableId: true
                         }
                     }

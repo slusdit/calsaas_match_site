@@ -1,9 +1,8 @@
 # Calsaas Early Warning
 
-Built with Next.js
 
 ## Tests
-Backend tests in `/apiTest/` 
+CLI backend tests found in `/apiTest/` 
 run `node fileName.mjs` 
 
 ## TODO
