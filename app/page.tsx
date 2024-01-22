@@ -15,6 +15,11 @@ const prisma = new PrismaClient
 const fetchTeachers = async (): Promise<TeacherCardType[]> => {
   const teachers = await prisma.teacher.findMany({
     // take: 10,
+    orderBy: {
+      // TODO: Add SC once table is setup
+      // sc: 'asc', 
+      lastName: 'asc'
+    }, 
     include: {
       sections: true
       }
@@ -30,9 +35,7 @@ export default async function TeacherList() {
     <main>
       <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
         {teachers.map((teacher) => {
-          console.log(teacher.sections.length)
            if (teacher.sections.length > 0) {
-          
               return <TeacherCard teacher={teacher} />
             }
             })}

@@ -10,6 +10,8 @@ export default function TeacherCard({ teacher }: Props) {
         <div className="w-64 h-48 m-3 p-3 rounded overflow-hidden border cursor-pointer" key={teacher.seid}>
             <Link href={`/teacher/${teacher.seid}`}>
                 <div className="m-3 text-center">
+                    {/* TODO: Add when School table is setup 
+                    {teacher.sc} */}
                     {teacher.firstName} {teacher.lastName}
                     <div className="mt-2">
                         SEID: {teacher.seid}
