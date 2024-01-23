@@ -11,6 +11,14 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 
 ## TODO
 
--   [ ] ALL frontend work
--   [ ] Build out `School` table
--   [x] Build out base prisma.schema
+- [ ] Frontend
+    - [ ] Teacher List page
+        - [ ] Add search / filter ability
+    - [ ] Teacher details page
+        - [ ] Add highlighting to credentials
+        - [ ] Add demographics tab or card on top of Teacher Credentials
+        - [ ] ?Add credential use counder
+        - [x] Add highlighting to matching state auth row
+- [ ] Backend
+    - [ ] Build out `School` table
+    - [x] Build out base prisma.schema
