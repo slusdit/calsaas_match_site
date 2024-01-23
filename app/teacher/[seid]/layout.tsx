@@ -12,7 +12,7 @@ export default function TeacherLayout({
     return (
         <main>
             {/* <TeacherHeader name={params.seid} /> */}
-            <div className="flex m-auto w-2/3 justify-between items-start 0-mt-11">
+            <div className="flex m-auto w-5/6 justify-between items-start 0-mt-11">
                 {children}
             </div>
         </main>

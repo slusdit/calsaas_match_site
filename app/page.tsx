@@ -26,7 +26,6 @@ const fetchTeachers = async (): Promise<TeacherCardType[]> => {
       credentials: true
       }
   });
-  console.log(teachers)
   return teachers
 }
 
@@ -35,7 +34,7 @@ export default async function TeacherList() {
 
   return (
     <main>
-      <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
+      <div className="py-3 px-24 mt-10 flex flex-wrap justify-center">
         {teachers.map((teacher) => {
            if (teacher.sections.length > 0) {
               return <TeacherCard teacher={teacher} />
