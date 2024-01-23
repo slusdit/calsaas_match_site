@@ -1,9 +1,9 @@
 export default function MainHeader(){    
 
     return (
-        <head className="p-2 bg-blue-600">
-            <div className="text-xl font-bold">CALSAAS Early Warning</div>
+        <div className="p-2 bg-blue-600">
+            <div className="text-xl font-bold text-white text-center">CALSAAS Early Warning</div>
         
-        </head>
+        </div>
     )
 }
