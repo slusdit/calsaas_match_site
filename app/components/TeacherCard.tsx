@@ -12,7 +12,9 @@ export default function TeacherCard({ teacher }: Props) {
                 <div className="m-3 text-center">
                     {/* TODO: Add when School table is setup 
                     {teacher.sc} */}
-                    {teacher.firstName} {teacher.lastName}
+                    <span className="font-semibold">
+                        {teacher.firstName} {teacher.lastName}
+                    </span>
                     <div className="mt-2">
                         SEID: {teacher.seid}
                     </div>

@@ -1,19 +1,14 @@
-import {  PrismaClient, Teacher, Section } from "@prisma/client"
+import {  PrismaClient, Teacher, Section, Prisma } from "@prisma/client"
 import Link from "next/link"
 import TeacherCard from "./components/TeacherCard"
 
-export interface TeacherCardType {
-  seid: Teacher['seid']
-  firstName: Teacher['firstName']
-  lastName: Teacher['lastName']
-  empId: Teacher['empId']
-  sc: Teacher['sc']
+export interface TeacherCardType extends Teacher{
   sections: Section[]
   credentials: Credential[]
 }
 
 const prisma = new PrismaClient
-const fetchTeachers = async (): Promise<TeacherCardType[]> => {
+const fetchTeachers = async (): Promise<Teacher[]> => {
   const teachers = await prisma.teacher.findMany({
     // take: 10,
     orderBy: {
