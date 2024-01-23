@@ -14,6 +14,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 - [ ] Frontend
     - [ ] Teacher List page
         - [ ] Add search / filter ability
+        - [ ] Memoize initial data pull
     - [ ] Teacher details page
         - [ ] Add highlighting to credentials
         - [ ] Add demographics tab or card on top of Teacher Credentials
