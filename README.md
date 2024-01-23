@@ -17,10 +17,11 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
         - [ ] Memoize initial data pull
         - [ ] CRUD for teacher demographics
     - [ ] Teacher details page
-        - [ ] Back to search button
+        - [ ] Top level highlighting on course list
         - [ ] CRUD for teacher credentials
         - [ ] Add demographics tab or card on top of Teacher Credentials
         - [ ] ?Add credential use counder
+        - [x] Back to search button
         - [x] Add highlighting to matching state auth to credentials
         - [x] Add highlighting to matching state auth row
 - [ ] Backend

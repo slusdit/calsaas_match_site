@@ -5,9 +5,16 @@ import {
     AccordionTrigger,
   } from "@/components/ui/accordion"
 import StateAuthTable from "./StateAuthTable"
-import {  Section, TeacherCredential } from "@prisma/client"
+import {  Section, TeacherCredential, Course, StateCourseAuth } from "@prisma/client"
 
-export default function SectionsList({ sections, credentials }: {sections:Section[], credentials:TeacherCredential[]}) {
+type StateAuthWithCourse = Course & {
+    authTableId: StateCourseAuth 
+}
+
+type SectionWithCourse = Section & {
+    course: StateAuthWithCourse 
+}
+export default function SectionsList({ sections, credentials }: {sections:SectionWithCourse[], credentials:TeacherCredential[]}) {
     // console.log(sections)
     
     return (
@@ -23,7 +30,7 @@ export default function SectionsList({ sections, credentials }: {sections:Sectio
                 
                 return ( 
                
-            <AccordionItem value={section.sectionId}>
+            <AccordionItem value={section.sectionId} className={matchedClassName}>
                     <AccordionTrigger className={matchedClassName}>Course: <span className="font-bold">{section.courseName}</span> Section Number: <span className="font-bold">{section.sectionNumber}</span></AccordionTrigger>
                         <AccordionContent>
                             <div className="mt-2 p-2">

@@ -7,9 +7,9 @@ interface Props {
 
 export default function TeacherCard({ teacher }: Props) {
     return (
-        <div className="w-64 h-48 m-3 p-3 rounded overflow-hidden border-4 cursor-pointer" key={teacher.seid}>
-            <Link href={`/teacher/${teacher.seid}`}>
-                <div className="m-3 text-center">
+        <div className="w-64 m-3 rounded-lg overflow-hidden border-2 cursor-pointer" key={teacher.seid}>
+            <Link href={`/teacher/${teacher.seid}`} className="h-full">
+                <div className="p-2 text-center bg-slate-200 hover:bg-sky-100">
                     {/* TODO: Add when School table is setup 
                     {teacher.sc} */}
                     <span className="font-semibold">
