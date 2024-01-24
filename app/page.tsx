@@ -1,6 +1,8 @@
-import {  PrismaClient, Teacher, Section, Prisma } from "@prisma/client"
-import Link from "next/link"
+import { PrismaClient, Teacher, Section, Prisma } from "@prisma/client"
 import TeacherCard from "./components/TeacherCard"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
 
 export interface TeacherCardType extends Teacher{
   sections: Section[]
@@ -27,8 +29,16 @@ const fetchTeachers = async (): Promise<Teacher[]> => {
 export default async function TeacherList() {
   const teachers = await fetchTeachers()
 
+  
+
   return (
     <main>
+      <div className="search-bar pt-2 m-auto">
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label htmlFor="searchOption">Search by SEID: </Label>
+      <Input id="searchOption" type="text" placeholder="NOT WORKING" />
+    </div>
+        </div>
       <div className="py-3 px-2/8 flex flex-wrap justify-center">
         {teachers.map((teacher) => {
            if (teacher.sections.length > 0) {

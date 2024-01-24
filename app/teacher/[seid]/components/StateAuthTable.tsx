@@ -37,7 +37,7 @@ export default function StateAuthTable(
                     );
 
                     // Assign a different className if matched
-                    const rowClassName = isMatched ? "bg-green-400" : "";
+                    const rowClassName = isMatched ? "bg-green-400 font-bold" : "font-bold";
 
                     return (
                         <TableRow key={authCode.key_id} className={rowClassName}>
