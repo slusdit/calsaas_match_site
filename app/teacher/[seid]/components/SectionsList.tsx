@@ -18,18 +18,19 @@ export default function SectionsList({ sections, credentials }: {sections:Sectio
     // console.log(sections)
     
     return (
+        <div className="w-96">
 
         <Accordion type="single" collapsible className="w-full">
             {sections.map((section) => {
                 const isMatched = credentials.some(credential =>
                     credential.docTitle === section.course.authTableId.docTitle &&
                     credential.authCode === section.course.authTableId.authCode
-                );
-
-                const matchedClassName = isMatched ? "bg-green-500" : ""
-                
-                return ( 
-               
+                    );
+                    
+                    const matchedClassName = isMatched ? "bg-green-500" : ""
+                    
+                    return ( 
+                        
             <AccordionItem value={section.sectionId} className={matchedClassName}>
                     <AccordionTrigger className={matchedClassName}>Course: <span className="font-bold">{section.courseName}</span> Section Number: <span className="font-bold">{section.sectionNumber}</span></AccordionTrigger>
                         <AccordionContent>
@@ -37,12 +38,13 @@ export default function SectionsList({ sections, credentials }: {sections:Sectio
                                 <StateAuthTable
                                     authCodes={section.course.authTableId}
                                     credentials={credentials}
-                                />
+                                    />
                             </div>
                         </AccordionContent>
             </AccordionItem>
             )}
-)}
+            )}
     </Accordion>
+    </div>
     )
 }

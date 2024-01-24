@@ -3,16 +3,15 @@ import TeacherCard from "./components/TeacherCard"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-
 export interface TeacherCardType extends Teacher{
   sections: Section[]
   credentials: Credential[]
 }
 
 const prisma = new PrismaClient
-const fetchTeachers = async (): Promise<Teacher[]> => {
+const fetchTeachers = async (): Promise<TeacherCardType[]> => {
   const teachers = await prisma.teacher.findMany({
-    // take: 10,
+    take: 10000,
     orderBy: {
       // TODO: Add SC once table is setup
       // sc: 'asc', 
@@ -29,14 +28,12 @@ const fetchTeachers = async (): Promise<Teacher[]> => {
 export default async function TeacherList() {
   const teachers = await fetchTeachers()
 
-  
-
   return (
     <main>
-      <div className="search-bar pt-2 m-auto">
+      <div className="search-bar p-6 m-auto">
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="searchOption">Search by SEID: </Label>
-      <Input id="searchOption" type="text" placeholder="NOT WORKING" />
+      <Input id="searchOption" type="text" placeholder="DO NOT USE" />
     </div>
         </div>
       <div className="py-3 px-2/8 flex flex-wrap justify-center">
