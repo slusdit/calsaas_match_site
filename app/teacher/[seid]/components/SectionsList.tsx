@@ -6,6 +6,7 @@ import {
   } from "@/components/ui/accordion"
 import StateAuthTable from "./StateAuthTable"
 import {  Section, TeacherCredential, Course, StateCourseAuth } from "@prisma/client"
+import { match } from "assert"
 
 type StateAuthWithCourse = Course & {
     authTableId: StateCourseAuth 
@@ -27,14 +28,17 @@ export default function SectionsList({ sections, credentials }: {sections:Sectio
                     credential.authCode === section.course.authTableId.authCode
                     );
                     
-                    const matchedClassName = isMatched ? "bg-green-500" : ""
-                    
+                    const matchedClassName = isMatched ? "bg-green-500 Matched" : ""
+                    console.log(`Match State: ${matchedClassName}`)
                     return ( 
                         
             <AccordionItem value={section.sectionId} className={matchedClassName}>
                     <AccordionTrigger className={matchedClassName}>Course: <span className="font-bold">{section.courseName}</span> Section Number: <span className="font-bold">{section.sectionNumber}</span></AccordionTrigger>
                         <AccordionContent>
-                            <div className="mt-2 p-2">
+                                <div className="mt-2 p-2 w-auto">
+                                    <div className="m-auto">
+                                        State Course Code: <span className="font-bold">{section.stateCode}</span>
+                                    </div>    
                                 <StateAuthTable
                                     authCodes={section.course.authTableId}
                                     credentials={credentials}

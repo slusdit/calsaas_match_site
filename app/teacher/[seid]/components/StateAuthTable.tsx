@@ -36,7 +36,6 @@ export default function StateAuthTable(
                         credential.authCode === authCode.authCode
                     );
 
-                    // Assign a different className if matched
                     const rowClassName = isMatched ? "bg-green-400 font-bold" : "font-bold";
 
                     return (
