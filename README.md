@@ -21,7 +21,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
         - [ ] State Course Code link to State Course page
         - [ ] Top level highlighting on course list
         - [ ] Add demographics tab or card on top of Teacher Credentials
-        - [ ] ?Add credential use counder
+        - [ ] ?Add credential use counter
         - [x] Back to search button
         - [x] Add highlighting to matching state auth to credentials
         - [x] Add highlighting to matching state auth row
@@ -31,3 +31,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 - [ ] Backend
     - [ ] Build out `School` table
     - [x] Build out base prisma.schema
+    - [ ] API
+        - [ ] CRUD for TeacherCredentials
+        - [ ] CRUD / update for state auth codes
+        - [ ] Import for Teachers & Sections
