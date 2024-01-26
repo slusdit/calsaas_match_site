@@ -11,9 +11,31 @@ const prisma = new PrismaClient();
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
+      const search = req.query.search as string;
+
       const teachers: TeacherCardType[] = await prisma.teacher.findMany({
         take: 100,
         where: {
+          OR: [
+            {
+              caltidesNumId: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              lastName: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              firstName: {
+                contains: search,
+                mode: 'insensitive', 
+              },
+            },
+          ],
           sections: {
             some: {}
           }

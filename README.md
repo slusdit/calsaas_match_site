@@ -26,8 +26,12 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 
   - [ ] Teacher List page
     - [ ] Add search / filter ability
-    - [ ] Memoize initial data pull
     - [ ] CRUD for teacher demographics
+    - [X] Teacher search
+      - [X] SEID
+      - [X] lastName
+      - [X] firstName
+    ~~- [ ] Memoize initial data pull~~
   - [ ] Teacher details page
     - [ ] CRUD for teacher credentials
     - [ ] State Course Code link to State Course page
