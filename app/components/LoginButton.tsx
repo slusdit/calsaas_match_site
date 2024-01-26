@@ -10,19 +10,24 @@ import Link from "next/link";
 
 export default function LoginButton() {
     const { data: session } = useSession();
+    if (session) {
 
-    if (session){
+    
+    const imgUrl = session?.user?.image ? session.user.image : undefined
+        
+    
+        
         return(
             <div className="">
                 <Popover>
                     <PopoverTrigger>
                     <Avatar>
-                        <AvatarImage src={session?.user.image} />
+                        <AvatarImage src={imgUrl} />
                         <AvatarFallback></AvatarFallback>                  
                     </Avatar> 
                     </PopoverTrigger>
                     <PopoverContent className="grid justify-items-center w-80 mr-8">
-                        <p>Welcome, {session.user.name}</p>
+                        <p>Welcome, {session?.user?.name}</p>
                         <div className="py-2">
 
                         <Link href="/profile">User Profile</Link>

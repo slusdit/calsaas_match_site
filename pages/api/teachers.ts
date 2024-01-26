@@ -15,7 +15,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         take: 10000,
         orderBy: {
           lastName: 'asc',
-          // Add other ordering fields as needed
         },
         include: {
           sections: true,
@@ -30,3 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(405).end(); // Method Not Allowed
   }
 }
+
+
+export const config = {
+  api: {
+    responseLimit: false,
+  }
+}
+// export { handler as POST}

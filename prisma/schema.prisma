@@ -83,7 +83,7 @@ model Section {
 model StateCourseAuth {
   key_id            Int      @id @unique @default(autoincrement())
   stateCourseNumber String   
-  localCourse       Course  @relation(fields: [stateCourseNumber], references: [stateCourseIdAuth])
+  localCourse       Course?  @relation(fields: [stateCourseNumber], references: [stateCourseIdAuth])
   authType          String
   docTitle          String
   authTitle         String
