@@ -34,7 +34,6 @@ export default function TeacherSearch() {
                     <Label htmlFor="searchOption">
                         Search by SEID:
                     </Label>
-                    <span>SEARCH IS {searchString}</span>
                     <Input
                         id="searchOption"
                         type="text"
