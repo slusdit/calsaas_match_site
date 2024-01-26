@@ -12,7 +12,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     try {
       const teachers: TeacherCardType[] = await prisma.teacher.findMany({
-        take: 10000,
+        take: 100,
+        where: {
+          sections: {
+            some: {}
+          }
+        },
         orderBy: {
           lastName: 'asc',
         },
@@ -32,8 +37,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
 export const config = {
-  api: {
-    responseLimit: false,
-  }
+  // api: {
+  //   responseLimit: false,
+  // }
 }
 // export { handler as POST}
