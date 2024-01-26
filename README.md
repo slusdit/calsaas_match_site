@@ -14,6 +14,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 - Course
 - Auth
 - Teacher
+- School
 - Sections
 - Credentials
 
@@ -45,7 +46,8 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
     - [ ] List all course sections with that course code
     - [ ] Link on teacher name via SEID to teacher page
 - [ ] Backend
-  - [ ] Build out `School` table
+  - [x] Build out `School` table
+    - [x] Linked to `Section` 
   - [x] Build out base prisma.schema
   - [ ] API
     - [ ] CRUD for TeacherCredentials

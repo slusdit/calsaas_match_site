@@ -10,7 +10,7 @@ export default function TeacherSearch() {
 
     const fetchTeachers = async (): Promise<TeacherCardType[]> => {
 
-        const response = await fetch(`http://localhost:3000/api/teachers?search=${searchString}`, { method: 'POST' });
+        const response = await fetch(`/api/teachers?search=${searchString}`, { method: 'POST' });
         const data: TeacherCardType[] = await response.json();
         return data;
     };
@@ -32,14 +32,14 @@ export default function TeacherSearch() {
             <div className="search-bar p-6 m-auto">
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="searchOption">
-                        Search by SEID:
+                        Search for Teachers:
                     </Label>
                     <Input
                         id="searchOption"
                         type="text"
                         value={searchString}
                         onChange={handleInputChange}
-                        placeholder="Enter SEID"
+                        placeholder="Last name / SEID"
                     />
                 </div>
             </div>

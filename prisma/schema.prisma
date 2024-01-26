@@ -14,7 +14,8 @@ datasource db {
 model School {
   sc      String       @id @unique
   name    String
-  teacher Teacher[]
+  teachers Teacher[]
+  sections Section[]
 }
 
 
@@ -74,6 +75,7 @@ model Section {
   courseName        String
   courseNumber      String
   period            String
+  school            School?            @relation(fields: [sc], references: [sc])
   course            Course?           @relation(fields: [stateCode], references: [stateCourseIdSec])
   teacher           Teacher?          @relation(fields: [seid], references: [seid])
   created_at        DateTime          @default(now())

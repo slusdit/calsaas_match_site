@@ -8,10 +8,14 @@ export interface TeacherCardType extends Teacher{
   }
 
 export default function TeacherListGrid({teachers}:{teachers:TeacherCardType[]}) {
-
+    if (teachers.length < 1) {
+        return ( <div></div>)
+    }
+    console.log(teachers)
     return (
         
         <div className="py-3 px-2/8 flex flex-wrap justify-center">
+            
         {teachers.map((teacher) => {
             //  if (teacher.sections.length > 0) {
                 return <TeacherCard teacher={teacher} key={teacher.seid}/>

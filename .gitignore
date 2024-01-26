@@ -9,6 +9,7 @@
 # testing
 /coverage
 
+
 # next.js
 /.next/
 /out/
@@ -29,10 +30,15 @@ yarn-error.log*
 .env*.local
 .env
 
-seeding/
+seeding/*.csv
+seeding/*.txt
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# old
+*.old

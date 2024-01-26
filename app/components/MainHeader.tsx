@@ -5,9 +5,9 @@ export default function MainHeader(){
 
     return (
         <div className="p-2 bg-blue-600 ">
-            <div className=" ml-3 text-xl font-bold text-white text-center flex justify-between ">
-                <Link href={'/'}>
-                    <div>
+            <div className=" ml-3 text-xl font-bold text-white text-center flex justify-between">
+                <Link href={'/'} >
+                    <div className="pt-1">
                         CALSAAS Early Warning
                     </div>
                 </Link>
