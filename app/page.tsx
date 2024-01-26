@@ -10,32 +10,10 @@ export interface TeacherCardType extends Teacher{
 
 const prisma = new PrismaClient
 
-const fetchTeachers = async (): Promise<TeacherCardType[]> => {
-
-  const teacherIdsWithSections = await prisma.section.findMany({
-    select: {
-      seid: true
-    },
-    distinct: ['seid']
-  });
-  const teachers = await prisma.teacher.findMany({
-    take: 10000,
-    orderBy: {
-      // TODO: Add SC once table is setup
-      // sc: 'asc', 
-      lastName: 'asc'
-    }, 
-    // where: {
-    //   seid: {
-    //     in: teacherIdsWithSections
-    //   }
-    // },
-    include: {
-      sections: true,
-      credentials: true
-    }
-  });
-  return teachers
+const fetchTeachers = async ():Promise<TeacherCardType[]> => {
+  const teachers = await fetch('http://localhost:3000/api/teachers', { method: 'POST' })
+  const data:TeacherCardType[] = await teachers.json()
+  return data
 }
 
 export default async function TeacherList() {

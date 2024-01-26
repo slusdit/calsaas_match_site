@@ -1,0 +1,32 @@
+import { PrismaClient, Teacher, Section, TeacherCredential } from '@prisma/client';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+export interface TeacherCardType extends Teacher {
+  sections: Section[];
+  credentials: TeacherCredential[];
+}
+
+const prisma = new PrismaClient();
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === 'POST') {
+    try {
+      const teachers: TeacherCardType[] = await prisma.teacher.findMany({
+        take: 10000,
+        orderBy: {
+          lastName: 'asc',
+          // Add other ordering fields as needed
+        },
+        include: {
+          sections: true,
+          credentials: true,
+        },
+      });
+      res.status(200).json(teachers);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  } else {
+    res.status(405).end(); // Method Not Allowed
+  }
+}
