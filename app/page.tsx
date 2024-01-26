@@ -9,7 +9,15 @@ export interface TeacherCardType extends Teacher{
 }
 
 const prisma = new PrismaClient
+
 const fetchTeachers = async (): Promise<TeacherCardType[]> => {
+
+  const teacherIdsWithSections = await prisma.section.findMany({
+    select: {
+      seid: true
+    },
+    distinct: ['seid']
+  });
   const teachers = await prisma.teacher.findMany({
     take: 10000,
     orderBy: {
@@ -17,10 +25,15 @@ const fetchTeachers = async (): Promise<TeacherCardType[]> => {
       // sc: 'asc', 
       lastName: 'asc'
     }, 
+    // where: {
+    //   seid: {
+    //     in: teacherIdsWithSections
+    //   }
+    // },
     include: {
       sections: true,
       credentials: true
-      }
+    }
   });
   return teachers
 }

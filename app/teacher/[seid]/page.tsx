@@ -32,7 +32,8 @@ const fetchTeacherBySeid = async (seid: string) => {
       },
 
       credentials: true,  
-    }
+    },
+    
   })
   
   if (!teacher) {

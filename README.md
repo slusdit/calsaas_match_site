@@ -12,6 +12,10 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 ## TODO
 
 - [ ] Frontend
+    - [ ] Auth
+        - [ ] Role based google auth
+        ~~- [ ] Basic google auth~~
+
     - [ ] Teacher List page
         - [ ] Add search / filter ability
         - [ ] Memoize initial data pull
