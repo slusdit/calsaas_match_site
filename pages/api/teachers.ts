@@ -35,6 +35,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 mode: 'insensitive', 
               },
             },
+            {
+              empId: {
+                contains: search,
+                mode: 'insensitive', 
+              },
+            },
           ],
           sections: {
             some: {}
