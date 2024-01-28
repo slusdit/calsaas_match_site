@@ -23,7 +23,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 - [ ] Frontend
   - [ ] Auth
     - [ ] Role based google auth
-    ~~- [ ] Basic google auth~~
+      - [X] Basic SLUSD only google auth
   - [ ] Teacher List page
     - [ ] Add search / filter ability
     - [ ] CRUD for teacher demographics

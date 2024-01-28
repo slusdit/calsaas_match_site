@@ -10,10 +10,10 @@ import { useSession } from "next-auth/react";
 export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
     const [searchString, setSearchString] = useState<string>('');
+    const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
     const [locations, setLocations] = useState<School[]>([])
 
     const session = useSession()
-
 
 
     const handleSchoolChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +39,11 @@ export default function TeacherSearch() {
         setSchools();
     },[])
 
+    useEffect(() =>{
+       
+    console.log(selectedSchool)
+    },[selectedSchool])
+
      useEffect(() => {
         const fetchTeachers = async (): Promise<TeacherCardType[]> => {
 
@@ -51,8 +56,8 @@ export default function TeacherSearch() {
             setTeachers(data);
         };
         fetchData();
-    }, [searchString]); // Depend on searchString
-    console.log(locations)
+    }, [searchString]); 
+    
     return (
         <div className="">
             <div className="search-bar p-6 m-auto">
@@ -69,7 +74,7 @@ export default function TeacherSearch() {
                     />
                 </div>
                 <div>
-                    <SchoolSelector schools={locations}/>
+                    <SchoolSelector updateSchool={setSelectedSchool}/>
                 </div>
                 
             </div>

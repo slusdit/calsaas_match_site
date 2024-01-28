@@ -5,33 +5,39 @@ import { useEffect, useState } from "react";
 
 interface Props {
     schools?: School[]
-    updateSchool?: any
+    updateSchool?: (school: string) => void
 }
 
-export default function SchoolSelector({ schools }: Props) {
-    const [locations, setLocations] = useState<School[]>([])
+export default function SchoolSelector({ schools, updateSchool }: Props) {
+    const [locations, setLocations] = useState<School[]>(schools || [])
+    console.log(schools)
 
-    if (!schools){
-    async ():Promise<School[]> => {
-        const response = await fetch('/api/schools', {'method': 'POST'})
-        const data = await response.json()
-        console.log(`SCHOOL DATA: ${data}`)
-        setLocations(data)
-        return data
-    }          
+    useEffect(() => {
+        if (!schools) { 
+            const fetchSchools = async (): Promise<void> => {
+                const response = await fetch('/api/schools', {'method': 'POST'})
+                const data = await response.json()
+                console.log(`SCHOOL DATA: ${data}`)
+                setLocations(data)
+            }
+            fetchSchools()
+        }
+        if (schools){
+            setLocations(schools)
+        }
+    }, [])
+
+    const handleSchoolChange = (school: School) => {
+        if (updateSchool) {
+            updateSchool(school.sc)
+        }
     }
 
-    if (!schools) {
-        schools = [{
-            "sc": '2',
-            "name": 'Test School'
-        }]
-    }
 
     return (
-        <div>
-            <Select value='' >
-                <SelectTrigger className="w-[180px]">
+        <div className="max-w-80 p-2">
+            <Select >
+                <SelectTrigger>
                     <SelectValue placeholder="School Filter" />
                 </SelectTrigger>
                 <SelectContent>

@@ -6,7 +6,13 @@ const prisma = new PrismaClient();
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
-      const schools: School[] = await prisma.school.findMany({});
+      const schools: School[] = await prisma.school.findMany({
+        where:{
+          sections:{
+            some:{}
+          }
+        }
+      });
       res.status(200).json(schools);
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
