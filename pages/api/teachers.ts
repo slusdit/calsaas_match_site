@@ -12,6 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     try {
       const search = req.query.search as string;
+      const school = req.query.school as string;
+      console.log(school)
 
       const teachers: TeacherCardType[] = await prisma.teacher.findMany({
         take: 100,
@@ -43,8 +45,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
           ],
           sections: {
-            some: {}
-          }
+            some: school && school !== 'null' ? {
+              sc: {
+                equals: school,
+              }, 
+            } : {},
+          },
         },
         orderBy: {
           lastName: 'asc',

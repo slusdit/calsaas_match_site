@@ -25,8 +25,8 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
     - [ ] Role based google auth
       - [X] Basic SLUSD only google auth
   - [ ] Teacher List page
-    - [ ] Add search / filter ability
     - [ ] CRUD for teacher demographics
+    - [X] Add search / filter ability by school 
     - [X] Teacher search
       - [X] SEID
       - [X] lastName

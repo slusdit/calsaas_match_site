@@ -11,43 +11,18 @@ export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
     const [searchString, setSearchString] = useState<string>('');
     const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
-    const [locations, setLocations] = useState<School[]>([])
 
     const session = useSession()
-
-
-    const handleSchoolChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setSearchString(event.target.value);
-    };
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchString(event.target.value);
     };
 
-    useEffect(() => {
-        const fetchLocations = async ():Promise<School[]> => {
-            const response = await fetch(`/api/schools`, {method: 'POST'});
-            const data = await response.json()
-            return data
-        }
-
-        const setSchools = async () => {
-            const data = await fetchLocations();
-            setLocations(data)
-        }
-
-        setSchools();
-    },[])
-
-    useEffect(() =>{
-       
-    console.log(selectedSchool)
-    },[selectedSchool])
 
      useEffect(() => {
         const fetchTeachers = async (): Promise<TeacherCardType[]> => {
 
-            const response = await fetch(`/api/teachers?search=${searchString}`, { method: 'POST' });
+            const response = await fetch(`/api/teachers?search=${searchString}&school=${selectedSchool}`, { method: 'POST' });
             const data: TeacherCardType[] = await response.json();
             return data;
         };
@@ -56,7 +31,7 @@ export default function TeacherSearch() {
             setTeachers(data);
         };
         fetchData();
-    }, [searchString]); 
+    }, [searchString, selectedSchool]); 
     
     return (
         <div className="">
@@ -74,7 +49,7 @@ export default function TeacherSearch() {
                     />
                 </div>
                 <div>
-                    <SchoolSelector updateSchool={setSelectedSchool}/>
+                    <SchoolSelector onSchoolChange={setSelectedSchool}/>
                 </div>
                 
             </div>
