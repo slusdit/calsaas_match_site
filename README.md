@@ -44,6 +44,8 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
   - [ ] State Course Page
     - [ ] List all course sections with that course code
     - [ ] Link on teacher name via SEID to teacher page
+  - [ ] Components
+    - [ ] Teacher Card fix double line background gap
 - [ ] Backend
   - [x] Build out `School` table
     - [x] Linked to `Section` 

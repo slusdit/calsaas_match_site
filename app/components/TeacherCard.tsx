@@ -1,5 +1,10 @@
+import { Section, Teacher, TeacherCredential } from "@prisma/client";
 import Link from "next/link";
-import { TeacherCardType } from "../page";
+
+export interface TeacherCardType extends Teacher{
+    sections: Section[]
+    credentials: TeacherCredential[]
+  }
 
 interface Props {
     teacher: TeacherCardType
@@ -7,12 +12,12 @@ interface Props {
 
 export default function TeacherCard({ teacher }: Props) {
     return (
-        <div className="w-64 m-3 rounded-lg overflow-hidden border-2 cursor-pointer hover:scale-105 transition-transform duration-300" key={teacher.seid}>
+        <div className="w-64 m-3  bg-slate-200 hover:bg-slate-300 rounded-lg overflow-hidden border-2 cursor-pointer hover:scale-105 transition-transform duration-300" key={teacher.seid}>
             <Link href={`/teacher/${teacher.seid}`} className="h-full">
-                <div className="p-2 text-center bg-slate-200 hover:bg-slate-300">
+                <div className="p-2 text-center">
                     {/* TODO: Add when School table is setup 
                     {teacher.sc} */}
-                    <span className="font-semibold">
+                    <span className="font-semibold ">
                         {teacher.firstName} {teacher.lastName}
                     </span>
                     <div className="mt-2">
