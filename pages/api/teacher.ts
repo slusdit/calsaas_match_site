@@ -12,7 +12,6 @@ const prisma = new PrismaClient();
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     if (req.method === 'POST') {
-
         const firstName = req.query.firstName
         const lastName = req.query.lastName
         const seid = req.query.seid
