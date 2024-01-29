@@ -4,7 +4,6 @@ import TeacherListGrid, { TeacherCardType } from "./TeacherListGrid";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from "react";
 import  SchoolSelector from "./SchoolSelector";
-import { School } from "@prisma/client";
 import { useSession } from "next-auth/react";
 
 export default function TeacherSearch() {
