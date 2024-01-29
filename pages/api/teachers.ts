@@ -9,10 +9,12 @@ export interface TeacherCardType extends Teacher {
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+  if (req.method === 'GET') {
+    
+    const search = req.query.search as string;
+    const school = req.query.school as string;
+
     try {
-      const search = req.query.search as string;
-      const school = req.query.school as string;
     
       const teachers: TeacherCardType[] = await prisma.teacher.findMany({
         take: 100,
@@ -61,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       res.status(200).json(teachers);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'Internal Server Error Try failed' });
     }
   } else {
     res.status(405).end(); // Method Not Allowed

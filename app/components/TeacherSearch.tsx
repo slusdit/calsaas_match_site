@@ -20,8 +20,8 @@ export default function TeacherSearch() {
 
      useEffect(() => {
         const fetchTeachers = async (): Promise<TeacherCardType[]> => {
-
-            const response = await fetch(`/api/teachers?search=${searchString}&school=${selectedSchool}`, { method: 'POST' });
+            
+            const response = await fetch(`/api/teachers?search=${searchString}&school=${selectedSchool}`, { method: 'GET' });
             const data: TeacherCardType[] = await response.json();
             return data;
         };
@@ -29,6 +29,7 @@ export default function TeacherSearch() {
             const data = await fetchTeachers();
             setTeachers(data);
         };
+
         fetchData();
     }, [searchString, selectedSchool]); 
     
