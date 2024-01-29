@@ -9,7 +9,7 @@ export interface TeacherCardType extends Teacher{
 
 export default function TeacherListGrid({teachers}:{teachers:TeacherCardType[]}) {
     if (teachers.length === 0) {
-        return ( <div>No Teachers Found</div>)
+        return ( <div className="float text-center">No Teachers Found</div>)
     }
     return (
         

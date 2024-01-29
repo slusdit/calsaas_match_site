@@ -4,7 +4,8 @@ import TeacherListGrid, { TeacherCardType } from "./TeacherListGrid";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from "react";
 import  SchoolSelector from "./SchoolSelector";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
@@ -54,7 +55,13 @@ export default function TeacherSearch() {
                 
             </div>
             { session.status === 'unauthenticated' ? 
-            <div className="float text-center">Please sign in</div>
+            <div className="float text-center">
+                <Link
+                    className='text-underline' 
+                    href={'/api/auth/signin'}>
+                       Please Sign In
+                </Link>
+            </div>
             :
             <TeacherListGrid teachers={teachers} />
         }
