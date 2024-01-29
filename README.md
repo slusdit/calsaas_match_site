@@ -21,9 +21,6 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 ## TODO
 
 - [ ] Frontend
-  - [ ] Auth
-    - [ ] Role based google auth
-      - [X] Basic SLUSD only google auth
   - [ ] Teacher List page
     - [ ] Implement `zod`
     - [ ] CRUD for teacher demographics
@@ -47,11 +44,14 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
     - [ ] Link on teacher name via SEID to teacher page
   - [ ] Components
     - [ ] Teacher Card fix double line background gap
+  - [X] Auth
+    - [X] Role based google auth
+      - [X] Basic SLUSD only google auth
 - [ ] Backend
-  - [x] Build out `School` table
-    - [x] Linked to `Section` 
-  - [x] Build out base prisma.schema
   - [ ] API
     - [ ] CRUD for TeacherCredentials
     - [ ] CRUD / update for state auth codes
     - [ ] Import for Teachers & Sections
+  - [x] Build out `School` table
+    - [x] Linked to `Section` 
+  - [x] Build out base prisma.schema

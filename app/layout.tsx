@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body suppressHydrationWarning={true} className={inter.className}>
         <SessionProvider>
           <main className="bg-slate-100 h-dvh">
             <MainHeader />

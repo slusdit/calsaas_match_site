@@ -24,7 +24,6 @@ const fetchTeacherBySeid = async (seid: string) => {
         include: {
           course: {
             include: {
-              // sectionTableId: true,
               authTableId: true
             }
           }
@@ -52,6 +51,7 @@ export default async function TeacherPage({ params }: Params) {
         <>
           <BackButton />
           <div className="mt-5">Name: <span className="font-bold">{teacher.firstName} {teacher.lastName}</span></div>
+          <div className="mt-5">SEID: <span className="font-bold">{teacher.seid}</span></div>
         </>
       </div>
       <div className="flex space-x-4 mt-10">

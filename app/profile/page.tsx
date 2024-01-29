@@ -6,7 +6,7 @@ import ProfileImage from "../components/ProfileImage"
 
 export default function SessionPage() {
     const { data: session } = useSession()
-
+    console.log(session)
     return (
         <div className="flex flex-col">
             <div className="m-auto">

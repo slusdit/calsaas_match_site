@@ -32,8 +32,8 @@ export default function CredentialsTable({ credentials }: { credentials: credent
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {credentials.map((credential) => (
-                    <TableRow>
+                {credentials.map((credential, key) => (
+                    <TableRow key={key}>
                         <TableCell>{credential.docTitle}</TableCell>
                         <TableCell>{credential.authCode}</TableCell>
                         <TableCell>{credential.subjectCodeMajor}</TableCell>
