@@ -13,8 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const search = req.query.search as string;
       const school = req.query.school as string;
-      console.log(school)
-
+    
       const teachers: TeacherCardType[] = await prisma.teacher.findMany({
         take: 100,
         where: {
