@@ -23,14 +23,13 @@ model Teacher {
   key_id        Int                 @id @unique @default(autoincrement())
   empId         String?             @unique
   credPersonId  String?             @unique
-  caltidesNumId String?
-  tn            Int?
+  caltidesNumId String              @unique
   firstName     String
   middleName    String?
   lastName      String
   dateBirth     String?
-  statusCode    String?
-  seid          String?             @unique                 
+  statusCode    String?             @default("A")
+  seid          String              @unique                 
   sc            String?
   school        School?             @relation(fields: [sc], references: [sc])
   credentials   TeacherCredential[]
@@ -43,6 +42,7 @@ model Teacher {
 model TeacherCredential {
   key_id           Int      @id @unique @default(autoincrement())
   credPersonId     String
+  seid             String?
   teacher          Teacher? @relation(fields: [credPersonId], references: [credPersonId])
   caltidesNumId    String?
   docTitle         String
