@@ -124,7 +124,7 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  role          AssignedRoles[]    
+  role          ROLE[]    
   name          String?
   email         String?   @unique
   emailVerified DateTime?
@@ -141,17 +141,9 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model AssignedRoles {
-  id                String    @id @default(cuid())
-  userId            String
-  user              User @relation(fields: [userId], references: [id])
-  role              ROLE
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt          
-}
-
 enum ROLE {
   USER
   ADMIN
   SUPERADMIN
+  HR
 }

@@ -4,13 +4,15 @@ import TeacherListGrid, { TeacherCardType } from "./TeacherListGrid";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from "react";
 import  SchoolSelector from "./SchoolSelector";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { ROLE } from "prisma/prisma-client"
 import Link from "next/link";
 
 export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
     const [searchString, setSearchString] = useState<string>('');
     const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
+    const authorizedRoles:ROLES = ["HR", ""]
 
     const session = useSession()
 
@@ -54,16 +56,18 @@ export default function TeacherSearch() {
                 </div>
                 
             </div>
-            { session.status === 'unauthenticated' ? 
+            { session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user.role.includes(role)) ?
+            
+            <TeacherListGrid teachers={teachers} />
+            :
             <div className="float text-center">
                 <Link
                     className='text-underline' 
                     href={'/api/auth/signin'}>
-                       Please Sign In
+                       Unauthorized: Must be have role: {authorizedRoles.join()}
                 </Link>
             </div>
-            :
-            <TeacherListGrid teachers={teachers} />
+            
         }
         </div>
     );

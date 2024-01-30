@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LoginButton from "./LoginButton";
+import TestLogButton from "./TestLogButton";
 
 export default function MainHeader(){    
 

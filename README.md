@@ -50,6 +50,9 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 - [ ] Backend
   - [ ] API
     - [ ] CRUD for TeacherCredentials
+      - [ ] Update
+      - [ ] Delete
+      - [X] Create
     - [ ] CRUD / update for state auth codes
     - [ ] Import for Teachers & Sections
   - [x] Build out `School` table

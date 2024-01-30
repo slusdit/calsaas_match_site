@@ -14,16 +14,18 @@ export default function LoginButton() {
 
     
     const imgUrl = session?.user?.image ? session.user.image : undefined
-        
     
-        
+
+    const userInitials = session.user ? session.user?.name.split(" ").map((initial) => initial[0]).join('') : "NA"
+    // const userInitials = "NA"
+            
         return(
             <div className="">
                 <Popover>
                     <PopoverTrigger>
                     <Avatar>
                         <AvatarImage src={imgUrl} />
-                        <AvatarFallback></AvatarFallback>                  
+                        <AvatarFallback className="text-slate-600">{userInitials}</AvatarFallback>                  
                     </Avatar> 
                     </PopoverTrigger>
                     <PopoverContent className="grid justify-items-center w-80 mr-8">
