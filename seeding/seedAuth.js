@@ -33,7 +33,9 @@ const prisma = new PrismaClient();
                 });
             } catch (error) {
                 // console.log(error)
-                console.log(`State Course Number: ${item.stateCourseNumber}`)
+                console.log(item)
+                console.log(error)
+                console.log(`State Course Number: ${item.CourseCode}`)
                 if (item.stateCourseNumber === undefined) { continue }
                 errorList.push(item.stateCourseNumber)
             }

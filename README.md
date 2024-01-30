@@ -11,10 +11,10 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 
 ## Seed Order
 
+- School
 - Course
 - Auth
 - Teacher
-- School
 - Sections
 - Credentials
 
