@@ -8,8 +8,9 @@ async function main() {
     const prisma = new PrismaClient();
         // const data:Prisma.CourseCreateInput[] = [];
         const data = [];
+        const errorList =[]
         const table = prisma.course
-        fs.createReadStream('courseSeed.csv')
+        fs.createReadStream('courses.csv')
             .pipe(csv())
             .on('data', (row) => {
                 data.push(row);
@@ -20,21 +21,38 @@ async function main() {
                 await table.deleteMany({})
                 console.log('Table Truncated')
                 for (const item of data) {
-                    // if (item.credPersonId) {
-    
+                    const data = {
+                        'stateCourseIdAuth': item.stateCode,
+                        'stateCourseIdSec': item.stateCode,
+                        'localCourseNumber': item.courseNumber,
+                        'localCourseName': item.courseName,
+                    }
+                    // console.log(data)
+                    try{
                     await table.create({
-                        data: {
-                            'stateCourseIdAuth': item.stateCode,
-                            'stateCourseIdSec': item.stateCode,
-                            // 'courseName': item.courseName,
-                            },
+                        data: data,
                         // skipDuplicates: true
                         });
-                    // }
-                }
+            } catch (error) {
+               
+                console.log(`Local Course Number ${item.courseName}`)
+                errorList.push(data)
+
+            }
+        }
     
                 console.log('Data seeding completed');
                 await prisma.$disconnect();
+                if (errorList.length > 0 ) {
+                    const content = errorList.join('\n')
+    
+                    fs.writeFile('seedAuth-StateCode_errors.txt', content, err => {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                    })
+                }
             });
     }
     

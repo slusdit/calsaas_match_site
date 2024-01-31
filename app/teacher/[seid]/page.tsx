@@ -44,7 +44,7 @@ const fetchTeacherBySeid = async (seid: string) => {
 export default async function TeacherPage({ params }: Params) {
 
   const teacher = await fetchTeacherBySeid(params.seid)
-
+  console.log(teacher)
   return (
     <div className="m-auto md:flex-col">
       <div className="p-2 mt-8">

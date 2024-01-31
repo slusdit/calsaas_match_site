@@ -39,9 +39,9 @@ model Teacher {
 
 model TeacherCredential {
   key_id           Int      @id @unique @default(autoincrement())
-  credPersonId     String
+  credPersonId     String?
   seid             String?
-  teacher          Teacher? @relation(fields: [credPersonId], references: [credPersonId])
+  teacher          Teacher? @relation(fields: [seid], references: [seid])
   caltidesNumId    String?
   docTitle         String
   authCode         String
@@ -55,6 +55,8 @@ model Course {
   key_id             Int             @id @unique @default(autoincrement())
   stateCourseIdSec   String ?        @unique
   stateCourseIdAuth  String?        @unique
+  localCourseName    String?
+  localCourseNumber  String?
   authTableId     StateCourseAuth[]   
   sectionTableId  Section[]         
   // @@unique([stateCourseId, courseNumber])

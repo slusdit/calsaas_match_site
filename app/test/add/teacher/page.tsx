@@ -1,11 +1,7 @@
+import TeacherForm from "./components/TeacherForm"
 
-import SchoolSelector from "@/app/components/SchoolSelector"
-
-export default async function PopoverDemo() {
-  return (
-    <div>
-      <SchoolSelector />
-    </div>
-    
-  )
+const testPage = () => {
+  <TeacherForm />
 }
+
+export default testPage

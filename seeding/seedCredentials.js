@@ -29,7 +29,8 @@ const prisma = new PrismaClient();
                             await table.create({
                             data: {
                                 'credPersonId': item.CredPersonId,
-                                'caltidesNumId': item.CaltidesNumId,
+                                'seid': item.CALTIDESNumId,
+                                'caltidesNumId': item.CALTIDESNumId,
                                 'docTitle': item.DocTitle?.trim(),
                                 'authCode': item.AuthCode?.trim(),
                                 'subjectCodeMajor': subjectMoajor,
@@ -39,12 +40,14 @@ const prisma = new PrismaClient();
                             
                         } catch (error) {
                             errorList.push(`{
-                                'credPersonId': '${item.CredPersonId}',
-                                'caltidesNumId': '${item.CaltidesNumId}',
-                                'docTitle': '${item.DocTitle?.trim()}',
-                                'authCode': '${item.AuthCode?.trim()}',
-                                'subjectCodeMajor': '${subjectMoajor}',
-                                'subjectCodeMinor': '${subjectMinor}',
+                                'credPersonId': item.CredPersonId,
+                                'seid': item.CALTIDESNumId,
+                                'caltidesNumId': item.CALTIDESNumId,
+                                'docTitle': item.DocTitle?.trim(),
+                                'authCode': item.AuthCode?.trim(),
+                                'subjectCodeMajor': subjectMoajor,
+                                'subjectCodeMinor': subjectMinor,
+                                },
                                 }`)
                             console.log(error)
                         }

@@ -24,7 +24,7 @@ export default function SectionsList({ sections, credentials }: {sections:Sectio
         <Accordion type="single" collapsible className="w-full">
             {sections.map((section) => {
                 const isMatched = credentials.some(credential =>
-                    credential.docTitle === section.course.authTableId.docTitle &&
+                    credential.docTitle === section.course?.authTableId.docTitle &&
                     credential.authCode === section.course.authTableId.authCode
                     );
                     
@@ -40,7 +40,7 @@ export default function SectionsList({ sections, credentials }: {sections:Sectio
                                         State Course Code: <span className="font-bold">{section.stateCode}</span>
                                     </div>    
                                 <StateAuthTable
-                                    authCodes={section.course.authTableId}
+                                    authCodes={section.course?.authTableId}
                                     credentials={credentials}
                                     />
                             </div>
