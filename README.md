@@ -54,7 +54,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
       - [ ] Delete
       - [X] Create
     - [ ] CRUD / update for state auth codes
-    - [ ] Import for Teachers & Sections
+    - [ ] Import for Teachers & Sections 
   - [x] Build out `School` table
     - [x] Linked to `Section` 
   - [x] Build out base prisma.schema

@@ -18,10 +18,8 @@ interface User {
    }
 
 
-export default function SessionPage() {
-    const { data: session } = useSession<Session>()
-    const other = useSession()
-    console.log(other)
+export default function ProfilePage() {
+    const { data: session } = useSession()
     return (
         <div className="flex flex-col">
             <div className="m-auto">
@@ -40,7 +38,7 @@ export default function SessionPage() {
                         <div>
                             {session && session.user && session?.user?.role &&
                                 <div className="flex mr-1">
-                                    Roles: {session?.user.role.map((badge: string, key: int) => {
+                                    Roles: {session?.user?.role.map((badge: string, key: int) => {
                                         return <Badge key={key} className="mx-1">{badge.toString().toLowerCase()}</Badge>
                                     }
                                     )}
