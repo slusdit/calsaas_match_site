@@ -1,6 +1,7 @@
+import { serverAuth } from "@/lib/auth";
 import TeacherHeader from "./components/TeacherHeader";
 
-export default function TeacherLayout({
+export default async function TeacherLayout({
     children,
     params
   }: {
@@ -8,12 +9,14 @@ export default function TeacherLayout({
     params: {seid: string}
   })  {
 
-    
+    const session = await serverAuth()
     return (
         <main>
             {/* <TeacherHeader name={params.seid} /> */}
             <div className="flex m-auto justify-between items-start 0-mt-11">
-                {children}
+              {session &&
+                children
+              }
             </div>
         </main>
     )
