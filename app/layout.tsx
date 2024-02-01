@@ -5,9 +5,7 @@ import MainHeader from './components/MainHeader'
 import './globals.css'
 import  SessionProvider  from '@/app/components/SessionProvider'
 import { NextRequest } from 'next/server'
-import authOptions from '@/pages/api/auth/[...nextauth]'
 import { serverAuth } from '@/lib/auth'
-
 
 const inter = Inter({ subsets: ['latin'] })
 

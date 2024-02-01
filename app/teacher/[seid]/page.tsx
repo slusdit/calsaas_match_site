@@ -4,6 +4,11 @@ import { notFound } from "next/navigation";
 import CredentialsTable from "./components/CredentialsTable";
 import SectionsList from "./components/SectionsList";
 import BackButton from "@/app/components/BackButton";
+// Uncomment when in production
+// import ma from "@/lib/prisma"
+
+// Comment out when in production
+const prisma = new PrismaClient();
 
 interface Params {
   params: {
@@ -11,7 +16,6 @@ interface Params {
   }
 }
 
-const prisma = new PrismaClient();
 
 const fetchTeacherBySeid = async (seid: string) => {
   const teacher = await prisma.teacher.findUnique({
