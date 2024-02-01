@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import { getServerSession } from 'next-auth'
 import { Inter } from 'next/font/google'
 import MainHeader from './components/MainHeader'
 import './globals.css'
-import  SessionProvider  from '@/app/components/SessionProvider'
+import SessionProvider from '@/app/components/SessionProvider'
 import { NextRequest } from 'next/server'
 import { serverAuth } from '@/lib/auth'
+import Link from 'next/link'
+import UnauthorizedButton from './components/UnauthorizedButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,7 @@ export default async function RootLayout({
   req,
 }: {
   children: React.ReactNode
-  req: NextRequest, 
+  req: NextRequest,
   session: any
 }) {
   const session = await serverAuth()
@@ -30,7 +31,11 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <main className="bg-slate-100 h-dvh">
             <MainHeader />
-            {children}
+
+            {session ? children :
+              <UnauthorizedButton
+                home
+              />}
           </main>
         </SessionProvider>
       </body>

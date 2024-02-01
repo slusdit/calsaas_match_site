@@ -1,5 +1,6 @@
 import { serverAuth } from "@/lib/auth";
 import TeacherHeader from "./components/TeacherHeader";
+import UnauthorizedButton from "@/app/components/UnauthorizedButton";
 
 export default async function TeacherLayout({
     children,
@@ -14,8 +15,10 @@ export default async function TeacherLayout({
         <main>
             {/* <TeacherHeader name={params.seid} /> */}
             <div className="flex m-auto justify-between items-start 0-mt-11">
-              {session &&
-                children
+              {session ?
+                children 
+                :
+                <UnauthorizedButton signIn/>
               }
             </div>
         </main>

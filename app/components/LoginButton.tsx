@@ -28,7 +28,7 @@ export default function LoginButton() {
                         <AvatarFallback className="text-slate-600">{userInitials}</AvatarFallback>                  
                     </Avatar> 
                     </PopoverTrigger>
-                    <PopoverContent className="grid justify-items-center w-80 mr-8">
+                    <PopoverContent className="grid justify-items-center w-80">
                         <p>Welcome, {session?.user?.name}</p>
                         <div className="py-2">
 
@@ -46,7 +46,7 @@ export default function LoginButton() {
         )
     }
     return(
-        <div className="md:mr-8">
+        <div className="m-auto">
             <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => signIn()}>Sign in</Button>
         </div>
     )
