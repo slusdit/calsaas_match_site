@@ -21,7 +21,7 @@ export default async function RootLayout({
   req,
 }: {
   children: React.ReactNode
-  req: NextRequest,
+  req: NextRequest
   session: any
 }) {
   const session = await serverAuth()

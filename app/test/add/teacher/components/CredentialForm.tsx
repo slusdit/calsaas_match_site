@@ -64,6 +64,7 @@ export function CredentialForm({
         body:JSON.stringify(values)
       });
       const credential = await response.json()
+      form.reset()
       toast.success("Credential inserted successfully")
 
     } catch (e) {
