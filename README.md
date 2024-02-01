@@ -1,5 +1,7 @@
 # Calsaas Early Warning
 
+Copy `env.local.example` to `.env.local` and fill out variables
+
 ## Tests
 
 CLI backend tests found in `/apiTest/` 
@@ -24,7 +26,7 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
   - [ ] Teacher List page
     - [ ] Implement `zod`
     - [ ] CRUD for teacher demographics
-    - [X] Add search / filter ability by school 
+    - [X] Add search / filter ability by school
     - [X] Teacher search
       - [X] SEID
       - [X] lastName
@@ -54,7 +56,10 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
       - [ ] Delete
       - [X] Create
     - [ ] CRUD / update for state auth codes
-    - [ ] Import for Teachers & Sections 
+    - [ ] Import for Teachers & Sections
   - [x] Build out `School` table
     - [x] Linked to `Section` 
   - [x] Build out base prisma.schema
+- [ ] Security
+  - [X] Role based auth client and server side
+  - [ ] API security
