@@ -7,6 +7,7 @@ import { NextRequest } from 'next/server'
 import { serverAuth } from '@/lib/auth'
 import Link from 'next/link'
 import UnauthorizedButton from './components/UnauthorizedButton'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,6 +37,7 @@ export default async function RootLayout({
               <UnauthorizedButton
                 home
               />}
+          <Toaster richColors/>
           </main>
         </SessionProvider>
       </body>

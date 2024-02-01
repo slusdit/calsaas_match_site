@@ -43,7 +43,8 @@ export default async function handle(req, res) {
       });
       res.status(200).json(credentials);
     } catch (error) {
-      res.status(500).json({ error: 'Error fetching TeacherCredentials' });
+      console.log(error)
+      res.status(500).json({ error: error });
     }
  } else {
     res.status(405).json({ error: 'Method not allowed' });

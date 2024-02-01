@@ -14,6 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+// import { useoast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 
 interface Props {
     seid?: string 
@@ -25,8 +27,8 @@ const formSchema = z.object({
   seid: z.string().length(10, {
     message: "SEID must be exactly 10 characters"
   }),
-  docTitle: z.string(),
-  authCode: z.string(),
+  docTitle: z.string().min(1,{message: "Document Title must not be empty"}),
+  authCode: z.string().min(1,{message: "Authorization Code must not be empty"}),
   subjectCodeMajor: z.string().optional(),
   subjectCodeMinor: z.string().optional(),
 
@@ -41,16 +43,19 @@ export function CredentialForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues:{
-      seid: seid ? seid : undefined,
-      docTitle: docTitle ? docTitle : undefined,
-      authCode: authCode ? authCode : undefined,
+      seid: seid ?? '',
+      docTitle: docTitle ?? '',
+      authCode: authCode ?? '',
 
     }
   })
 
+  // const { toast } = useToast()
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+
     try {
+
       const response = await fetch('/api/credential/', {
         method: "POST", 
         headers: {
@@ -58,13 +63,11 @@ export function CredentialForm({
         },
         body:JSON.stringify(values)
       });
-
       const credential = await response.json()
-      console.log(`Submitted Credential: ${credential}`)
-
+      toast.success("Credential inserted successfully")
 
     } catch (e) {
-      console.log (`Error: ${e}`)
+      toast.error(`Error creating credential \n Error: ${e}`)
     }
   }
 
@@ -76,7 +79,7 @@ export function CredentialForm({
           name="seid"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Teacher Seid</FormLabel>
+              <FormLabel>Teacher Seid<span className="text-red-500">*</span></FormLabel>
               <FormControl>
                 {seid ?
                   <Input value={seid} disabled /> :
@@ -92,7 +95,7 @@ export function CredentialForm({
           name="docTitle"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Document Title</FormLabel>
+              <FormLabel>Document Title<span className="text-red-500">*</span></FormLabel>
               <FormControl>
                 <Input placeholder="Doc Title" {...field} />
               </FormControl>
@@ -105,7 +108,7 @@ export function CredentialForm({
           name="authCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Authorization Code</FormLabel>
+              <FormLabel>Authorization Code<span className="text-red-500">*</span></FormLabel>
               <FormControl>
                 <Input placeholder="Authorization Code" {...field} />
               </FormControl>
