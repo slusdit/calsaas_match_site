@@ -3,17 +3,27 @@ import { NextRequest, NextResponse } from "next/server";
 
 import prisma from '@/lib/prisma'
 
+type CredentialCreate = Pick<TeacherCredential, 
+'seid' | 
+'docTitle' | 
+'caltidesNumId' |
+'authCode' | 
+'subjectCodeMajor' | 
+'subjectCodeMinor'
+>;
+
 export default async function handle(req, res) {
  if (req.method === 'POST') {
-  console.log(req)
-    const { credPersonId, seid, caltidesNumId, docTitle, authCode, subjectCodeMajor, subjectCodeMinor } = req.body;
+  console.log(req.body)
+    const { seid, docTitle, authCode, subjectCodeMajor, subjectCodeMinor }:CredentialCreate = req.body;
+    
+    const caltidesNumId = seid   
     // try {
       const newCredential = await prisma.teacherCredential.create({
         data: {
-          credPersonId,
           seid,
-          caltidesNumId,
           docTitle,
+          caltidesNumId,
           authCode,
           subjectCodeMajor,
           subjectCodeMinor,
