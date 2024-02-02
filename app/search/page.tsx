@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { PrismaClient, Teacher, Section, Prisma } from "@prisma/client";
 import Link from "next/link";
-import TeacherCard from "@/app/components/TeacherCard";
+import TeacherCard from "@/app/components/TeacherCard3";
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 

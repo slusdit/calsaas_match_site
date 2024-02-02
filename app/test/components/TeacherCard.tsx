@@ -18,16 +18,16 @@ interface Props {
     teacher: TeacherCardType
 }
 
-export default function TeacherCard({ teacher }: Props) {
+export function TeacherCard({ teacher }: Props) {
     return (
-        <Link href={`/teacher/${teacher.seid}`} className="h-full" >
-            <Card className="w-72 h-64 m-2 text-center bg-card text-card-foreground rounded-xl overflow-hidden border-2 cursor-pointer hover:scale-105 transition-transform duration-300">
+        <Link href={`/teacher$teacher.seid`} className="h-full" >
+            <Card className="w-72 text-center bg-card text-card-foreground rounded-lg overflow-hidden border-2 cursor-pointer hover:scale-105 transition-transform duration-300">
                 <CardHeader>
                     <CardTitle>{teacher.lastName}, {teacher.firstName}</CardTitle>
                     <CardDescription>SEID: {teacher.seid}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex justify-center align-bottom">
+                    <div className=" flex justify-center">
                         <div className="p-2 ">
                             Section Count: <br />
                             {teacher.sections.length}

@@ -1,8 +1,9 @@
-import TeacherCard from "@/app/components/TeacherCard2"
-import { TeacherCardType } from "@/app/components/TeacherCard"
+import TeacherCard from "@/app/components/TeacherCard"
+import { TeacherCardType } from "@/app/components/TeacherCard3"
 import { PrismaClient } from "@prisma/client"
 import { notFound } from "next/navigation"
-import TeacherCard2 from "@/app/components/TeacherCard2"
+import TeacherCard2 from "@/app/components/TeacherCard"
+import { TeacherCard as CardWithForm } from "./components/TeacherCard"
 
 const prisma = new PrismaClient()
 const testPage = async () => {
@@ -49,10 +50,15 @@ const testPage = async () => {
 const teacher = await fetchTeacher({seid}) 
   
   return (
+    <>
     <div className="flex justify-center">
       <TeacherCard teacher={teacher}/>
       <TeacherCard2 teacher={teacher} />
     </div>
+    <div className="flex justify-center">
+      <CardWithForm teacher={teacher}/>
+    </div>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import { Section, Teacher, TeacherCredential } from "@prisma/client";
 import Link from "next/link";
 
-export interface TeacherCardType extends Teacher{
+export type TeacherCardType = Teacher & {
     sections: Section[]
     credentials: TeacherCredential[]
   }
@@ -10,7 +10,7 @@ interface Props {
     teacher: TeacherCardType
 }
 
-export default function TeacherCard2({ teacher }: {teacher:TeacherCardType}) {
+export default function TeacherCard({ teacher }: Props) {
     teacher.sections.forEach((section) => {
         // {console.log(`Section Course: ${JSON.stringify(section)}`)}
         const isMatched = teacher.credentials.some(credential =>
