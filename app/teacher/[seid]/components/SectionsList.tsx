@@ -15,7 +15,13 @@ type StateAuthWithCourse = Course & {
 type SectionWithCourse = Section & {
     course: StateAuthWithCourse 
 }
-export default function SectionsList({ sections, credentials }: {sections:SectionWithCourse[], credentials:TeacherCredential[]}) {
+export default function SectionsList({ 
+    sections, 
+    credentials, 
+ }: {
+    sections:SectionWithCourse[], 
+    credentials:TeacherCredential[]
+}) {
     // console.log(sections)
     
     return (

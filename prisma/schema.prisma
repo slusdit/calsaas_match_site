@@ -44,7 +44,7 @@ model TeacherCredential {
   teacher          Teacher? @relation(fields: [seid], references: [seid])
   caltidesNumId    String?
   docTitle         String
-  authCode         String
+  authCode         String?
   subjectCodeMajor String?
   subjectCodeMinor String?
   created_at       DateTime @default(now())

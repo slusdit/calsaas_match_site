@@ -3,8 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { toast } from "sonner"
+import { useDialog } from "./DialogContext"
 import {
   Form,
   FormControl,
@@ -13,14 +15,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-// import { useoast } from "@/components/ui/use-toast"
-import { toast } from "sonner"
 
 interface Props {
     seid?: string 
     docTitle?: string
     authCode?: string
+    submitTitle?: string
+    dialogState?: () => void
   }
 
 const formSchema = z.object({
@@ -34,11 +35,12 @@ const formSchema = z.object({
 
 })
 
-
 export function CredentialForm({
   seid,
   docTitle,
-  authCode,}: Props) {
+  authCode,
+  submitTitle, 
+  dialogState}: Props) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,7 +52,7 @@ export function CredentialForm({
     }
   })
 
-  // const { toast } = useToast()
+  const { closeDialog } = useDialog()
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
@@ -66,6 +68,8 @@ export function CredentialForm({
       const credential = await response.json()
       form.reset()
       toast.success("Credential inserted successfully")
+      // closeDialog()
+
 
     } catch (e) {
       toast.error(`Error creating credential \n Error: ${e}`)
@@ -145,7 +149,7 @@ export function CredentialForm({
           )}
         />
         </div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{submitTitle ?? "Add"}</Button>
       </form>
     </Form>
   )

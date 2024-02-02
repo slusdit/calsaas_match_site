@@ -1,5 +1,8 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { DialogProvider, useDialog } from "./DialogContext";
+import { useState } from "react";
 
 export default function FormDialog({ 
     children, 
@@ -10,8 +13,13 @@ export default function FormDialog({
     triggerMessage?: string
     title?: string
 }) {
-    return (
-        <Dialog>
+    // const { closeDialog } = useDialog()
+    const [open, setOpen] = useState(false)
+
+        return (
+        // <DialogProvider>
+
+        <Dialog >
             <DialogTrigger asChild>
                 <Button>
                     {triggerMessage ?? 'Open'}
@@ -22,5 +30,6 @@ export default function FormDialog({
             {children}
         </DialogContent>
         </Dialog>
+        // </DialogProvider>
     )
 }

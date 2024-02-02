@@ -25,14 +25,16 @@ const prisma = new PrismaClient();
                     // if (item.credPersonId) {
                     const subjectMinor = item.SubjectCodeMinor?.trim() === 'NULL' ? null : item.SubjectCodeMinor?.trim()
                     const subjectMoajor = item.SubjectCodeMajor?.trim() === 'NULL' ? null : item.SubjectCodeMajor?.trim()
+                    const authCode = item.AuthCode?.trim() === "NULL" ? null : item.AuthCode.trim()
+                    const docTitle = item.DocTitle?.trim() === "NULL" ? null : item.DocTitle.trim()
                         try {
                             await table.create({
                             data: {
                                 'credPersonId': item.CredPersonId,
                                 'seid': item.CALTIDESNumId,
                                 'caltidesNumId': item.CALTIDESNumId,
-                                'docTitle': item.DocTitle?.trim(),
-                                'authCode': item.AuthCode?.trim(),
+                                'docTitle': docTitle,
+                                'authCode': authCode, 
                                 'subjectCodeMajor': subjectMoajor,
                                 'subjectCodeMinor': subjectMinor,
                                 },

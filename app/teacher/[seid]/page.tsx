@@ -47,8 +47,8 @@ const fetchTeacherBySeid = async (seid: string) => {
 }
 export default async function TeacherPage({ params }: Params) {
 
-  const teacher = await fetchTeacherBySeid(params.seid)
- 
+  const seid = params.seid
+  const teacher = await fetchTeacherBySeid(seid)
   return (
     <div className="m-auto md:flex-col">
       <div className="p-2 mt-8">
@@ -61,12 +61,17 @@ export default async function TeacherPage({ params }: Params) {
       <div className="flex space-x-4 mt-10">
         <div className="p-2 inline">
           <div className="font-bold">Teachers Credentials:</div>
-          <CredentialsTable credentials={teacher.credentials} />
+          <CredentialsTable 
+            credentials={teacher.credentials} 
+            seid={seid}/>
         </div>
         <div className="p-2">
           <div className="font-bold">Classes</div>
-          <SectionsList sections={teacher.sections} credentials={teacher.credentials} />
-        </div>
+            <SectionsList 
+            sections={teacher.sections} 
+            credentials={teacher.credentials} 
+            />
+          </div>
       </div>
     </div>
   );

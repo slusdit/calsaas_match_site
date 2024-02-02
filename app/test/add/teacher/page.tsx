@@ -1,6 +1,6 @@
 // import TeacherForm from "./components/TeacherForm"
-import { CredentialForm } from "./components/CredentialForm"
-import FormDialog from "./components/FormDialogue"
+import { CredentialForm } from "@/app/components/CredentialForm"
+import FormDialog from "../../../components/FormDialogue"
 const testPage = () => {
   const seid:string = '2015780964'
   return (

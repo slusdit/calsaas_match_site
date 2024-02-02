@@ -1,4 +1,6 @@
 'use client' 
+import { CredentialForm } from "@/app/components/CredentialForm";
+import FormDialog from "@/app/components/FormDialogue";
 import {
     Table,
     TableBody,
@@ -19,9 +21,11 @@ interface credential {
     created_at: Date;
     updated_at: Date;
 }
-export default function CredentialsTable({ credentials }: { credentials: credential[] }) {
-    // console.log(credentials)
+export default function CredentialsTable({ credentials, seid }: { credentials: credential[], seid?:string }) {
+    console.log(seid)
+
     return (
+        <>
         <Table>
             <TableHeader>
                 <TableRow>
@@ -43,6 +47,14 @@ export default function CredentialsTable({ credentials }: { credentials: credent
             </TableBody>
 
         </Table>
+        <div className="flex">
+        <div className="m-auto">
+          <FormDialog triggerMessage="Add Credential" title="Add Teacher Credential">
+            <CredentialForm seid={seid} submitTitle="Add Credential" />
+          </FormDialog>
+        </div>
+      </div>
+      </>
     )
    
 }
