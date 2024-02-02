@@ -34,7 +34,7 @@ export default function SectionsList({
                     credential.authCode === section.course.authTableId.authCode
                     );
                     
-                    const matchedClassName = isMatched ? "bg-green-500 Matched" : ""
+                    const matchedClassName = isMatched ? "Matched" : ""
 
                     return ( 
                         

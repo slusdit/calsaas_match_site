@@ -17,7 +17,7 @@ export default function TeacherListGrid({teachers}:{teachers:TeacherCardType[]})
             
         {teachers.map((teacher) => (
             //  if (teacher.sections.length > 0) {
-                <TeacherCard teacher={teacher} key={teacher.seid}/>
+                <TeacherCard teacher={teacher} key={teacher.key_id} />
                 // }
             ))}
       </div>

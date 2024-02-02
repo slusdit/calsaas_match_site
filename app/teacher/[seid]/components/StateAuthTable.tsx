@@ -35,12 +35,13 @@ export default function StateAuthTable(
                         credential.docTitle === authCode.docTitle &&
                         credential.authCode === authCode.authCode
                     );
-
-                    const rowClassName = isMatched ? "bg-green-400 font-bold" : "font-bold";
+                    const baseRowClassName = "odd:text-secondary-foreground odd:bg-secondary "
+                    // 
+                    const rowClassName = isMatched ?  `bg-spotlight text-spotlight-foreground font-bold ` : baseRowClassName;
 
                     return (
                         <TableRow key={authCode.key_id} className={rowClassName}>
-                            <TableCell className={rowClassName}>{authCode.docTitle}</TableCell>
+                            <TableCell>{authCode.docTitle}</TableCell>
                             <TableCell>{authCode.authCode}</TableCell>
                             <TableCell>{authCode.subjectCode}</TableCell>
                         </TableRow>

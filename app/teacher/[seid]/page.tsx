@@ -1,14 +1,14 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../@/components/ui/tabs";
 import { notFound } from "next/navigation";
 import CredentialsTable from "./components/CredentialsTable";
 import SectionsList from "./components/SectionsList";
 import BackButton from "@/app/components/buttons/BackButton";
 // Uncomment when in production
-// import ma from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 
 // Comment out when in production
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 interface Params {
   params: {

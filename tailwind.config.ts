@@ -19,7 +19,6 @@ const config = {
     },
     extend: {
       colors: {
-        "highlight": "rgb(0,255,0)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -59,6 +58,10 @@ const config = {
         },
         submit: {
           100: '#F53814'
+        },
+        spotlight:{
+          DEFAULT: "hsl(var(--spotlight))",
+          foreground: "hsl(var(--spotlight-foreground))"
         }
       },
       borderRadius: {

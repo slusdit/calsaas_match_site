@@ -38,7 +38,7 @@ export default function CredentialsTable({ credentials, seid }: { credentials: c
             </TableHeader>
             <TableBody>
                 {credentials.map((credential, key) => (
-                    <TableRow key={key}>
+                    <TableRow key={key} className="odd:text-secondary-foreground odd:bg-secondary">
                         <TableCell>{credential.docTitle}</TableCell>
                         <TableCell>{credential.authCode}</TableCell>
                         <TableCell>{credential.subjectCodeMajor}</TableCell>
