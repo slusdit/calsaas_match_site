@@ -1,6 +1,6 @@
 'use client' 
-import { CredentialForm } from "@/app/components/CredentialForm";
-import FormDialog from "@/app/components/FormDialogue";
+import { CredentialForm } from "@/app/components/forms/CredentialForm";
+import FormDialog from "@/app/components/forms/FormDialogue";
 import {
     Table,
     TableBody,

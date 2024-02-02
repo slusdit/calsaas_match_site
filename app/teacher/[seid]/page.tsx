@@ -3,7 +3,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
 import CredentialsTable from "./components/CredentialsTable";
 import SectionsList from "./components/SectionsList";
-import BackButton from "@/app/components/BackButton";
+import BackButton from "@/app/components/buttons/BackButton";
 // Uncomment when in production
 // import ma from "@/lib/prisma"
 

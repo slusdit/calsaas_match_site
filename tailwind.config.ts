@@ -54,8 +54,11 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         danger: {
-          100: '#e71821',
+          100: '#E71821',
           200: '#d3161e'
+        },
+        submit: {
+          100: '#F53814'
         }
       },
       borderRadius: {

@@ -1,8 +1,9 @@
 'use client'
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { DialogProvider, useDialog } from "./DialogContext";
+import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { DialogProvider, useDialog } from "../DialogContext";
 import { useState } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 export default function FormDialog({ 
     children, 
@@ -28,6 +29,14 @@ export default function FormDialog({
         <DialogContent>
             <DialogTitle>{title ?? ''}</DialogTitle>
             {children}
+            <DialogFooter className="justify-start">
+                
+            <DialogClose asChild>
+                <Button type="button" variant="link">
+                    Close
+                </Button>
+            </DialogClose>
+            </DialogFooter>
         </DialogContent>
         </Dialog>
         // </DialogProvider>

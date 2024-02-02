@@ -6,7 +6,7 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
-import { useDialog } from "./DialogContext"
+import { useDialog } from "../DialogContext"
 import {
   Form,
   FormControl,
@@ -52,7 +52,7 @@ export function CredentialForm({
     }
   })
 
-  const { closeDialog } = useDialog()
+  // const { closeDialog } = useDialog()
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
@@ -149,7 +149,9 @@ export function CredentialForm({
           )}
         />
         </div>
-        <Button type="submit">{submitTitle ?? "Add"}</Button>
+        <Button 
+          type="submit" 
+          >{submitTitle ?? "Add"}</Button>
       </form>
     </Form>
   )

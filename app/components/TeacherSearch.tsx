@@ -12,7 +12,7 @@ export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
     const [searchString, setSearchString] = useState<string>('');
     const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
-    const authorizedRoles:ROLES = ["HR", ""]
+    const authorizedRoles:ROLE[] = ["HR", "SUPERADMIN"]
 
     const session = useSession()
 
@@ -24,7 +24,7 @@ export default function TeacherSearch() {
      useEffect(() => {
         const fetchTeachers = async (): Promise<TeacherCardType[]> => {
             
-            const response = await fetch(`/api/teachers?search=${searchString}&school=${selectedSchool}`, { method: 'GET' });
+            const response = await fetch(`/api/teachers?search=${searchString}&school=${selectedSchool}`, { method: 'GET',  });
             const data: TeacherCardType[] = await response.json();
             return data;
         };
