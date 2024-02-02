@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client"
 import { notFound } from "next/navigation"
 import TeacherCard2 from "@/app/components/TeacherCard"
 import { TeacherCard as CardWithForm } from "./components/TeacherCard"
+import { ModeToggle } from "../components/buttons/ModeToggle"
 
 const prisma = new PrismaClient()
 const testPage = async () => {
@@ -51,6 +52,7 @@ const teacher = await fetchTeacher({seid})
   
   return (
     <>
+    <ModeToggle />
     <div className="flex justify-center">
       <TeacherCard teacher={teacher}/>
       <TeacherCard2 teacher={teacher} />

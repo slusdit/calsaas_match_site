@@ -8,6 +8,7 @@ import { serverAuth } from '@/lib/auth'
 import Link from 'next/link'
 import UnauthorizedButton from './components/UnauthorizedButton'
 import { Toaster } from '@/components/ui/sonner'
+import { ThemeProvider } from './components/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,15 +31,21 @@ export default async function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
         <SessionProvider session={session}>
-          <main className="bg-slate-100 h-dvh">
-            <MainHeader />
-
-            {session ? children :
-              <UnauthorizedButton
-                home
-              />}
-          <Toaster richColors/>
-          </main>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="bg-background text-foreground">
+              <MainHeader />
+              {session ? children :
+                <UnauthorizedButton
+                  home
+                />}
+              <Toaster richColors />
+            </main>
+          </ThemeProvider>
         </SessionProvider>
       </body>
     </html>

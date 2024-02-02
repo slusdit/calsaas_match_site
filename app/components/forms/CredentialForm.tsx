@@ -15,6 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Plus, Send } from "lucide-react"
 
 interface Props {
     seid?: string 
@@ -151,7 +152,7 @@ export function CredentialForm({
         </div>
         <Button 
           type="submit" 
-          >{submitTitle ?? "Add"}</Button>
+          >{submitTitle ?? "Add"}<Send className="pl-2" /></Button>
       </form>
     </Form>
   )

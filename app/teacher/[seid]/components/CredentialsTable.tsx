@@ -9,6 +9,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { Plus } from "lucide-react";
   
 interface credential {
     key_id: number;
@@ -23,7 +24,7 @@ interface credential {
 }
 export default function CredentialsTable({ credentials, seid }: { credentials: credential[], seid?:string }) {
     console.log(seid)
-
+    const triggerMessage = "Add Credential"
     return (
         <>
         <Table>
@@ -49,8 +50,8 @@ export default function CredentialsTable({ credentials, seid }: { credentials: c
         </Table>
         <div className="flex">
         <div className="m-auto">
-          <FormDialog triggerMessage="Add Credential" title="Add Teacher Credential">
-            <CredentialForm seid={seid} submitTitle="Add Credential" />
+          <FormDialog triggerMessage={triggerMessage} icon={<Plus className="py-1" />} title="Add Teacher Credential">
+            <CredentialForm seid={seid} submitTitle="Submit Credential" />
           </FormDialog>
         </div>
       </div>

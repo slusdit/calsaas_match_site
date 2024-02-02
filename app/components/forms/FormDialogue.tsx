@@ -4,15 +4,18 @@ import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from 
 import { DialogProvider, useDialog } from "../DialogContext";
 import { useState } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { LucideIcon } from "lucide-react";
 
 export default function FormDialog({ 
     children, 
     triggerMessage,
-    title 
+    title,
+    icon 
 }:{ 
     children: React.ReactNode
     triggerMessage?: string
     title?: string
+    icon?: React.ReactNode
 }) {
     // const { closeDialog } = useDialog()
     const [open, setOpen] = useState(false)
@@ -24,6 +27,7 @@ export default function FormDialog({
             <DialogTrigger asChild>
                 <Button>
                     {triggerMessage ?? 'Open'}
+                    {icon}
                 </Button>
             </DialogTrigger>
         <DialogContent>

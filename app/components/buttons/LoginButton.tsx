@@ -7,6 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
+import { ModeToggle } from "./ModeToggle";
 
 export default function LoginButton() {
     const { data: session } = useSession();
@@ -20,23 +21,27 @@ export default function LoginButton() {
     // const userInitials = "NA"
             
         return(
-            <div className="">
+            <div >
                 <Popover>
                     <PopoverTrigger>
-                    <Avatar>
+                    <Avatar className=" hover:shadow-md hover:shadow-primary">
                         <AvatarImage src={imgUrl} />
-                        <AvatarFallback className="text-slate-600">{userInitials}</AvatarFallback>                  
+                        <AvatarFallback className="text-foreground bg-background">{userInitials}</AvatarFallback>                  
                     </Avatar> 
                     </PopoverTrigger>
-                    <PopoverContent className="grid justify-items-center w-80">
+                    <PopoverContent className="grid justify-items-center w-80 bg-popover">
                         <p>Welcome, {session?.user?.name}</p>
                         <div className="py-2">
 
-                        <Link href="/profile">User Profile</Link>
+                        <ModeToggle />
+                        <Button asChild variant="link" >
+                        <Link href="/profile" className="text-popover-foreground">User Profile</Link>
+
+                        </Button>
                         </div>
                         <Button  
                             onClick={() => signOut()}
-                            className="m-auto bg-red-400 hover:bg-red-500"
+                            className="m-auto bg-destructive text-destructive-foreground hover:bg-muted hover:text-muted-foreground "
                             >
                             Sign out
                         </Button>
@@ -47,7 +52,7 @@ export default function LoginButton() {
     }
     return(
         <div className="m-auto">
-            <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => signIn()}>Sign in</Button>
+            <Button className="bg-primary hover:bg-muted text-primary-foreground hover:text-muted-foreground" onClick={() => signIn()}>Sign in</Button>
         </div>
     )
 }

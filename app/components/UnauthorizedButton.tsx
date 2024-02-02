@@ -1,5 +1,5 @@
 import Link from "next/link"
-import LoginButton from "./LoginButton"
+import LoginButton from "./buttons/LoginButton"
 
 const UnauthorizedButton = ({
     signIn,
