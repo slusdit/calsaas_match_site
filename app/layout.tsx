@@ -38,7 +38,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="bg-background text-foreground">
+            <main className="">
               <MainHeader />
               {session ? children :
                 <UnauthorizedButton
@@ -46,8 +46,8 @@ export default async function RootLayout({
                 />}
               <Toaster richColors />
             </main>
-          </ThemeProvider>
           <MainFooter />
+          </ThemeProvider>
         </SessionProvider>
       </body>
     </html>

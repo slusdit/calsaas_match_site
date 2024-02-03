@@ -46,7 +46,7 @@ export default function TeacherCard({ teacher }: Props) {
                             Section Count: <br />
                             {teacher.sections.length}
                         </div>
-                        <Separator orientation="vertical" />
+                        <div className="w-0.5 bg-border"></div>
                         {teacher.credentials ? (
                             <div className="p-2">
                                 Credential Count: <br />

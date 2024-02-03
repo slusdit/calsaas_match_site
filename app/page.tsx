@@ -9,7 +9,7 @@ export default function TeacherSearchPage() {
   return (
     <main>
       {session && session.status === "authenticated" ?
-      <TeacherSearch />
+      <TeacherSearch className='m-auto flex'/>
       : <div className="m-auto flex">
         <Link href="/api/auth/signin">Please Sign In</Link>
       </div>

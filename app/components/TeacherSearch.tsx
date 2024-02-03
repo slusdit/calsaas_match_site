@@ -37,9 +37,11 @@ export default function TeacherSearch() {
     }, [searchString, selectedSchool]); 
     
     return (
-        <div className="">
+        <div className="flex flex-col">
             <div className="search-bar p-6 m-auto">
-                <div className="grid w-full max-w-sm items-center gap-1.5">
+                <div className=" flex w-full items-center gap-10">
+                    <div>
+
                     <Label htmlFor="searchOption">
                         Search for Teachers:
                     </Label>
@@ -49,16 +51,19 @@ export default function TeacherSearch() {
                         value={searchString}
                         onChange={handleInputChange}
                         placeholder="Last name / SEID"
-                    />
-                </div>
+                        />
+                        </div>
                 <div>
                     <SchoolSelector onSchoolChange={setSelectedSchool}/>
+                </div>
                 </div>
                 
             </div>
             { session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user.role.includes(role)) ?
-            
+            <div className="m-auto">
+
             <TeacherListGrid teachers={teachers} />
+            </div>
             :
             <div className="float text-center">
                 <Link

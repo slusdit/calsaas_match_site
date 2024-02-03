@@ -35,7 +35,7 @@ export default function SchoolSelector({ schools, onSchoolChange }: Props) {
 
     return (
         <div className="max-w-80 p-2">
-            <Label></Label>
+            <Label>School Filter</Label>
             <Select onValueChange={handleSchoolChange}>
                 <SelectTrigger>
                     <SelectValue placeholder="School Filter" />

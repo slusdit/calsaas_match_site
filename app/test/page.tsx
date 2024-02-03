@@ -1,8 +1,8 @@
-import TeacherCard from "@/app/components/TeacherCard"
+import TeacherCard from "@/app/components/cards/TeacherCard"
 import { TeacherCardType } from "@/app/components/TeacherCard3"
 import { PrismaClient } from "@prisma/client"
 import { notFound } from "next/navigation"
-import TeacherCard2 from "@/app/components/TeacherCard"
+import TeacherCard2 from "@/app/components/cards/TeacherCard"
 import { TeacherCard as CardWithForm } from "./components/TeacherCard"
 import { ModeToggle } from "../components/buttons/ModeToggle"
 
