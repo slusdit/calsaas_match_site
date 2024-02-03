@@ -34,11 +34,11 @@ export default function SchoolSelector({ schools, onSchoolChange }: Props) {
 
 
     return (
-        <div className="max-w-80 p-2">
+        <div className="w-56 p-2">
             <Label>School Filter</Label>
             <Select onValueChange={handleSchoolChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder="School Filter" />
+                    <SelectValue className='text-muted' placeholder="School Filter" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value='null' key={0}>All SLUSD</SelectItem>
