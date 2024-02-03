@@ -12,10 +12,8 @@ import { ModeToggle } from "./ModeToggle";
 export default function LoginButton() {
     const { data: session } = useSession();
     if (session) {
-
     
-    const imgUrl = session?.user?.image ? session.user.image : undefined
-    
+    const imgUrl = session?.user?.image ? session.user.image : undefined  
 
     const userInitials = session.user ? session.user?.name.split(" ").map((initial) => initial[0]).join('') : "NA"
     // const userInitials = "NA"

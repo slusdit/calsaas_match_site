@@ -1,13 +1,10 @@
 import Link from "next/link";
-import LoginButton from "./buttons/LoginButton";
+import LoginButton from "../buttons/LoginButton";
 import { Button } from "@/components/ui/button";
-import { serverAuth } from "@/lib/auth";
 
-export default async function MainHeader() {
+export default function MainHeader() {
 
-    const session = await serverAuth()
-    console.log(session)
-    
+    // const session = await serverAuth()   
 
     return (
         <nav
@@ -26,7 +23,7 @@ export default async function MainHeader() {
         "
         >
             <div>
-                <Button variant="link" className="text-secondary-foreground text-xl font-bold hover">
+                <Button asChild variant="link" className="text-secondary-foreground text-xl font-bold hover">
 
                     <Link href="/">
                         Calsaas Early Warning
@@ -44,21 +41,6 @@ export default async function MainHeader() {
               md:justify-between 
               md:pt-0"
                 >
-                    {session?.user?.role.some( (role:string) => {
-                        
-                        role ==='SUPERADMIN'}) && (
-                    <li>
-                        <Button asChild variant="link">
-                            <Link
-                                className="md:p-4 py-2 block text-primary-foreground"
-                                href="/admin"
-                            >
-                                Admin
-                            </Link>
-                        </Button>
-                    </li>
-                        )
-                    }
                 </ul>
                 <div className="py-3">
                     <LoginButton />

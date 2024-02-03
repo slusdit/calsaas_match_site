@@ -13,11 +13,11 @@ export default function TeacherListGrid({teachers}:{teachers:TeacherCardType[]})
     }
     return (
         
-        <div className="py-3 px-2/8 flex flex-wrap justify-center">
+        <div className="snap-y no-scrollbar p-1 m-4 max-h-[50rem] max-w-[80rem] overflow-y-scroll flex flex-wrap justify-center border-4 rounded-2xl">
             
         {teachers.map((teacher) => (
             //  if (teacher.sections.length > 0) {
-                <TeacherCard teacher={teacher} key={teacher.key_id} />
+                <TeacherCard className="snap-start" teacher={teacher} key={teacher.key_id} />
                 // }
             ))}
       </div>

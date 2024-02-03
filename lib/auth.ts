@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
 import type { NextAuthOptions } from "next-auth"
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, ROLE } from "@prisma/client";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import { getServerSession } from "next-auth"
@@ -60,4 +60,9 @@ export const authOptions = {
 // Use it in server contexts
 export function serverAuth(...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []) {
   return getServerSession(...args, authOptions)
+}
+
+export const isAdmin = async (roles: ROLE[]) => {        
+  const admin = roles.some((role: string) => role === 'SUPERADMIN');
+  console.log(admin);
 }

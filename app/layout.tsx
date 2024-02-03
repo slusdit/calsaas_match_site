@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import MainHeader from './components/MainHeader'
+import MainHeader from './components/layout/MainHeader'
 import './globals.css'
 import SessionProvider from '@/app/components/SessionProvider'
 import { NextRequest } from 'next/server'
 import { serverAuth } from '@/lib/auth'
-import Link from 'next/link'
 import UnauthorizedButton from './components/UnauthorizedButton'
 import { Toaster } from '@/components/ui/sonner'
 import { ThemeProvider } from './components/ThemeProvider'
+import MainFooter from './components/layout/MainFooter'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,7 +30,7 @@ export default async function RootLayout({
   // console.log(`Server Session: ${JSON.stringify(session)}`)
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={inter.className}>
+      <body suppressHydrationWarning={true} className={`h-screen flex flex-col justify-between ${inter.className}`}>
         <SessionProvider session={session}>
           <ThemeProvider
             attribute='class'
@@ -46,6 +47,7 @@ export default async function RootLayout({
               <Toaster richColors />
             </main>
           </ThemeProvider>
+          <MainFooter />
         </SessionProvider>
       </body>
     </html>

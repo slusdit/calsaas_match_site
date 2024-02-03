@@ -49,7 +49,7 @@ export default function CredentialsTable({ credentials, seid }: { credentials: c
 
         </Table>
         <div className="flex">
-        <div className="m-auto">
+        <div className="m-auto mt-2">
           <FormDialog triggerMessage={triggerMessage} icon={<Plus className="py-1" />} title="Add Teacher Credential">
             <CredentialForm seid={seid} submitTitle="Submit Credential" />
           </FormDialog>
