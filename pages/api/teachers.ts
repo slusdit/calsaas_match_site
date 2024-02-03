@@ -2,8 +2,8 @@ import { PrismaClient, Teacher, Section, TeacherCredential } from '@prisma/clien
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export interface TeacherCardType extends Teacher {
-  sections: Section[];
-  credentials: TeacherCredential[];
+  sections?: Section[];
+  credentials?: TeacherCredential[];
 }
 
 const prisma = new PrismaClient();
@@ -11,8 +11,8 @@ const prisma = new PrismaClient();
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     
-    const search = req.query.search as string;
-    const school = req.query.school as string;
+    const search = req.query.search ?? '' as string;
+    const school = req.query.school ?? '' as string;
 
     try {
     

@@ -23,7 +23,6 @@ interface credential {
     updated_at: Date;
 }
 export default function CredentialsTable({ credentials, seid }: { credentials: credential[], seid?:string }) {
-    console.log(seid)
     const triggerMessage = "Add Credential"
     return (
         <>

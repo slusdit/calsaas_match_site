@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import TeacherSearch from "./components/TeacherSearch"
+import TeacherSearch from "./components/teacherSearch/TeacherSearch"
 import { useSession } from "next-auth/react";
 
 export default function TeacherSearchPage() {

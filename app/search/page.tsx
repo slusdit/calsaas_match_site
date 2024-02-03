@@ -20,7 +20,7 @@ export default function TeacherList() {
     async function fetchTeachers() {
       const response = await fetch('/api/teachers');
       const data = await response.json();
-      console.log(data)
+      // console.log(data)
       setTeachers(data)
     }
   },[searchInput])

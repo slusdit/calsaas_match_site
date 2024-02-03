@@ -1,11 +1,10 @@
 
 import { Section, Teacher } from "@prisma/client"
-import TeacherCard from "./cards/TeacherCard"
+import TeacherCard from "../cards/TeacherCard"
 
-export interface TeacherCardType extends Teacher{
-    sections: Section[]
-    credentials: Credential[]
-  }
+import { TeacherCardType } from '@/lib/types'
+
+
 
 export default function TeacherListGrid({teachers}:{teachers:TeacherCardType[]}) {
     if (teachers.length === 0) {

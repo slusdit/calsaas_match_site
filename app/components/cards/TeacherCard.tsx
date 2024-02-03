@@ -5,22 +5,17 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Section, Teacher, TeacherCredential } from "@prisma/client";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator"
-
-export type TeacherCardType = Teacher & {
-    sections: Section[]
-    credentials: TeacherCredential[]
-}
+import { TeacherCardType } from "@/lib/types"
 
 interface Props {
     teacher: TeacherCardType
+    className: string
 }
 
-export default function TeacherCard({ teacher }: Props) {
+export default function TeacherCard({ teacher, className }: Props) {
     return (
-        <Link href={`/teacher/${teacher.seid}`} className="h-full" >
+        <Link href={`/teacher/${teacher.seid}`} className={`h-full ${className}`} >
             <Card className="w-72 
             min-h-56 
             m-2 
@@ -44,7 +39,7 @@ export default function TeacherCard({ teacher }: Props) {
                     <div className="flex justify-center align-bottom ">
                         <div className="p-2">
                             Section Count: <br />
-                            {teacher.sections.length}
+                            {teacher.sections?.length}
                         </div>
                         <div className="w-0.5 bg-border"></div>
                         {teacher.credentials ? (

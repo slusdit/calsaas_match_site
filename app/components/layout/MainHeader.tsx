@@ -12,8 +12,8 @@ export default function MainHeader() {
           flex flex-wrap
           items-center
           justify-between
-          bg-secondary
-          text-secondary-foreground
+          bg-title
+          text-title-foreground
           w-full
           py-4
           md:py-0
@@ -23,7 +23,7 @@ export default function MainHeader() {
         "
         >
             <div>
-                <Button asChild variant="link" className="text-secondary-foreground text-xl font-bold hover">
+                <Button asChild variant="link" className="text-xl text-title-foreground font-bold hover">
 
                     <Link href="/">
                         Calsaas Early Warning

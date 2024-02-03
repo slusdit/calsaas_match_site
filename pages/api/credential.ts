@@ -14,7 +14,6 @@ type CredentialCreate = Pick<TeacherCredential,
 
 export default async function handle(req, res) {
  if (req.method === 'POST') {
-  console.log(req.body)
     const { seid, docTitle, authCode, subjectCodeMajor, subjectCodeMinor }:CredentialCreate = req.body;
     
     const caltidesNumId = seid   

@@ -43,7 +43,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     else if (req.method === 'GET') {
-        console.log(JSON.stringify(req.body))
         try {
             const seid = req.query.seid as string;
 

@@ -59,6 +59,10 @@ const config = {
         submit: {
           100: '#F53814'
         },
+        title: {
+          DEFAULT:"hsl(var(--title))",
+          foreground:"hsl(var(--title-foreground))"
+        },
         spotlight:{
           DEFAULT: "hsl(var(--spotlight))",
           foreground: "hsl(var(--spotlight-foreground))"

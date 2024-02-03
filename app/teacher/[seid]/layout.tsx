@@ -1,6 +1,6 @@
 import { serverAuth } from "@/lib/auth";
 import TeacherHeader from "./components/TeacherHeader";
-import UnauthorizedButton from "@/app/components/UnauthorizedButton";
+import UnauthorizedButton from "@/app/components/buttons/UnauthorizedButton";
 
 export default async function TeacherLayout({
     children,

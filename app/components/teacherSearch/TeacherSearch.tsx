@@ -1,12 +1,15 @@
 'use client'
 import { Label } from "@/components/ui/label";
-import TeacherListGrid, { TeacherCardType } from "./TeacherListGrid";
+import TeacherListGrid from "./TeacherListGrid";
+import { ExpandRecursively, TeacherCardType } from "@/lib/types"
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from "react";
-import  SchoolSelector from "./SchoolSelector";
+import  SchoolSelector from "../SchoolSelector";
 import { useSession } from "next-auth/react";
 import { ROLE } from "prisma/prisma-client"
 import Link from "next/link";
+import TeacherTabs, { TabContent } from "./TeacherTabs";
+import {Expand} from '@/lib/types'
 
 export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
@@ -15,7 +18,6 @@ export default function TeacherSearch() {
     const authorizedRoles:ROLE[] = ["HR", "SUPERADMIN"]
 
     const session = useSession()
-
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchString(event.target.value);
     };
@@ -35,6 +37,16 @@ export default function TeacherSearch() {
 
         fetchData();
     }, [searchString, selectedSchool]); 
+
+    const tabsContent:TabContent[]= [{
+        title: 'List',
+        tabContent: <TeacherListGrid key="tab1" teachers={teachers} />,
+    },
+    {
+        title: 'Grid',
+        tabContent: <TeacherListGrid key="tab1" teachers={teachers} />,
+    },
+]
     
     return (
         <div className="flex flex-col">
@@ -62,6 +74,7 @@ export default function TeacherSearch() {
             { session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user.role.includes(role)) ?
             <div className="m-auto">
 
+            <TeacherTabs  />   
             <TeacherListGrid teachers={teachers} />
             </div>
             :
