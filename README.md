@@ -35,8 +35,8 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
   - [ ] Teacher details page
     - [ ] CRUD for teacher credentials
     - [ ] State Course Code link to State Course page
-    - [ ] Top level highlighting on course list
     - [ ] Add demographics tab or card on top of Teacher Credentials
+    - [x] Top level highlighting on course list
     - [x] Add Credential form dialog on Teacher page
     - [x] Back to search button
     - [x] Add highlighting to matching state auth to credentials
