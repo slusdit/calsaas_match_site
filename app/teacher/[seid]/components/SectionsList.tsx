@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/accordion"
 import StateAuthTable from "./StateAuthTable"
 import { Section, TeacherCredential, Course, StateCourseAuth } from "@prisma/client"
+import { useState } from "react"
+import { Check, CheckSquare, CheckSquare2, SquareIcon } from "lucide-react"
 
 type StateAuthWithCourse = Course & {
     authTableId: StateCourseAuth
@@ -30,17 +32,20 @@ export default function SectionsList({
             <Accordion type="single" collapsible className="">
                 <div className=""></div>
                 {sections.map((section) => {
-                    const isMatched = credentials.some(credential =>
-                        credential.docTitle === section.course?.authTableId.docTitle &&
-                        credential.authCode === section.course.authTableId.authCode
+                    const isMatched = credentials.some(credential => 
+                        section.course.authTableId.some(auth => 
+                            credential.docTitle === auth.docTitle &&
+                            credential.authCode === auth.authCode
+                        )
                     );
-
-                    const matchedClassName = isMatched ? "Matched gap-24" : "gap-24"
+                    // const isMissing = section.course.authTableId?[0] ? true : undefined
+                                     
+                    const matchedClassName = isMatched ? "bg-spotlight text-spotlight-foreground font-bold gap-24 px-1" : "gap-24 px-1"
 
                     return (
 
-                         <AccordionItem value={section.sectionId} className={matchedClassName} key={section.key_id}>
-                            <AccordionTrigger className={matchedClassName}>
+                         <AccordionItem value={section.sectionId} className="gap-24 px-1" key={section.key_id}>
+                            <AccordionTrigger className="gap-24 px-1">
                                 Course:
                                 <span className="font-bold">
                                     {section.courseName}
@@ -48,6 +53,10 @@ export default function SectionsList({
                                 Section Number:
                                 <span className="font-bold">
                                     {section.sectionNumber}
+                                </span>
+                                Match: 
+                                <span className="font-bold">
+                                    {isMatched ? <Check color="hsl(var(--spotlight))"/> : <SquareIcon />}
                                 </span>
                             </AccordionTrigger>
                             <AccordionContent className="">

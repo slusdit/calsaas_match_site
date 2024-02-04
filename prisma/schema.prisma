@@ -93,6 +93,7 @@ model StateCourseAuth {
   subjectCode       String
   subject           String
   notes             String?
+  match             Boolean?
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
 }

@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card"
 import Link from "next/link";
 import { TeacherCardType } from "@/lib/types"
+import { StateCourseAuth, TeacherCredential } from "@prisma/client";
 
 interface Props {
     teacher: TeacherCardType
@@ -14,6 +15,10 @@ interface Props {
 }
 
 export default function TeacherCard({ teacher }: Props) {
+
+    function isMatch(authCodes:StateCourseAuth[], credentials:TeacherCredential[]){
+        
+    }
     return (
         <Link href={`/teacher/${teacher.seid}`} className={`h-full`} >
             <Card className="w-72 

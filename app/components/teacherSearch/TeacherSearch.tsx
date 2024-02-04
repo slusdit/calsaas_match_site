@@ -48,7 +48,7 @@ export default function TeacherSearch() {
             tabContent: <div>List View Coming Soon</div>,
         }
     ]
-    console.log(teachers[0])
+    
     return (
         <div className="flex flex-col">
             <div className="search-bar p-6 m-auto">

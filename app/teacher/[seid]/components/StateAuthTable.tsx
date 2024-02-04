@@ -14,7 +14,7 @@ import { TeacherCredential, StateCourseAuth } from "@prisma/client";
 export default function StateAuthTable(
     {
         authCodes,
-        credentials
+        credentials,
     }: {
         authCodes?: StateCourseAuth[]
         credentials: TeacherCredential[]
