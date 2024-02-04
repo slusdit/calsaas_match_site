@@ -24,7 +24,6 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
 
 - [ ] Frontend
   - [ ] Teacher List page
-    - [ ] Implement `zod`
     - [ ] CRUD for teacher demographics
     - [X] Add search / filter ability by school
     - [X] Teacher search
@@ -34,6 +33,9 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
     ~~- [ ] Memoize initial data pull~~
   - [ ] Teacher details page
     - [ ] CRUD for teacher credentials
+      - [ ] Update
+      - [ ] Delete
+      - [X] Add
     - [ ] State Course Code link to State Course page
     - [ ] Add demographics tab or card on top of Teacher Credentials
     - [x] Top level highlighting on course list
@@ -45,7 +47,8 @@ Utilizing [shadcn/ui](https://ui.shadcn.com/docs/components)
     - [ ] List all course sections with that course code
     - [ ] Link on teacher name via SEID to teacher page
   - [ ] Components
-    - [ ] Teacher Card fix double line background gap
+    - [x] Teacher Card fix double line background gap
+  - [x] Implement `zod`
   - [X] Auth
     - [X] Role based google auth
       - [X] Basic SLUSD only google auth
