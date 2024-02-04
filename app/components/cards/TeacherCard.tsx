@@ -28,33 +28,38 @@ export default function TeacherCard({ teacher, className }: Props) {
             cursor-pointer
             hover:shadow-sm
             hover:shadow-primary 
-            hover:scale-105 
-            transition-transform 
-            duration-300">
-                <CardHeader className="">
-                    <CardTitle className="h-12 inline-block align-middle overflow-hidden">{teacher.lastName}, {teacher.firstName}</CardTitle>
-                    <CardDescription>SEID: {teacher.seid}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="flex justify-center align-bottom ">
-                        <div className="p-2">
-                            Section Count: <br />
-                            {teacher.sections?.length}
-                        </div>
-                        <div className="w-0.5 bg-border"></div>
-                        {teacher.credentials ? (
+           ">
+                {/* Hover Effect Container */}
+                <div className=" 
+                hover:scale-105
+                transition-transform 
+                duration-300
+                ">
+                    <CardHeader className="">
+                        <CardTitle className="h-12 inline-block align-middle overflow-hidden">{teacher.lastName}, {teacher.firstName}</CardTitle>
+                        <CardDescription>SEID: {teacher.seid}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex justify-center align-bottom ">
                             <div className="p-2">
-                                Credential Count: <br />
-                                {teacher.credentials.length}
+                                Section Count: <br />
+                                {teacher.sections?.length}
                             </div>
-                        ) : (
-                            <div className="p-2 ">
-                                Credential Count: <br />
-                                0
-                            </div>
-                        )}
-                    </div>
-                </CardContent>
+                            <div className="w-0.5 bg-border"></div>
+                            {teacher.credentials ? (
+                                <div className="p-2">
+                                    Credential Count: <br />
+                                    {teacher.credentials.length}
+                                </div>
+                            ) : (
+                                <div className="p-2 ">
+                                    Credential Count: <br />
+                                    0
+                                </div>
+                            )}
+                        </div>
+                    </CardContent>
+                </div>
             </Card>
         </Link>
     )

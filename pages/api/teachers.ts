@@ -6,6 +6,10 @@ export interface TeacherCardType extends Teacher {
   credentials?: TeacherCredential[];
 }
 
+// type SectionWithAuth = {
+//   sections: string[]
+// }
+
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -57,8 +61,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           lastName: 'asc',
         },
         include: {
-          sections: true,
-          credentials: true,
+          sections: {
+            include: {
+                course: {
+                    include: {
+                        authTableId: true
+                    }
+                }
+            }
+        },
+        credentials: true
         },
       });
       res.status(200).json(teachers);

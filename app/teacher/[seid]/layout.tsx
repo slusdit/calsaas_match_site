@@ -14,7 +14,7 @@ export default async function TeacherLayout({
     return (
         <main>
             {/* <TeacherHeader name={params.seid} /> */}
-            <div className="flex m-auto justify-between items-start 0-mt-11">
+            <div className="grid grid-cols-1">
               {session ?
                 children 
                 :

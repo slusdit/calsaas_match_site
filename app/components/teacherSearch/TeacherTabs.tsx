@@ -1,30 +1,31 @@
-
-import TeacherListGrid from "@/app/components/teacherSearch/TeacherListGrid"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { Teacher } from "@prisma/client"
-import { TeacherCardType } from "../cards/TeacherCard"
+import { TeacherCardType } from "@/lib/types"
 
 export interface TabContent {
   title: string,
   tabContent: React.ReactNode
 }
 
+const dummyData:TabContent[] = [
+  {
+    title:"Tabs Test",
+    tabContent:<ul><li>Tab1</li><li>Tab Content</li></ul>
+  },
+  {
+    title:"Tabs Test The Second",
+    tabContent:<ul><li>Tab2</li><li>Tab Content Yet again</li></ul>
+  },
+]
 
-export default function TeacherTabs({tabs = [{title:"Tabs Test",tabContent:<ul><li>Tab1</li><li>Tab Content</li></ul>}], teachers}:{tabs:TabContent[], teachers:TeacherCardType[]}) {
+export default function TeacherTabs({tabs}:{tabs?:TabContent[]}) {
+  if (!tabs){
+    const tabs = dummyData
+  }
   return (
     <Tabs defaultValue={tabs[0].title} >
       <TabsList className="

@@ -82,14 +82,7 @@ const teachers = await fetchTeachers()
   return (
     <>
     <ModeToggle />
-    <div className="flex justify-center">
-      <TeacherCard teacher={teacher}/>
-      <TeacherCard2 teacher={teacher} />
-    </div>
-    <div className="flex justify-center">
-      <CardWithForm teacher={teacher}/>
-    </div>
-    <div className="">
+      <div className="">
       {/* <TeacherTabs teachers={teachers}/> */}
       <TeacherData />
     </div>
