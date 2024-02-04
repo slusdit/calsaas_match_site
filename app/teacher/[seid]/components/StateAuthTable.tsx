@@ -26,8 +26,8 @@ export default function StateAuthTable(
             <ScrollArea className="h-96 border rounded">
             <TableHeader className="sticky top-0 bg-background border-b-4">
                 <TableRow >
-                    <TableHead className="w-[75px]">Doc Title</TableHead>
-                    <TableHead className="w-[75px]">Auth Code</TableHead>
+                    <TableHead className="w-[50px]">Doc Title</TableHead>
+                    <TableHead className="w-[50px]">Auth Code</TableHead>
                     <TableHead className="w-[50px]">Auth Type</TableHead>
                     <TableHead className="w-[50px]">Subject Code</TableHead>
                     <TableHead className="w-[50px]">Subject</TableHead>

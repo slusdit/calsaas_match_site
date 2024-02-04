@@ -66,6 +66,10 @@ const config = {
         spotlight:{
           DEFAULT: "hsl(var(--spotlight))",
           foreground: "hsl(var(--spotlight-foreground))"
+        },
+        warning:{
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))"
         }
       },
       borderRadius: {

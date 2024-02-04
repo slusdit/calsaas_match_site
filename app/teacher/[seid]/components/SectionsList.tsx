@@ -8,7 +8,9 @@ import {
 import StateAuthTable from "./StateAuthTable"
 import { Section, TeacherCredential, Course, StateCourseAuth } from "@prisma/client"
 import { useState } from "react"
-import { Check, CheckSquare, CheckSquare2, SquareIcon } from "lucide-react"
+import { AlertTriangle, Check, CheckSquare, CheckSquare2, SquareIcon, XOctagon } from "lucide-react"
+import { credentialAuthMatch } from "@/lib/utils"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 type StateAuthWithCourse = Course & {
     authTableId: StateCourseAuth
@@ -24,7 +26,7 @@ export default function SectionsList({
     sections: SectionWithCourse[],
     credentials: TeacherCredential[]
 }) {
-    // console.log(sections)
+
 
     return (
         <div className="w-content">
@@ -32,20 +34,48 @@ export default function SectionsList({
             <Accordion type="single" collapsible className="">
                 <div className=""></div>
                 {sections.map((section) => {
-                    const isMatched = credentials.some(credential => 
-                        section.course.authTableId.some(auth => 
+                    const isMatched = credentials.some(credential =>
+                        section.course.authTableId.some(auth =>
                             credential.docTitle === auth.docTitle &&
                             credential.authCode === auth.authCode
                         )
                     );
-                    // const isMissing = section.course.authTableId?[0] ? true : undefined
-                                     
+                    const matched = credentialAuthMatch({
+                        credentials: credentials,
+                        stateCourseAuth: section.course.authTableId
+                    })
+                    const getMatchIcon = (matched?: string) => {
+                        if (matched === 'match') {
+                            return {
+                                message: 'Credential Match!',
+                                icon: <Check color="hsl(var(--spotlight))" />
+                            }
+                        } else if (matched === 'noMatch') {
+                            return {
+                                message: 'No Match',
+                                icon: <AlertTriangle color="hsl(var(--warning))" />
+                            }
+                        } else if (matched === 'noCredentials' || matched === 'noAuth') {
+                            return {
+                                message: 'Warning: Missing Data',
+                                icon: <XOctagon color="hsl(var(--destructive))" />
+                            }
+                        }
+                        return {
+                            message: 'Error!',
+                            icon: <XOctagon color="hsl(var(--destructive))" />
+                        }
+                    };
+                   
+                   
+                    const matchIcon = getMatchIcon(matched)
+                    
                     const matchedClassName = isMatched ? "bg-spotlight text-spotlight-foreground font-bold gap-24 px-1" : "gap-24 px-1"
 
                     return (
 
-                         <AccordionItem value={section.sectionId} className="gap-24 px-1" key={section.key_id}>
-                            <AccordionTrigger className="gap-24 px-1">
+                        <AccordionItem value={section.sectionId} className="gap-24 px-1" key={section.key_id}>
+                            <AccordionTrigger className="gap-12 px-1">
                                 Course:
                                 <span className="font-bold">
                                     {section.courseName}
@@ -54,13 +84,22 @@ export default function SectionsList({
                                 <span className="font-bold">
                                     {section.sectionNumber}
                                 </span>
-                                Match: 
-                                <span className="font-bold">
-                                    {isMatched ? <Check color="hsl(var(--spotlight))"/> : <SquareIcon />}
-                                </span>
+                                Match:
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger className="font-bold">
+                                            {matchIcon.icon}
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p className="">
+                                                {matchIcon.message}
+                                            </p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
                             </AccordionTrigger>
                             <AccordionContent className="">
-                                <div className="mt-2 p-2 w-">
+                                <div className="mt-2 p-2 w-content">
                                     <div className="m-auto mb-2">
                                         State Course Code: <span className="font-bold">{section.stateCode}</span>
                                     </div>

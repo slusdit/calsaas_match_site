@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { ROLE } from "prisma/prisma-client"
 import Link from "next/link";
 import TeacherTabs, { TabContent } from "./TeacherTabs";
+import UnauthorizedButton from "../buttons/UnauthorizedButton";
 
 
 export default function TeacherSearch() {
@@ -16,6 +17,7 @@ export default function TeacherSearch() {
     const [searchString, setSearchString] = useState<string>('');
     const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
     const authorizedRoles:ROLE[] = ["HR", "SUPERADMIN"]
+    const adminRoles:ROLE[] = ["SUPERADMIN", "ADMIN"]
 
     const session = useSession()
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -79,11 +81,7 @@ export default function TeacherSearch() {
             </div>
             :
             <div className="float text-center">
-                <Link
-                    className='text-underline' 
-                    href={'/api/auth/signin'}>
-                       Unauthorized: Must be have role: {authorizedRoles.join()}
-                </Link>
+                <UnauthorizedButton role={{authorizedRoles: authorizedRoles, adminRoles:adminRoles}} />
             </div>
             
         }

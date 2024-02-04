@@ -39,6 +39,9 @@
 
     --spotlight: 150 60% 50%;
     --spotlight-foreground: 0 0% 11%;
+
+    --warning: 29 89% 58%;
+    --warning-foreground: 0 0% 11%;
   }
   /* 
   Original Light Theme

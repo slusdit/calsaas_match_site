@@ -52,13 +52,15 @@ model TeacherCredential {
 }
 
 model Course {
-  key_id             Int             @id @unique @default(autoincrement())
-  stateCourseIdSec   String ?        @unique
-  stateCourseIdAuth  String?        @unique
-  localCourseName    String?
-  localCourseNumber  String?
-  authTableId     StateCourseAuth[]   
-  sectionTableId  Section[]         
+  key_id            Int           @id @unique @default(autoincrement())
+  stateCourseIdSec  String ?      @unique
+  stateCourseIdAuth String?       @unique
+  localCourseName   String?
+  localCourseNumber String?
+  authExempt        Boolean       @default(false)
+  authExemptionType String?
+  authTableId       StateCourseAuth[]   
+  sectionTableId    Section[]         
   // @@unique([stateCourseId, courseNumber])
 }
 
