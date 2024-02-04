@@ -10,6 +10,7 @@ import { ROLE } from "prisma/prisma-client"
 import Link from "next/link";
 import TeacherTabs, { TabContent } from "./TeacherTabs";
 import UnauthorizedButton from "../buttons/UnauthorizedButton";
+import { credentialAuthMatch } from "@/lib/utils";
 
 
 export default function TeacherSearch() {
@@ -34,7 +35,16 @@ export default function TeacherSearch() {
         };
         const fetchData = async () => {
             const data = await fetchTeachers();
-            setTeachers(data);
+            if (data) {
+
+                data.forEach((teacher) => {
+                    teacher.sections.forEach((section) => {
+    
+                        const isMatch = credentialAuthMatch({credentials:teacher.credentials, stateCourseAuth:[]})
+                    })
+                })
+                setTeachers(data);
+            }
         };
 
         fetchData();
