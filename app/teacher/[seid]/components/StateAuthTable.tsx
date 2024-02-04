@@ -1,3 +1,4 @@
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
     Table,
     TableCaption,
@@ -22,7 +23,8 @@ export default function StateAuthTable(
 
         <Table>
             <TableCaption>State Auth Codes</TableCaption>
-            <TableHeader>
+            <ScrollArea className="h-96 border rounded">
+            <TableHeader className="sticky top-0 bg-background border-b-4">
                 <TableRow >
                     <TableHead className="w-[75px]">Doc Title</TableHead>
                     <TableHead className="w-[75px]">Auth Code</TableHead>
@@ -32,31 +34,34 @@ export default function StateAuthTable(
                     <TableHead className="w-[50px]">Notes</TableHead>
                 </TableRow>
             </TableHeader>
-            <TableBody >
-                {authCodes.map((authCode) => {
-                    // Check if the authCode matches any credential
-                    const isMatched = credentials.some(credential =>
-                        credential.docTitle === authCode.docTitle &&
-                        credential.authCode === authCode.authCode
-                    );
-                    const baseRowClassName = "odd:text-secondary-foreground odd:bg-secondary "
-                    // 
-                    const rowClassName = isMatched ? `bg-spotlight text-spotlight-foreground font-bold ` : baseRowClassName;
 
-                    return (
-                        <TableRow key={authCode.key_id} className={rowClassName}>
-                            <TableCell>{authCode.docTitle}</TableCell>
-                            <TableCell>{authCode.authCode}</TableCell>
-                            <TableCell>{authCode.authType}</TableCell>
-                            <TableCell>{authCode.subjectCode}</TableCell>
-                            <TableCell>{authCode.subject}</TableCell>
-                            <TableCell>{authCode.notes}</TableCell>
 
-                        </TableRow>                      
-                    )
-                })}
-            </TableBody>
 
+                <TableBody className="">
+                    {authCodes.map((authCode) => {
+                        // Check if the authCode matches any credential
+                        const isMatched = credentials.some(credential =>
+                            credential.docTitle === authCode.docTitle &&
+                            credential.authCode === authCode.authCode
+                        );
+                        const baseRowClassName = "odd:text-secondary-foreground odd:bg-secondary "
+                        // 
+                        const rowClassName = isMatched ? `bg-spotlight text-spotlight-foreground font-bold ` : baseRowClassName;
+
+                        return (
+                            <TableRow key={authCode.key_id} className={rowClassName}>
+                                <TableCell>{authCode.docTitle}</TableCell>
+                                <TableCell>{authCode.authCode}</TableCell>
+                                <TableCell>{authCode.authType}</TableCell>
+                                <TableCell>{authCode.subjectCode}</TableCell>
+                                <TableCell>{authCode.subject}</TableCell>
+                                <TableCell>{authCode.notes}</TableCell>
+
+                            </TableRow>
+                        )
+                    })}
+                </TableBody>
+            </ScrollArea>
         </Table>
     )
 }

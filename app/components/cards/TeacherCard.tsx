@@ -10,12 +10,12 @@ import { TeacherCardType } from "@/lib/types"
 
 interface Props {
     teacher: TeacherCardType
-    className: string
+    
 }
 
-export default function TeacherCard({ teacher, className }: Props) {
+export default function TeacherCard({ teacher }: Props) {
     return (
-        <Link href={`/teacher/${teacher.seid}`} className={`h-full ${className}`} >
+        <Link href={`/teacher/${teacher.seid}`} className={`h-full`} >
             <Card className="w-72 
             min-h-56 
             m-2 

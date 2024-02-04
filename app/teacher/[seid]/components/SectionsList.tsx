@@ -28,17 +28,18 @@ export default function SectionsList({
         <div className="w-content">
 
             <Accordion type="single" collapsible className="">
+                <div className=""></div>
                 {sections.map((section) => {
                     const isMatched = credentials.some(credential =>
                         credential.docTitle === section.course?.authTableId.docTitle &&
                         credential.authCode === section.course.authTableId.authCode
                     );
 
-                    const matchedClassName = isMatched ? "Matched" : "gap-24"
+                    const matchedClassName = isMatched ? "Matched gap-24" : "gap-24"
 
                     return (
 
-                        <AccordionItem value={section.sectionId} className={matchedClassName} key={section.key_id}>
+                         <AccordionItem value={section.sectionId} className={matchedClassName} key={section.key_id}>
                             <AccordionTrigger className={matchedClassName}>
                                 Course:
                                 <span className="font-bold">
@@ -49,9 +50,9 @@ export default function SectionsList({
                                     {section.sectionNumber}
                                 </span>
                             </AccordionTrigger>
-                            <AccordionContent>
+                            <AccordionContent className="">
                                 <div className="mt-2 p-2 w-">
-                                    <div className="m-auto">
+                                    <div className="m-auto mb-2">
                                         State Course Code: <span className="font-bold">{section.stateCode}</span>
                                     </div>
                                     <StateAuthTable

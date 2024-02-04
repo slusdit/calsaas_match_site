@@ -52,26 +52,24 @@ export default async function TeacherPage({ params }: Params) {
   return (
     <div className="m-auto md:flex-col">
       <div className="p-2 mt-8">
-        <>
-          <BackButton />
-          <div className="mt-5">Name: <span className="font-bold">{teacher.firstName} {teacher.lastName}</span></div>
-          <div className="mt-5">SEID: <span className="font-bold">{teacher.seid}</span></div>
-        </>
+        <BackButton />
+        <div className="mt-5">Name: <span className="font-bold">{teacher.firstName} {teacher.lastName}</span></div>
+        <div className="mt-5">SEID: <span className="font-bold">{teacher.seid}</span></div>
       </div>
       <div className="flex space-x-4 mt-10">
         <div className="p-2 inline">
           <div className="font-bold">Teachers Credentials:</div>
-          <CredentialsTable 
-            credentials={teacher.credentials} 
-            seid={seid}/>
+          <CredentialsTable
+            credentials={teacher.credentials}
+            seid={seid} />
         </div>
         <div className="p-2">
           <div className="font-bold">Classes</div>
-            <SectionsList 
-            sections={teacher.sections} 
-            credentials={teacher.credentials} 
-            />
-          </div>
+          <SectionsList
+            sections={teacher.sections}
+            credentials={teacher.credentials}
+          />
+        </div>
       </div>
     </div>
   );
