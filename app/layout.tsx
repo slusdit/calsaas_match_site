@@ -29,7 +29,7 @@ export default async function RootLayout({
   const session = await serverAuth()
   // console.log(`Server Session: ${JSON.stringify(session)}`)
   return (
-    <html lang="en">
+    <html lang="en" className='no-scrollbar'>
       <body suppressHydrationWarning={true} className={`h-screen flex flex-col justify-between ${inter.className}`}>
         <SessionProvider session={session}>
           <ThemeProvider
