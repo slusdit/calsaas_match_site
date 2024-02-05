@@ -15,7 +15,6 @@ export default function TeacherData({searchString}:{searchString?:string}){
     const fetchData = async () => {
         const data = await fetchTeachers();
         setTeachers(data);
-        console.log(JSON.stringify(data[0], null, '\t'))
     };
 
     fetchData()

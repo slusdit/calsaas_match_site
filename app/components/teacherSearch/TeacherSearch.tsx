@@ -10,7 +10,7 @@ import { ROLE } from "prisma/prisma-client"
 import Link from "next/link";
 import TeacherTabs, { TabContent } from "./TeacherTabs";
 import UnauthorizedButton from "../buttons/UnauthorizedButton";
-import { credentialAuthMatch } from "@/lib/utils";
+import { credentialAuthMatch, jp } from "@/lib/utils";
 
 
 export default function TeacherSearch() {
@@ -36,15 +36,32 @@ export default function TeacherSearch() {
         const fetchData = async () => {
             const data = await fetchTeachers();
             if (data) {
-
-                data.forEach((teacher) => {
-                    teacher.sections.forEach((section) => {
-    
-                        const isMatch = credentialAuthMatch({credentials:teacher.credentials, stateCourseAuth:[]})
+                const updatedTeachers = data.map((teacher) => {
+                    const updatedSections = teacher.sections.map((section) => {
+                        const isMatch = credentialAuthMatch({credentials:teacher.credentials, stateCourseAuth:section.course.authTableId })
+                        return {
+                            ...section,
+                            match: isMatch
+                        }
                     })
+
+                    return {
+                        ...teacher,
+                        sections: updatedSections,
+                    }
                 })
-                setTeachers(data);
+                setTeachers(updatedTeachers)
             }
+            // if (data) {
+
+            //     data.forEach((teacher) => {
+            //         teacher.sections.forEach((section) => {
+            //             const isMatch = credentialAuthMatch({credentials:teacher.credentials, stateCourseAuth:section.course.authTableId })
+            //             return {isMatch:,...section}
+            //         })
+            //     })
+            //     setTeachers(data);
+            // }
         };
 
         fetchData();

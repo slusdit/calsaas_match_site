@@ -64,5 +64,4 @@ export function serverAuth(...args: [GetServerSidePropsContext["req"], GetServer
 
 export const isAdmin = async (roles: ROLE[]) => {        
   const admin = roles.some((role: string) => role === 'SUPERADMIN');
-  console.log(admin);
 }

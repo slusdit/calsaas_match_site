@@ -52,7 +52,6 @@ const UnauthorizedButton = ({
           <p>Must be have role: {role.authorizedRoles.filter(e => !role.adminRoles.includes(e)).join(', ')}</p>
           <Button asChild variant="link" className="font-bold">
             <Link href={'/'}>
-              {/* <Home className="mr-2 h-6"/> */}
               Home
             </Link>
           </Button>

@@ -11,6 +11,7 @@ import { useState } from "react"
 import { AlertTriangle, Check, CheckSquare, CheckSquare2, SquareIcon, XOctagon } from "lucide-react"
 import { credentialAuthMatch } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { match } from "assert"
 
 type StateAuthWithCourse = Course & {
     authTableId: StateCourseAuth
@@ -34,12 +35,12 @@ export default function SectionsList({
             <Accordion type="single" collapsible className="">
                 <div className=""></div>
                 {sections.map((section) => {
-                    const isMatched = credentials.some(credential =>
-                        section.course.authTableId.some(auth =>
-                            credential.docTitle === auth.docTitle &&
-                            credential.authCode === auth.authCode
-                        )
-                    );
+                    // const isMatched = credentials.some(credential =>
+                    //     section.course.authTableId.some(auth =>
+                    //         credential.docTitle === auth.docTitle &&
+                    //         credential.authCode === auth.authCode
+                    //     )
+                    // );
                     const matched = credentialAuthMatch({
                         credentials: credentials,
                         stateCourseAuth: section.course.authTableId
@@ -47,7 +48,7 @@ export default function SectionsList({
                     const getMatchIcon = (matched?: string) => {
                         if (matched === 'match') {
                             return {
-                                message: 'Credential Match!',
+                                message: 'Credential and State Auth match!',
                                 icon: <Check color="hsl(var(--spotlight))" />
                             }
                         } else if (matched === 'noMatch') {
@@ -66,16 +67,14 @@ export default function SectionsList({
                             icon: <XOctagon color="hsl(var(--destructive))" />
                         }
                     };
-                   
-                   
                     const matchIcon = getMatchIcon(matched)
-                    
-                    const matchedClassName = isMatched ? "bg-spotlight text-spotlight-foreground font-bold gap-24 px-1" : "gap-24 px-1"
+                    // const isMissing = section.course.authTableId?[0] ? true : undefined
+                    const matchedClassName = matched ? "bg-spotlight text-spotlight-foreground font-bold gap-24 px-1" : "gap-24 px-1"
 
                     return (
 
                         <AccordionItem value={section.sectionId} className="gap-24 px-1" key={section.key_id}>
-                            <AccordionTrigger className="gap-12 px-1">
+                            <AccordionTrigger className="gap-10 px-1">
                                 Course:
                                 <span className="font-bold">
                                     {section.courseName}
@@ -91,15 +90,13 @@ export default function SectionsList({
                                             {matchIcon.icon}
                                         </TooltipTrigger>
                                         <TooltipContent>
-                                            <p className="">
                                                 {matchIcon.message}
-                                            </p>
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
                             </AccordionTrigger>
                             <AccordionContent className="">
-                                <div className="mt-2 p-2 w-content">
+                                <div className="mt-2 p-2 w-cpmtemt">
                                     <div className="m-auto mb-2">
                                         State Course Code: <span className="font-bold">{section.stateCode}</span>
                                     </div>
