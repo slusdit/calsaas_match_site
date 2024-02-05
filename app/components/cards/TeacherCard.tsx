@@ -10,6 +10,7 @@ import { TeacherCardType } from "@/lib/types"
 import { StateCourseAuth, TeacherCredential } from "@prisma/client";
 import { credentialAuthMatch, jp } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import MatchCountBadges from "./MatchCountBadges";
 
 interface Props {
     teacher: TeacherCardType
@@ -17,39 +18,37 @@ interface Props {
 }
 
 export default function TeacherCard({ teacher }: Props) {
-    jp(teacher)
-    // const countMatch = (tch) => {
-    //     const match = tch.course.authTableId.match
 
-    // }
-    // countMatch(teacher)
-    const countMatchesNull = (data) => {
-        // Initialize a count variable
-        let count = 0;
+    const countMatches = (data) => {
+        let matchCount = 0
+        let noMatchCount = 0
+        let errorCount = 0
 
-        // Loop through each section
         data.sections.forEach((section) => {
             const matched = credentialAuthMatch({
                 credentials: teacher.credentials,
                 stateCourseAuth: section.course.authTableId
             })
-            console.log(matched)
+           
             if (matched === 'match') {
-                count ++
+                matchCount ++
             }
-            // Loop through each authTableId in the current section
-            // section.course.authTableId.forEach((auth) => {
-            //     // Check if match is null and increment count if true
-            //     if (auth.match != null) {
-            //         count++;
-            //     }
-            // });
+            if (matched === 'noAuth' || matched === 'noCredentials') {
+                errorCount++
+            }
+            if (matched === 'noMatch') {
+                noMatchCount++
+            }
         });
 
-        return count;
+        return {
+            matchCount: matchCount,
+            noMatchCount: noMatchCount,
+            errorCount: errorCount
+        };
     }
 
-    const nullCount = countMatchesNull(teacher)
+    const counts = countMatches(teacher)
 
     return (
         <Link href={`/teacher/${teacher.seid}`} className={`h-full`} >
@@ -76,9 +75,8 @@ export default function TeacherCard({ teacher }: Props) {
                         <CardTitle className="h-12 inline-block align-middle overflow-hidden">{teacher.lastName}, {teacher.firstName}</CardTitle>
                         <CardDescription>
                             SEID: {teacher.seid}
-                            <Badge >
-                                {nullCount}
-                            </Badge>
+
+                            {/* <MatchCountBadges counts={counts} courseCount={teacher.sections.length} /> */}
                         </CardDescription>
 
                     </CardHeader>
