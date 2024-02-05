@@ -35,6 +35,7 @@ const config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+          highlight: "hsl(var(--destructive-highlight))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -63,13 +64,15 @@ const config = {
           DEFAULT:"hsl(var(--title))",
           foreground:"hsl(var(--title-foreground))"
         },
-        spotlight:{
+        spotlight: {
           DEFAULT: "hsl(var(--spotlight))",
-          foreground: "hsl(var(--spotlight-foreground))"
+          foreground: "hsl(var(--spotlight-foreground))",
+          highlight: "hsl(var(--spotlight-highlight))"
         },
         warning:{
           DEFAULT: "hsl(var(--warning))",
-          foreground: "hsl(var(--warning-foreground))"
+          foreground: "hsl(var(--warning-foreground))",
+          highlight: "hsl(var(--warning-highlight))"
         }
       },
       borderRadius: {

@@ -35,6 +35,7 @@ const prisma = new PrismaClient();
                                 'caltidesNumId': item.CALTIDESNumId,
                                 'docTitle': docTitle,
                                 'authCode': authCode, 
+                                'created_by': 'support@slusd.us',
                                 'subjectCodeMajor': subjectMoajor,
                                 'subjectCodeMinor': subjectMinor,
                                 },
@@ -42,13 +43,13 @@ const prisma = new PrismaClient();
                             
                         } catch (error) {
                             errorList.push(`{
-                                'credPersonId': item.CredPersonId,
-                                'seid': item.CALTIDESNumId,
-                                'caltidesNumId': item.CALTIDESNumId,
-                                'docTitle': item.DocTitle?.trim(),
-                                'authCode': item.AuthCode?.trim(),
-                                'subjectCodeMajor': subjectMoajor,
-                                'subjectCodeMinor': subjectMinor,
+                                'credPersonId': ${item.CredPersonId},
+                                'seid': ${item.CALTIDESNumId},
+                                'caltidesNumId': ${item.CALTIDESNumId},
+                                'docTitle': ${item.DocTitle?.trim()},
+                                'authCode': ${item.AuthCode?.trim()},
+                                'subjectCodeMajor': ${subjectMoajor},
+                                'subjectCodeMinor': ${subjectMinor},
                                 },
                                 }`)
                             console.log(error)

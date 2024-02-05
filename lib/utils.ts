@@ -14,8 +14,8 @@ export function credentialAuthMatch({
   credentials, 
   stateCourseAuth 
 }: { 
-  credentials?: TeacherCredential[] | string
-  stateCourseAuth?: StateCourseAuth[] | string
+  credentials?: TeacherCredential[] | String
+  stateCourseAuth?: StateCourseAuth[] | String
  }) {
   // console.log(`credentials: "${credentials}"`)
   // console.log(`stateCourseAuth: "${stateCourseAuth}"`)
@@ -28,7 +28,8 @@ export function credentialAuthMatch({
   const isMatch = credentials.some(credential => 
     stateCourseAuth.some(auth => 
         credential.docTitle === auth.docTitle &&
-        credential.authCode === auth.authCode
+        credential.authCode === auth.authCode &&
+        auth.authType === 'Full'
     )
 
     );

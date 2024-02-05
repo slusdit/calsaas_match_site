@@ -11,8 +11,8 @@ datasource db {
 }
 
 model School {
-  sc      String       @id @unique
-  name    String
+  sc       String    @id @unique
+  name     String
   teachers Teacher[]
   sections Section[]
 }
@@ -27,7 +27,7 @@ model Teacher {
   lastName      String
   dateBirth     String?
   statusCode    String?             @default("A")
-  seid          String              @unique                 
+  seid          String              @unique
   sc            String?
   school        School?             @relation(fields: [sc], references: [sc])
   credentials   TeacherCredential[]
@@ -35,7 +35,6 @@ model Teacher {
   created_at    DateTime            @default(now())
   updated_at    DateTime            @updatedAt
 }
-
 
 model TeacherCredential {
   key_id           Int      @id @unique @default(autoincrement())
@@ -47,46 +46,47 @@ model TeacherCredential {
   authCode         String?
   subjectCodeMajor String?
   subjectCodeMinor String?
+  created_by       String   @default("support@slusd.us")  
+  creator          User     @relation(fields: [created_by], references: [email])
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 }
 
 model Course {
-  key_id            Int           @id @unique @default(autoincrement())
-  stateCourseIdSec  String ?      @unique
-  stateCourseIdAuth String?       @unique
+  key_id            Int               @id @unique @default(autoincrement())
+  stateCourseIdSec  String?           @unique
+  stateCourseIdAuth String?           @unique
   localCourseName   String?
   localCourseNumber String?
-  authExempt        Boolean       @default(false)
-  authExemptionType String?
-  authTableId       StateCourseAuth[]   
-  sectionTableId    Section[]         
-  // @@unique([stateCourseId, courseNumber])
+  authExempt        Boolean           @default(false)
+  authExemptionType AuthExempt[]
+  authTableId       StateCourseAuth[]
+  sectionTableId    Section[]
 }
 
 model Section {
-  key_id            Int               @id @unique @default(autoincrement())
-  stateCode         String?
-  sc                String
-  sectionId         String
-  empId             String
-  empId2            String?
-  seid              String?
-  sectionNumber     String
-  grade             String
-  courseName        String
-  courseNumber      String
-  period            String
-  school            School?            @relation(fields: [sc], references: [sc])
-  course            Course?           @relation(fields: [stateCode], references: [stateCourseIdSec])
-  teacher           Teacher?          @relation(fields: [seid], references: [seid])
-  created_at        DateTime          @default(now())
-  updated_at        DateTime          @updatedAt
+  key_id        Int      @id @unique @default(autoincrement())
+  stateCode     String?
+  sc            String
+  sectionId     String
+  empId         String
+  empId2        String?
+  seid          String?
+  sectionNumber String
+  grade         String
+  courseName    String
+  courseNumber  String
+  period        String
+  school        School?  @relation(fields: [sc], references: [sc])
+  course        Course?  @relation(fields: [stateCode], references: [stateCourseIdSec])
+  teacher       Teacher? @relation(fields: [seid], references: [seid])
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
 model StateCourseAuth {
   key_id            Int      @id @unique @default(autoincrement())
-  stateCourseNumber String   
+  stateCourseNumber String
   localCourse       Course?  @relation(fields: [stateCourseNumber], references: [stateCourseIdAuth])
   authType          String
   docTitle          String
@@ -100,19 +100,38 @@ model StateCourseAuth {
   updated_at        DateTime @updatedAt
 }
 
+model StateIssuedDocuments {
+  key_id          Int      @id @unique @default(autoincrement())
+  title           String
+  docCode         String
+  Authorization   String
+  gradeLevelsAuth String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}
+
+enum AuthExempt {
+  MANUAL
+  Title5
+}
+
+// //
+//  Authentication models 
+// //
+
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -128,20 +147,21 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  role          ROLE[]    
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                String              @id @default(cuid())
+  name              String?
+  email             String?             @unique
+  emailVerified     DateTime?
+  image             String?
+  role              ROLE[]
+  accounts          Account[]
+  sessions          Session[]
+  TeacherCredential TeacherCredential[]
 }
 
 model VerificationToken {
-  identifier      String
-  token           String   @unique
-  expires         DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
   @@unique([identifier, token])
 }

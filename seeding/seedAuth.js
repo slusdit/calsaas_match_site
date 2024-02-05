@@ -25,6 +25,7 @@ const prisma = new PrismaClient();
                         authType: item.AuthType,
                         docTitle: item.DocumentTitle,
                         authTitle: item.AuthorizationTitle,
+                        notes: item.notes,
                         authCode: item.AuthorizationCode === 'NULL' ? null : item.AuthorizationCode,
                         subjectCode: item.SubjectCode,
                         subject: item.Subject,
