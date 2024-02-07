@@ -17,11 +17,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
     }
+  } else
+  if (req.method === "GET") {
+    const sc = req.query.sc
+    try {
+      const school:School | null = await prisma.school.findUnique({
+        where: {
+          sc:sc
+        }
+      });
+      res.status(200).json({"sc":school?.sc, "name":school?.name})
+    } catch (error) {
+      {
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    }
   } else {
     res.status(405).end(); // Method Not Allowed
   }
 }
-
 
 export const config = {
   // api: {

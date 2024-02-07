@@ -2,6 +2,12 @@ import { StateCourseAuth, TeacherCredential } from '@prisma/client';
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+// import prisma from './prisma';
+
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient()
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -41,3 +47,15 @@ export function credentialAuthMatch({
     return 'noMatch'
   }
  }
+
+ export async function getSchoolName({sc}:{sc:string}) {
+
+  const school = await prisma.school.findUnique({
+    where: {
+      sc: sc
+        
+      }    
+  })
+  console.log("hello")
+  return "school is"
+}

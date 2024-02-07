@@ -12,6 +12,7 @@ import TeacherTabs, { TabContent } from "./TeacherTabs";
 import UnauthorizedButton from "../buttons/UnauthorizedButton";
 import { credentialAuthMatch, jp } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
+import TeacherListList from "./TeacherListList";
 
 
 export default function TeacherSearch() {
@@ -40,7 +41,7 @@ export default function TeacherSearch() {
             const data = await fetchTeachers();
             if (data) {
                 const updatedTeachers = data.map((teacher) => {
-                    const updatedSections = teacher.sections.map((section) => {
+                    const updatedSections = teacher.sections?.map((section) => {
                         const isMatch = credentialAuthMatch({ credentials: teacher.credentials, stateCourseAuth: section.course.authTableId })
                         return {
                             ...section,
@@ -77,7 +78,7 @@ export default function TeacherSearch() {
         },
         {
             title: 'List',
-            tabContent: <div>List View Coming Soon</div>,
+            tabContent: <TeacherListList key="list" teachers={teachers} doHighlight={doHighlight} />
         }
     ]
 
@@ -118,7 +119,7 @@ export default function TeacherSearch() {
                 </div>
 
             </div>
-            {session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user.role.includes(role)) ?
+            {session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user?.role?.includes(role)) ?
                 <div className="m-auto">
 
                     <TeacherTabs tabs={tabsContent} />

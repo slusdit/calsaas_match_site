@@ -103,18 +103,21 @@ export default function TeacherCard({ teacher, doHighlight }: Props) {
                         duration-300
                         "
                 >
-                    <CardHeader className="">
+                    <CardHeader className="py">
                         <CardTitle className="h-12 inline-block align-middle overflow-hidden">{teacher.lastName}, {teacher.firstName}</CardTitle>
                         <CardDescription>
-                            <span>SEID: {teacher.seid}</span>
+                            <span >SEID: {teacher.seid}</span>
+                            <div className="p-2">
 
                             <MatchCountBadges 
+                                icons
                                 counts={counts} 
                                 courseCount={teacher.sections.length} 
                                 setIsComplete={setIsComplete} 
                                 setIsFullError={setIsFullError}
                                 setIsFullWarning={setIsFullWarning}
                                 />
+                                </div>
                         </CardDescription>
 
                     </CardHeader>

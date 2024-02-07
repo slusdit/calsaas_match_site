@@ -13,12 +13,14 @@ interface MatchCounts {
 const MatchCountBadges = ({
     counts,
     courseCount,
+    icons,
     setIsComplete,
     setIsFullError,
     setIsFullWarning
 }: {
     counts: MatchCounts,
     courseCount: number,
+    icons?: boolean
     setIsComplete?: Dispatch<SetStateAction<boolean>>
     setIsFullError?: Dispatch<SetStateAction<boolean>>
     setIsFullWarning?: Dispatch<SetStateAction<boolean>>
@@ -75,52 +77,52 @@ const MatchCountBadges = ({
     // const mainClass = counts.matchCount === courseCount ? "bg-spotlight text-spotlight-foreground flex justify-between h-4 mt-4 mb-4" : "flex justify-between h-4 mt-4 mb-4"
     // // const warningColor = counts.noMatchCount > 0 ? "hsl(var(--warning))" : "hsl(var(--muted))"
     return (
-        <div className="flex justify-between h-4 mt-4 mb-4">
+        <div className="flex justify-between h-4 mb-2">
 
             <TooltipProvider>
-            <div className="m-auto">
-            <Tooltip>
-                    <TooltipTrigger className="font-bold">
-                <Check color={matchColor().match.iconColor} className="m-auto mb-1" />
-                <Badge className={`${matchColor().match.badgeColor} text-md`}>
-                    {counts.matchCount}
-                </Badge>
-                </TooltipTrigger>
-                    <TooltipContent className="w-20">
-                        Number of matched courses
-                    </TooltipContent>
-                </Tooltip>
-            </div>
+                <div className="m-auto">
+                    <Tooltip>
+                        <TooltipTrigger className="font-bold">
+                            {icons && <Check color={matchColor().match.iconColor} className="m-auto mb-1" />}
+                            <Badge className={`${matchColor().match.badgeColor} text-md`}>
+                                {counts.matchCount}
+                            </Badge>
+                        </TooltipTrigger>
+                        <TooltipContent className="w-20">
+                            Number of matched courses
+                        </TooltipContent>
+                    </Tooltip>
+                </div>
 
-<div className="m-auto">
+                <div className="m-auto">
 
-                <Tooltip>
-                    <TooltipTrigger className="font-bold">
-                        <AlertTriangle color={matchColor().warning.iconColor} className="m-auto mb-1" />
-                        <Badge className={`${matchColor().warning.badgeColor} text-md`}  >
-                            {counts.noMatchCount}
-                        </Badge>
-                    </TooltipTrigger>
-                    <TooltipContent className="w-24">
-                        Number of unmatched courses
-                    </TooltipContent>
-                </Tooltip>
-</div>
+                    <Tooltip>
+                        <TooltipTrigger className="font-bold">
+                            {icons && <AlertTriangle color={matchColor().warning.iconColor} className="m-auto mb-1" />}
+                            <Badge className={`${matchColor().warning.badgeColor} text-md`}  >
+                                {counts.noMatchCount}
+                            </Badge>
+                        </TooltipTrigger>
+                        <TooltipContent className="w-24">
+                            Number of unmatched courses
+                        </TooltipContent>
+                    </Tooltip>
+                </div>
 
 
-            <div className="m-auto">
-            <Tooltip>
-                    <TooltipTrigger className="font-bold">
-                <XOctagon color={matchColor().error.iconColor} className="m-auto mb-1" />
-                <Badge className={`${matchColor().error.badgeColor}  text-md`}>
-                    {counts.errorCount}
-                </Badge>
-                </TooltipTrigger>
-                    <TooltipContent className="w-20">
-                        Error! Possible data missing
-                    </TooltipContent>
-                </Tooltip>
-            </div>
+                <div className="m-auto">
+                    <Tooltip>
+                        <TooltipTrigger className="font-bold">
+                            {icons && <XOctagon color={matchColor().error.iconColor} className="m-auto mb-1" />}
+                            <Badge className={`${matchColor().error.badgeColor}  text-md`}>
+                                {counts.errorCount}
+                            </Badge>
+                        </TooltipTrigger>
+                        <TooltipContent className="w-20">
+                            Error! Possible data missing
+                        </TooltipContent>
+                    </Tooltip>
+                </div>
             </TooltipProvider>
         </div>
 
