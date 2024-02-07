@@ -1,7 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import TeacherCard from "../cards/TeacherCard"
 import { TeacherCardType } from '@/lib/types'
-import TestLogButton from "../buttons/TestLogButton"
 import { getSchoolName } from "@/lib/utils"
 import { credentialAuthMatch, jp } from "@/lib/utils";
 import MatchCountBadges from "../cards/MatchCountBadges"
@@ -20,16 +18,6 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
         return getSchoolName({ sc })
     }
 
-    const linkCell = (link: string, content: string, key: string) => {
-        return (<Link
-            href={link}
-            key={key}
-            className={`h-full`}
-        >
-            {content}
-        </Link>
-        )
-    }
     const countMatches = (teacher: TeacherCardType) => {
         let matchCount = 0
         let noMatchCount = 0
@@ -101,30 +89,48 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
                         <TableHead className="w-[100px]">Credential Count</TableHead>
                         <TableHead className="w-[100px]">Section Count</TableHead>
                         <TableHead className="w-[100px]">Complete</TableHead>
+
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {teachers.map((teacher) => {
                         const counts = countMatches(teacher)
                         return (
-                            <TableRow key={teacher.key_id} className="odd:text-secondary-foreground odd:bg-secondary ">
+                            <TableRow key={teacher.key_id} className="odd:text-secondary-foreground odd:bg-secondary hover:underline">
                                 <TableCell>
-
-                                    {linkCell(`teacher/${teacher.seid}`, teacher.seid, teacher.key_id.toString())}
-
+                                    <a href={`/teacher/${teacher.seid}`} key={teacher.key_id}>
+                                        {teacher.seid.toString()}
+                                    </a>
                                 </TableCell>
-                                <TableCell>{teacher.lastName}</TableCell>
-                                <TableCell>{teacher.firstName}</TableCell>
-                                <TableCell>{teacher.credentials?.length}</TableCell>
-                                <TableCell>{teacher.sections?.length}</TableCell>
-                                <TableCell><MatchCountBadges
-                                    counts={counts}
-                                    courseCount={teacher.sections?.length}
-                                    setIsComplete={setIsComplete}
-                                    setIsFullError={setIsFullError}
-                                    setIsFullWarning={setIsFullWarning}
-                                /></TableCell>
-
+                                <a href={`/teacher/${teacher.seid}`} className="h-full w-full">
+                                    <TableCell>
+                                        {teacher.lastName}
+                                    </TableCell>
+                                </a>
+                                <TableCell>
+                                    <a href={`/teacher/${teacher.seid}`} >
+                                        {teacher.firstName}
+                                    </a>
+                                </TableCell>
+                                <TableCell>
+                                    <a href={`/teacher/${teacher.seid}`} >
+                                        {teacher.credentials?.length}
+                                    </a>
+                                </TableCell>
+                                <TableCell>
+                                    <a href={`/teacher/${teacher.seid}`} >
+                                        {teacher.sections?.length}
+                                    </a>
+                                </TableCell>
+                                <TableCell>
+                                    <MatchCountBadges
+                                        counts={counts}
+                                        courseCount={teacher.sections?.length as number}
+                                        setIsComplete={setIsComplete}
+                                        setIsFullError={setIsFullError}
+                                        setIsFullWarning={setIsFullWarning}
+                                    />
+                                </TableCell>
                             </TableRow>
                         )
                     })}

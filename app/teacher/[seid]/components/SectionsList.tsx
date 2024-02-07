@@ -65,11 +65,10 @@ export default function SectionsList({
                     const matchIcon = getMatchIcon(matched)
     
                     const matchedClassName = matched ? "bg-spotlight text-spotlight-foreground gap-24 px-1" : "gap-24 px-1"
-                    console.log(section)
-
+                  
                     return (
 
-                        <AccordionItem value={section.sectionId} className="gap-10 px-1 odd:bg-secondary odd:text-secondary-foreground" key={section.key_id}>
+                        <AccordionItem value={section.sectionId} className="gap-12 px-1 odd:bg-secondary odd:text-secondary-foreground" key={section.key_id}>
                             <AccordionTrigger className="gap-11 px-1">
                                 Course:
                                 <span className="font-bold">

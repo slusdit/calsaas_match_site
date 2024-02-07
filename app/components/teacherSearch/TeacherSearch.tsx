@@ -56,16 +56,6 @@ export default function TeacherSearch() {
                 })
                 setTeachers(updatedTeachers)
             }
-            // if (data) {
-
-            //     data.forEach((teacher) => {
-            //         teacher.sections.forEach((section) => {
-            //             const isMatch = credentialAuthMatch({credentials:teacher.credentials, stateCourseAuth:section.course.authTableId })
-            //             return {isMatch:,...section}
-            //         })
-            //     })
-            //     setTeachers(data);
-            // }
         };
 
         fetchData();
