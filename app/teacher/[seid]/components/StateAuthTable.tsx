@@ -20,18 +20,19 @@ export default function StateAuthTable(
         credentials: TeacherCredential[]
     }) {
     return (
+        <div className="w-min">
 
         <Table>
             <TableCaption>State Auth Codes</TableCaption>
             <ScrollArea className="h-96 border rounded">
             <TableHeader className="sticky top-0 bg-background border-b-4">
                 <TableRow >
-                    <TableHead className="w-[50px]">Doc Title</TableHead>
-                    <TableHead className="w-[50px]">Auth Code</TableHead>
-                    <TableHead className="w-[50px]">Auth Type</TableHead>
-                    <TableHead className="w-[50px]">Subject Code</TableHead>
-                    <TableHead className="w-[50px]">Subject</TableHead>
-                    <TableHead className="w-[50px]">Notes</TableHead>
+                    <TableHead className="w-1/12">Doc Title</TableHead>
+                    <TableHead className="w-1/12">Auth Code</TableHead>
+                    <TableHead className="w-1/12">Auth Type</TableHead>
+                    <TableHead className="w-1/12">Subject Code</TableHead>
+                    <TableHead className="w-1/12">Subject</TableHead>
+                    <TableHead className="w-1/12">Notes</TableHead>
                 </TableRow>
             </TableHeader>
 
@@ -43,13 +44,13 @@ export default function StateAuthTable(
                         const isMatched = credentials.some(credential =>
                             credential.docTitle === authCode.docTitle &&
                             credential.authCode === authCode.authCode
-                        );
-                        const baseRowClassName = "odd:text-secondary-foreground odd:bg-secondary "
-                        // 
-                        const rowClassName = isMatched ? `bg-spotlight text-spotlight-foreground font-bold ` : baseRowClassName;
-
-                        return (
-                            <TableRow key={authCode.key_id} className={rowClassName}>
+                            );
+                            const baseRowClassName = "odd:text-secondary-foreground odd:bg-secondary even:bg-background "
+                            // 
+                            const rowClassName = isMatched ? `bg-spotlight text-spotlight-foreground font-bold ` : baseRowClassName;
+                            
+                            return (
+                                <TableRow key={authCode.key_id} className={rowClassName}>
                                 <TableCell>{authCode.docTitle}</TableCell>
                                 <TableCell>{authCode.authCode}</TableCell>
                                 <TableCell>{authCode.authType}</TableCell>
@@ -63,5 +64,6 @@ export default function StateAuthTable(
                 </TableBody>
             </ScrollArea>
         </Table>
+                    </div>
     )
 }

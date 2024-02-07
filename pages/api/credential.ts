@@ -9,12 +9,13 @@ type CredentialCreate = Pick<TeacherCredential,
 'caltidesNumId' |
 'authCode' | 
 'subjectCodeMajor' | 
-'subjectCodeMinor'
+'subjectCodeMinor' |
+'created_by'
 >;
 
 export default async function handle(req, res) {
  if (req.method === 'POST') {
-    const { seid, docTitle, authCode, subjectCodeMajor, subjectCodeMinor }:CredentialCreate = req.body;
+    const { seid, docTitle, authCode, subjectCodeMajor, created_by, subjectCodeMinor }:CredentialCreate = req.body;
     
     const caltidesNumId = seid   
     // try {
@@ -24,6 +25,7 @@ export default async function handle(req, res) {
           docTitle,
           caltidesNumId,
           authCode,
+          created_by,
           subjectCodeMajor,
           subjectCodeMinor,
         },

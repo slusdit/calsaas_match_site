@@ -28,6 +28,28 @@ export default function SectionsList({
     credentials: TeacherCredential[]
 }) {
 
+    const getMatchIcon = (matched?: string) => {
+        if (matched === 'match') {
+            return {
+                message: 'Credential and State Auth match!',
+                icon: <Check color="hsl(var(--spotlight))" />
+            }
+        } else if (matched === 'noMatch') {
+            return {
+                message: 'No Match',
+                icon: <AlertTriangle color="hsl(var(--warning))" />
+            }
+        } else if (matched === 'noCredentials' || matched === 'noAuth') {
+            return {
+                message: 'Warning: Missing Data',
+                icon: <XOctagon color="hsl(var(--destructive))" />
+            }
+        }
+        return {
+            message: 'Error!',
+            icon: <XOctagon color="hsl(var(--destructive))" />
+        }
+    }; 
 
     return (
         <div className="w-content">
@@ -35,51 +57,25 @@ export default function SectionsList({
             <Accordion type="single" collapsible className="">
                 <div className=""></div>
                 {sections.map((section) => {
-                    // const isMatched = credentials.some(credential =>
-                    //     section.course.authTableId.some(auth =>
-                    //         credential.docTitle === auth.docTitle &&
-                    //         credential.authCode === auth.authCode
-                    //     )
-                    // );
                     const matched = credentialAuthMatch({
                         credentials: credentials,
                         stateCourseAuth: section.course.authTableId
                     })
-                    const getMatchIcon = (matched?: string) => {
-                        if (matched === 'match') {
-                            return {
-                                message: 'Credential and State Auth match!',
-                                icon: <Check color="hsl(var(--spotlight))" />
-                            }
-                        } else if (matched === 'noMatch') {
-                            return {
-                                message: 'No Match',
-                                icon: <AlertTriangle color="hsl(var(--warning))" />
-                            }
-                        } else if (matched === 'noCredentials' || matched === 'noAuth') {
-                            return {
-                                message: 'Warning: Missing Data',
-                                icon: <XOctagon color="hsl(var(--destructive))" />
-                            }
-                        }
-                        return {
-                            message: 'Error!',
-                            icon: <XOctagon color="hsl(var(--destructive))" />
-                        }
-                    };
+                    
                     const matchIcon = getMatchIcon(matched)
-                    // const isMissing = section.course.authTableId?[0] ? true : undefined
-                    const matchedClassName = matched ? "bg-spotlight text-spotlight-foreground font-bold gap-24 px-1" : "gap-24 px-1"
+    
+                    const matchedClassName = matched ? "bg-spotlight text-spotlight-foreground gap-24 px-1" : "gap-24 px-1"
+                    console.log(section)
 
                     return (
 
-                        <AccordionItem value={section.sectionId} className="gap-24 px-1" key={section.key_id}>
-                            <AccordionTrigger className="gap-10 px-1">
+                        <AccordionItem value={section.sectionId} className="gap-10 px-1 odd:bg-secondary odd:text-secondary-foreground" key={section.key_id}>
+                            <AccordionTrigger className="gap-11 px-1">
                                 Course:
                                 <span className="font-bold">
                                     {section.courseName}
                                 </span>
-                                Section Number:
+                                Section#:
                                 <span className="font-bold">
                                     {section.sectionNumber}
                                 </span>
@@ -96,7 +92,7 @@ export default function SectionsList({
                                 </TooltipProvider>
                             </AccordionTrigger>
                             <AccordionContent className="">
-                                <div className="mt-2 p-2 w-cpmtemt">
+                                <div className="mt-2 p-2">
                                     <div className="m-auto mb-2">
                                         State Course Code: <span className="font-bold">{section.stateCode}</span>
                                     </div>

@@ -30,7 +30,7 @@ export default async function RootLayout({
   // console.log(`Server Session: ${JSON.stringify(session)}`)
   return (
     <html lang="en" className='no-scrollbar'>
-      <body suppressHydrationWarning={true} className={`h-screen flex flex-col justify-between ${inter.className}`}>
+      <body suppressHydrationWarning={true} className={` ${inter.className}`}>
         <SessionProvider session={session}>
           <ThemeProvider
             attribute='class'
@@ -38,15 +38,15 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="">
-              <MainHeader />
+          <MainHeader />
+            <main className="mt-(-10)">
               {session ? children :
                 <UnauthorizedButton
                   home
                 />}
               <Toaster richColors />
             </main>
-          <MainFooter />
+            <MainFooter />
           </ThemeProvider>
         </SessionProvider>
       </body>

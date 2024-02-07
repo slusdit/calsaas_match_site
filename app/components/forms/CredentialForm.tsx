@@ -6,7 +6,7 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
-import { useDialog } from "../DialogContext"
+import { useSession } from 'next-auth/react'
 import {
   Form,
   FormControl,
@@ -16,21 +16,25 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Plus, Send } from "lucide-react"
+import TestLogButton from "../buttons/TestLogButton"
 
 interface Props {
-    seid?: string 
-    docTitle?: string
-    authCode?: string
-    submitTitle?: string
-    dialogState?: () => void
-  }
+  seid?: string
+  docTitle?: string
+  authCode?: string
+  submitTitle?: string
+  dialogState?: () => void
+}
 
 const formSchema = z.object({
   seid: z.string().length(10, {
     message: "SEID must be exactly 10 characters"
   }),
-  docTitle: z.string().min(1,{message: "Document Title must not be empty"}),
-  authCode: z.string().min(1,{message: "Authorization Code must not be empty"}),
+  created_by: z.string().email({
+    message: "Must be a valid email"
+  }),
+  docTitle: z.string().min(1, { message: "Document Title must not be empty" }),
+  authCode: z.string().min(1, { message: "Authorization Code must not be empty" }),
   subjectCodeMajor: z.string().optional(),
   subjectCodeMinor: z.string().optional(),
 
@@ -40,37 +44,39 @@ export function CredentialForm({
   seid,
   docTitle,
   authCode,
-  submitTitle, 
-  dialogState}: Props) {
-
+  submitTitle,
+  dialogState }: Props) {
+  const session = useSession()
+  const created_by = session.data?.user?.email?.toString()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues:{
+    defaultValues: {
       seid: seid ?? '',
       docTitle: docTitle ?? '',
       authCode: authCode ?? '',
+      created_by: created_by,
 
     }
   })
 
   // const { closeDialog } = useDialog()
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log('submit')
 
     try {
+      console.log(`Values - ${JSON.stringify(values)}`)
 
       const response = await fetch('/api/credential/', {
-        method: "POST", 
+        method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify(values)
+        body: JSON.stringify(values)
       });
       const credential = await response.json()
       form.reset()
       toast.success("Credential inserted successfully")
       // closeDialog()
-
 
     } catch (e) {
       toast.error(`Error creating credential \n Error: ${e}`)
@@ -80,6 +86,8 @@ export function CredentialForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="flex w-full m-2 jutify-between">
+
         <FormField
           control={form.control}
           name="seid"
@@ -95,7 +103,21 @@ export function CredentialForm({
               <FormMessage />
             </FormItem>
           )}
-        />
+          />
+        <FormField
+          control={form.control}
+          name="created_by"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Authorized By<span className="text-red-500">*</span></FormLabel>
+              <FormControl>
+                <Input  {...field} disabled /> 
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+          />
+          </div>
         <FormField
           control={form.control}
           name="docTitle"
@@ -122,37 +144,37 @@ export function CredentialForm({
             </FormItem>
           )}
         />
-        <div className="flex p-2 border-2 rounded">      
-        <FormField
-          control={form.control}
-          name="subjectCodeMajor"
-          render={({ field }) => (
-            <FormItem className="m-1">
-              <FormLabel>Subject Code Major</FormLabel>
-              <FormControl>
-                <Input placeholder="Subject Code Major" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="subjectCodeMinor"
-          render={({ field }) => (
-            <FormItem className="m-1">
-              <FormLabel>Subject Code Minor</FormLabel>
-              <FormControl>
-                <Input placeholder="Subject Code Minor" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex p-2 border-2 rounded">
+          <FormField
+            control={form.control}
+            name="subjectCodeMajor"
+            render={({ field }) => (
+              <FormItem className="m-1">
+                <FormLabel>Subject Code Major</FormLabel>
+                <FormControl>
+                  <Input placeholder="Subject Code Major" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="subjectCodeMinor"
+            render={({ field }) => (
+              <FormItem className="m-1">
+                <FormLabel>Subject Code Minor</FormLabel>
+                <FormControl>
+                  <Input placeholder="Subject Code Minor" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
-        <Button 
-          type="submit" 
-          >{submitTitle ?? "Add"}<Send className="pl-2" /></Button>
+        <Button
+          type="submit"
+        >{submitTitle ?? "Add"}<Send className="pl-2" /></Button>
       </form>
     </Form>
   )

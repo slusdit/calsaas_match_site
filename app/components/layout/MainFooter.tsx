@@ -6,7 +6,7 @@ import Link from "next/link";
 const MainFooter = () => {
     const {data:session} = useSession()
     return (
-    <footer className="justify-end flex sticky bottom-0 bg-secondary">
+    <footer className="justify-end flex w-full bottom-0 bg-secondary fixed h-10">
       {session?.user?.role.includes("SUPERADMIN") && 
                         <Button asChild variant="link" className="text-muted-foreground">
                             <Link

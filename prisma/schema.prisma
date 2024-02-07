@@ -46,7 +46,7 @@ model TeacherCredential {
   authCode         String?
   subjectCodeMajor String?
   subjectCodeMinor String?
-  created_by       String   @default("support@slusd.us")  
+  created_by       String   @default("support@slusd.us")
   creator          User     @relation(fields: [created_by], references: [email])
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
@@ -58,10 +58,20 @@ model Course {
   stateCourseIdAuth String?           @unique
   localCourseName   String?
   localCourseNumber String?
-  authExempt        Boolean           @default(false)
-  authExemptionType AuthExempt[]
+  exemptionType     ExemptionType[]
   authTableId       StateCourseAuth[]
   sectionTableId    Section[]
+  created_at        DateTime          @default(now())
+  updated_at        DateTime          @updatedAt
+}
+
+model Exemptions {
+  key_id     Int      @id @unique @default(autoincrement())
+  label      String
+  entered_by String
+  user       User     @relation(fields: [entered_by], references: [email])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Section {
@@ -110,7 +120,7 @@ model StateIssuedDocuments {
   updated_at      DateTime @updatedAt
 }
 
-enum AuthExempt {
+enum ExemptionType {
   MANUAL
   Title5
 }
@@ -156,6 +166,7 @@ model User {
   accounts          Account[]
   sessions          Session[]
   TeacherCredential TeacherCredential[]
+  Exemptions        Exemptions[]
 }
 
 model VerificationToken {

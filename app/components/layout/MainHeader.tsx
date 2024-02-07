@@ -15,7 +15,6 @@ export default function MainHeader() {
           bg-title
           text-title-foreground
           w-full
-          py-4
           md:py-0
           px-4
           text-xl
@@ -38,7 +37,6 @@ export default function MainHeader() {
               text-base 
               text-secondary
               md:flex
-              md:justify-between 
               md:pt-0"
                 >
                 </ul>
