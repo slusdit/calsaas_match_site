@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Plus, Send } from "lucide-react"
+import { Plus, Save, Send } from "lucide-react"
 import TestLogButton from "../buttons/TestLogButton"
 
 interface Props {
@@ -24,6 +24,7 @@ interface Props {
   authCode?: string
   submitTitle?: string
   dialogState?: () => void
+  icon: React.ReactElement
 }
 
 const formSchema = z.object({
@@ -45,7 +46,9 @@ export function CredentialForm({
   docTitle,
   authCode,
   submitTitle,
-  dialogState }: Props) {
+  dialogState,
+  icon
+ }: Props) {
   const session = useSession()
   const created_by = session.data?.user?.email?.toString()
   const form = useForm<z.infer<typeof formSchema>>({
@@ -109,7 +112,7 @@ export function CredentialForm({
           name="created_by"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Authorized By<span className="text-red-500">*</span></FormLabel>
+              <FormLabel>Entered By<span className="text-red-500">*</span></FormLabel>
               <FormControl>
                 <Input  {...field} disabled /> 
               </FormControl>
@@ -174,7 +177,7 @@ export function CredentialForm({
         </div>
         <Button
           type="submit"
-        >{submitTitle ?? "Add"}<Send className="pl-2" /></Button>
+        >{submitTitle ?? "Add"}<Save className="py-1"/></Button>
       </form>
     </Form>
   )

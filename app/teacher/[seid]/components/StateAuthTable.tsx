@@ -20,11 +20,11 @@ export default function StateAuthTable(
         credentials: TeacherCredential[]
     }) {
     return (
-        <div className="w-min">
+        <div className="w-min m-auto">
 
         <Table>
             <TableCaption>State Auth Codes</TableCaption>
-            <ScrollArea className="h-96 border rounded">
+            <ScrollArea className="h-full border rounded">
             <TableHeader className="sticky top-0 bg-background border-b-4">
                 <TableRow >
                     <TableHead className="w-1/12">Doc Title</TableHead>

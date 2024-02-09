@@ -3,7 +3,7 @@ import { TeacherCardType } from '@/lib/types'
 import { getSchoolName } from "@/lib/utils"
 import { credentialAuthMatch, jp } from "@/lib/utils";
 import MatchCountBadges from "../cards/MatchCountBadges"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "lucide-react"
 
 export default function TeacherListList({ teachers, doHighlight }: { teachers: TeacherCardType[], doHighlight?: boolean }) {
@@ -17,6 +17,71 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
     function schoolName(sc: string) {
         return getSchoolName({ sc })
     }
+
+    const TeacherRow = ({
+        teacher,
+        doHighlight
+    }: {
+        teacher: TeacherCardType
+        doHighlight?: boolean
+    }) => {
+        const [rowStyle, setRowStyle] = useState('odd:text-secondary-foreground odd:bg-secondary hover:underline');
+
+        const counts = countMatches(teacher);
+
+        useEffect(() => {
+            if (doHighlight) {
+                let style = 'odd:text-secondary-foreground odd:bg-secondary hover:underline';
+                if (counts.errorCount > 0 && counts.noMatchCount == 0 && counts.matchCount == 0) {
+                    style = 'bg-destructive-highlight text-destructive-highlight-foreground  hover:underline';
+                } else if (counts.matchCount === teacher.sections?.length) {
+                    style = 'bg-spotlight-highlight text-spotlight-highlight-foreground hover:underline';
+                } else if (counts.noMatchCount > 0 && counts.errorCount == 0 && counts.matchCount == 0) {
+                    style = 'bg-warning-highlight text-warning-highlight-foreground hover:underline';
+                }
+                setRowStyle(style);
+            }
+        }, [doHighlight, counts, teacher.sections?.length]);
+
+        return (
+            <TableRow key={teacher.key_id} className={rowStyle}>
+                <TableCell>
+                    <a href={`/teacher/${teacher.seid}`} key={teacher.key_id}>
+                        {teacher.seid.toString()}
+                    </a>
+                </TableCell>
+                <a href={`/teacher/${teacher.seid}`} className="h-full w-full">
+                    <TableCell className="capitalize">
+                        {teacher.lastName}
+                    </TableCell>
+                </a>
+                <TableCell>
+                    <a href={`/teacher/${teacher.seid}`} >
+                        {teacher.firstName}
+                    </a>
+                </TableCell>
+                <TableCell>
+                    <a href={`/teacher/${teacher.seid}`} >
+                        {teacher.credentials?.length}
+                    </a>
+                </TableCell>
+                <TableCell>
+                    <a href={`/teacher/${teacher.seid}`} >
+                        {teacher.sections?.length}
+                    </a>
+                </TableCell>
+                <TableCell>
+                    <MatchCountBadges
+                        counts={counts}
+                        courseCount={teacher.sections?.length as number}
+                        setIsComplete={setIsComplete}
+                        setIsFullError={setIsFullError}
+                        setIsFullWarning={setIsFullWarning}
+                    />
+                </TableCell>
+            </TableRow>
+        );
+    };
 
     const countMatches = (teacher: TeacherCardType) => {
         let matchCount = 0
@@ -55,33 +120,28 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
     }
 
 
-    let cardBg = 'bg-card'
+    let rowStyle = 'odd:text-secondary-foreground odd:bg-secondary hover:underline'
     if (doHighlight) {
 
         if (isComplete) {
 
-            cardBg = 'bg-spotlight-highlight'
+            rowStyle = 'bg-spotlight-highlight text-spotlight-foreground hover:underline'
         } else
             if (isFullError) {
 
-                cardBg = 'bg-destructive-highlight'
+                rowStyle = 'bg-destructive-highlight text-destructive-foreground hover:underline'
             } else
                 if (isFullWarning) {
 
-                    cardBg = 'bg-warning-highlight'
+                    rowStyle = 'bg-warning-highlight tex-warning-foreground hover:underline'
                 }
     }
-
-
-
     return (
-
 
         <div className="no-scrollbar p-1 m-4 max-h-[50rem] max-w-[80rem] overflow-y-scroll flex flex-wrap justify-center border-2 rounded-lg">
 
-
             <Table>
-                <TableHeader>
+                <TableHeader className="sticky top-0">
                     <TableRow>
                         <TableHead className="w-[120px]">SEID</TableHead>
                         <TableHead className="w-[100px]">Last Name</TableHead>
@@ -93,52 +153,14 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {teachers.map((teacher) => {
-                        const counts = countMatches(teacher)
-                        return (
-                            <TableRow key={teacher.key_id} className="odd:text-secondary-foreground odd:bg-secondary hover:underline">
-                                <TableCell>
-                                    <a href={`/teacher/${teacher.seid}`} key={teacher.key_id}>
-                                        {teacher.seid.toString()}
-                                    </a>
-                                </TableCell>
-                                <a href={`/teacher/${teacher.seid}`} className="h-full w-full">
-                                    <TableCell>
-                                        {teacher.lastName}
-                                    </TableCell>
-                                </a>
-                                <TableCell>
-                                    <a href={`/teacher/${teacher.seid}`} >
-                                        {teacher.firstName}
-                                    </a>
-                                </TableCell>
-                                <TableCell>
-                                    <a href={`/teacher/${teacher.seid}`} >
-                                        {teacher.credentials?.length}
-                                    </a>
-                                </TableCell>
-                                <TableCell>
-                                    <a href={`/teacher/${teacher.seid}`} >
-                                        {teacher.sections?.length}
-                                    </a>
-                                </TableCell>
-                                <TableCell>
-                                    <MatchCountBadges
-                                        counts={counts}
-                                        courseCount={teacher.sections?.length as number}
-                                        setIsComplete={setIsComplete}
-                                        setIsFullError={setIsFullError}
-                                        setIsFullWarning={setIsFullWarning}
-                                    />
-                                </TableCell>
-                            </TableRow>
-                        )
-                    })}
+                    {teachers.map((teacher) => (
+                        <TeacherRow
+                            key={teacher.key_id}
+                            teacher={teacher}
+                            doHighlight={doHighlight} />
+                    ))}
                 </TableBody>
-
             </Table>
-
-
 
         </div>
 

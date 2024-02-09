@@ -53,7 +53,7 @@ export default async function TeacherPage({ params }: Params) {
     <div className="m-auto sm:flex-col md:h-[50rem]">
       <div className="p-2 mt-8">
         <BackButton />
-        <div className="mt-5">Name: <span className="font-bold">{teacher.firstName} {teacher.lastName}</span></div>
+        <div className="mt-5">Name: <span className="font-bold capitalize">{teacher.firstName} {teacher.lastName}</span></div>
         <div className="mt-5">SEID: <span className="font-bold">{teacher.seid}</span></div>
       </div>
       <div className="md:flex space-x-3 mt-10  ">
