@@ -20,6 +20,8 @@ export default function TeacherSearch() {
     const [searchString, setSearchString] = useState<string>('');
     const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
     const [doHighlight, setDoHighlight] = useState(true)
+    const [completeSwitch, setCompleteSwitch] = useState(false)
+    const [errorSwitch, setErrorSwitch] = useState(false)
 
     const authorizedRoles: ROLE[] = ["HR", "SUPERADMIN"]
     const adminRoles: ROLE[] = ["SUPERADMIN", "ADMIN"]
@@ -64,7 +66,13 @@ export default function TeacherSearch() {
     const tabsContent: TabContent[] = [
         {
             title: 'Grid',
-            tabContent: <TeacherListGrid key="grid" teachers={teachers} doHighlight={doHighlight} />,
+            tabContent: <TeacherListGrid
+                key="grid"
+                teachers={teachers}
+                doHighlight={doHighlight}
+                completeSwitch={completeSwitch}
+                errorSwitch={errorSwitch}
+            />,
         },
         {
             title: 'List',
@@ -93,18 +101,33 @@ export default function TeacherSearch() {
                         <SchoolSelector onSchoolChange={setSelectedSchool} />
                     </div>
                 </div>
-                <div className="flex align-middle text-center">
-                    <Switch
-                        id="highlight-switch"
-                        checked={doHighlight}
-                        onCheckedChange={() => setDoHighlight(current => !current)}
-                        aria-readonly
-                    />
-                    <div className="ml-4">
-                    <Label htmlFor="highlight-switch">
-                        Highlight
-                    </Label>
+                <div className="p-2 flex justify-between min-w-full">
 
+                    <div className="align-middle text-center flex">
+                        <Switch
+                            id="highlight-switch"
+                            checked={doHighlight}
+                            onCheckedChange={() => setDoHighlight(current => !current)}
+                            aria-readonly
+                        />
+                        <div className="ml-4">
+                            <Label htmlFor="highlight-switch">
+                                Highlight
+                            </Label>
+                        </div>
+                    </div>
+                    <div className="align-middle text-center flex">
+                        <Switch
+                            id="complete-switch"
+                            checked={doHighlight}
+                            onCheckedChange={() => setDoHighlight(current => !current)}
+                            aria-readonly
+                        />
+                        <div className="ml-4">
+                            <Label htmlFor="complete-switch">
+                                Show Complete
+                            </Label>
+                        </div>
                     </div>
                 </div>
 

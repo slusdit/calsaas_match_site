@@ -31,7 +31,7 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
 
         useEffect(() => {
             if (doHighlight) {
-                let style = 'odd:text-secondary-foreground odd:bg-secondary hover:underline';
+                let style = 'odd:text-secondary-foreground odd:bg-secondary hover:underline ';
                 if (counts.errorCount > 0 && counts.noMatchCount == 0 && counts.matchCount == 0) {
                     style = 'bg-destructive-highlight text-destructive-highlight-foreground  hover:underline';
                 } else if (counts.matchCount === teacher.sections?.length) {
@@ -45,32 +45,38 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
 
         return (
             <TableRow key={teacher.key_id} className={rowStyle}>
-                <TableCell>
+                <TableCell className="text-center">
                     <a href={`/teacher/${teacher.seid}`} key={teacher.key_id}>
                         {teacher.seid.toString()}
                     </a>
                 </TableCell>
                 <a href={`/teacher/${teacher.seid}`} className="h-full w-full">
-                    <TableCell className="capitalize">
+                    <TableCell className="text-center capitalize" >
                         {teacher.lastName}
                     </TableCell>
                 </a>
-                <TableCell>
+                <TableCell className="text-center">
                     <a href={`/teacher/${teacher.seid}`} >
                         {teacher.firstName}
                     </a>
                 </TableCell>
-                <TableCell>
-                    <a href={`/teacher/${teacher.seid}`} >
+                <TableCell className="text-center" >
+                {teacher.credentials && teacher.credentials.length !== 0 ? 
+                    <a href={`/teacher/${teacher.seid}`}  >
                         {teacher.credentials?.length}
                     </a>
+                    :
+                    <a href={`/teacher/${teacher.seid}`} className='py-2 px-4 bg-destructive text-destructive-foreground rounded-2xl'  >
+                        {teacher.credentials?.length}
+                    </a>
+    }
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                     <a href={`/teacher/${teacher.seid}`} >
                         {teacher.sections?.length}
                     </a>
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                     <MatchCountBadges
                         counts={counts}
                         courseCount={teacher.sections?.length as number}
@@ -138,18 +144,17 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
     }
     return (
 
-        <div className="no-scrollbar p-1 m-4 max-h-[50rem] max-w-[80rem] overflow-y-scroll flex flex-wrap justify-center border-2 rounded-lg">
+        <div className="no-scrollbar b  m-4 max-h-[55rem] max-w-[80rem] overflow-y-scroll flex flex-wrap justify-center border-2 rounded-lg">
 
             <Table>
-                <TableHeader className="sticky top-0">
-                    <TableRow>
-                        <TableHead className="w-[120px]">SEID</TableHead>
-                        <TableHead className="w-[100px]">Last Name</TableHead>
-                        <TableHead className="w-[100px]">First Name</TableHead>
-                        <TableHead className="w-[100px]">Credential Count</TableHead>
-                        <TableHead className="w-[100px]">Section Count</TableHead>
-                        <TableHead className="w-[100px]">Complete</TableHead>
-
+                <TableHeader className="sticky top-0 z-10 ">
+                    <TableRow >
+                        <TableHead className="w-[120px] text-center">SEID</TableHead>
+                        <TableHead className="w-[100px] text-center">Last Name</TableHead>
+                        <TableHead className="w-[100px] text-center">First Name</TableHead>
+                        <TableHead className="w-[100px] text-center">Credential Count</TableHead>
+                        <TableHead className="w-[100px] text-center">Section Count</TableHead>
+                        <TableHead className="w-[100px] text-center">Complete</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>

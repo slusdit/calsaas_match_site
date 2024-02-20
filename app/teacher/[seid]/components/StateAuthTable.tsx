@@ -39,7 +39,7 @@ export default function StateAuthTable(
 
 
                 <TableBody className="">
-                    {authCodes.map((authCode) => {
+                    { authCodes && authCodes.map((authCode) => {
                         // Check if the authCode matches any credential
                         const isMatched = credentials.some(credential =>
                             credential.docTitle === authCode.docTitle &&

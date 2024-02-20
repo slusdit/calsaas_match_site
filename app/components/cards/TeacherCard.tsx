@@ -128,7 +128,7 @@ export default function TeacherCard({ teacher, doHighlight }: Props) {
                                 {teacher.sections?.length}
                             </div>
                             {/* <div className="w-0.5 bg-border"></div> */}
-                            {teacher.credentials && teacher.credentials.length > 0 ? (
+                            {teacher.credentials && teacher.credentials.length !== 0 ? (
                                 <div className="p-2 w-full ">
                                     Credential Count: <br />
                                     {teacher.credentials.length}

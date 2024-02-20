@@ -2,6 +2,7 @@
 import Link from "next/link"
 import TeacherSearch from "./components/teacherSearch/TeacherSearch"
 import { useSession } from "next-auth/react";
+import { Suspense } from "react";
 
 export default function TeacherSearchPage() {
   
@@ -9,7 +10,10 @@ export default function TeacherSearchPage() {
   return (
     <main>
       {session && session.status === "authenticated" ?
-      <TeacherSearch />
+      <Suspense fallback={<div>Loading...</div>}>
+
+        <TeacherSearch />
+      </Suspense>
       : <div className="m-auto flex">
         <Link href="/api/auth/signin">Please Sign In</Link>
       </div>

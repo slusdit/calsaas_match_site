@@ -22,9 +22,8 @@ export function credentialAuthMatch({
 }: { 
   credentials?: TeacherCredential[] | String
   stateCourseAuth?: StateCourseAuth[] | String
- }) {
-  // console.log(`credentials: "${credentials}"`)
-  // console.log(`stateCourseAuth: "${stateCourseAuth}"`)
+ }): 'noAuth' | 'noCredentials' | 'match' | 'noMatch' | 'error' {
+
   if(!stateCourseAuth || stateCourseAuth == '') {
     return 'noAuth'
   }
@@ -46,6 +45,7 @@ export function credentialAuthMatch({
   if (!isMatch) {
     return 'noMatch'
   }
+  return 'error'
  }
 
  export async function getSchoolName({sc}:{sc:string}) {
@@ -56,6 +56,9 @@ export function credentialAuthMatch({
         
       }    
   })
-  console.log("hello")
-  return "school is"
+  if (!school) {
+    return 'noSchool'
+  }
+  // console.log("hello")
+  return school.name
 }
