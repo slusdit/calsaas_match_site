@@ -20,10 +20,16 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
 
     const TeacherRow = ({
         teacher,
-        doHighlight
+        doHighlight,
+        setIsComplete,
+        setIsFullError,
+        setIsFullWarning
     }: {
         teacher: TeacherCardType
         doHighlight?: boolean
+        setIsComplete: (isComplete: boolean) => void
+        setIsFullError: (isFullError: boolean) => void
+        setIsFullWarning: (isFullWarning: boolean) => void
     }) => {
         const [rowStyle, setRowStyle] = useState('odd:text-secondary-foreground odd:bg-secondary hover:underline');
 
@@ -144,10 +150,10 @@ export default function TeacherListList({ teachers, doHighlight }: { teachers: T
     }
     return (
 
-        <div className="no-scrollbar b  m-4 max-h-[55rem] max-w-[80rem] overflow-y-scroll flex flex-wrap justify-center border-2 rounded-lg">
+        <div className="no-scrollbar m-4 max-h-[55rem] w-screen-2xl overflow-y-scroll flex flex-wrap justify-center border-2 rounded-lg">
 
-            <Table>
-                <TableHeader className="sticky top-0 z-10 ">
+            <Table className="w-screen-2xl">
+                <TableHeader className="w-screen-2xl sticky top-0 z-10 ">
                     <TableRow >
                         <TableHead className="w-[120px] text-center">SEID</TableHead>
                         <TableHead className="w-[100px] text-center">Last Name</TableHead>

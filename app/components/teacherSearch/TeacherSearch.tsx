@@ -20,8 +20,8 @@ export default function TeacherSearch() {
     const [searchString, setSearchString] = useState<string>('');
     const [selectedSchool, setSelectedSchool] = useState<string | null>(null)
     const [doHighlight, setDoHighlight] = useState(true)
-    const [completeSwitch, setCompleteSwitch] = useState(false)
-    const [errorSwitch, setErrorSwitch] = useState(false)
+    const [completeSwitch, setCompleteSwitch] = useState(true)
+    const [errorSwitch, setErrorSwitch] = useState(true)
 
     const authorizedRoles: ROLE[] = ["HR", "SUPERADMIN"]
     const adminRoles: ROLE[] = ["SUPERADMIN", "ADMIN"]
@@ -76,7 +76,13 @@ export default function TeacherSearch() {
         },
         {
             title: 'List',
-            tabContent: <TeacherListList key="list" teachers={teachers} doHighlight={doHighlight} />
+            tabContent: <TeacherListList 
+                key="list" 
+                teachers={teachers} 
+                doHighlight={doHighlight} 
+                completeSwitch={completeSwitch}
+                errorSwitch={errorSwitch}
+            />
         }
     ]
 
@@ -101,7 +107,7 @@ export default function TeacherSearch() {
                         <SchoolSelector onSchoolChange={setSelectedSchool} />
                     </div>
                 </div>
-                <div className="p-2 flex justify-between min-w-full">
+                <div className="p-2 flex flex-col min-w-full gap-5 justify-center">
 
                     <div className="align-middle text-center flex">
                         <Switch
@@ -120,7 +126,7 @@ export default function TeacherSearch() {
                         <Switch
                             id="complete-switch"
                             checked={doHighlight}
-                            onCheckedChange={() => setDoHighlight(current => !current)}
+                            onCheckedChange={() => setCompleteSwitch(current => !current)}
                             aria-readonly
                         />
                         <div className="ml-4">

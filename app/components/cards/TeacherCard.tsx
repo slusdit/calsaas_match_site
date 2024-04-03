@@ -16,7 +16,10 @@ import { useState } from "react";
 
 interface Props {
     teacher: TeacherCardType
-    doHighlight?: boolean
+    doHighlight?: boolean,
+    showComplete?: boolean,
+    showFullError?: boolean,
+    showFullWarning?: boolean
 
 }
 
