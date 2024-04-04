@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "middleware.ts.old", "env.d.ts", "lib/escape.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "middleware.ts.old", "types/*.ts", "types/env.d.ts", "lib/escape.js"],
   "exclude": ["node_modules"]
 }
