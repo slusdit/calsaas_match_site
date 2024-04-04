@@ -10,3 +10,16 @@ export const escapeConfig = {
         trustServerCertificate: true
     }
 }
+
+export async function escapeQuery(query: string) {
+    try {
+    await sql.connect(escapeConfig);
+        
+    const result = await sql.query(query);
+    console.log(result)
+    await sql.close();
+    return result
+    } catch (err) {
+        console.error('SQL error: ',err)
+}
+}
