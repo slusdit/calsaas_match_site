@@ -1,7 +1,20 @@
 import { escapeConfig, escapeQuery } from '../../../../lib/escape'
 import { NextResponse } from "next/server"
 
-const credentialQuery = ```SELECT 
+type CredentialEscapeResponse = {
+    CredPersonId: number,
+    DateBirth: Date,
+    NameFirst: string,
+    NameLast: string,
+    EmpId?: number | null,
+    CALTIDESNumId?: number | null,
+    DocTitle: string,
+    AuthCode: string,
+    SubjectCodeMajor?: string | null,
+    SubjectCodeMinor?: string | null
+}
+
+const credentialQuery = `SELECT 
 
 hrcp.CredPersonId, hrcp.DateBirth, hrcp.NameFirst, hrcp.NameLast
 , hre.EmpId, hrcp.CALTIDESNumId
@@ -16,13 +29,13 @@ hrcp.CredPersonId, hrcp.DateBirth, hrcp.NameFirst, hrcp.NameLast
 
 
 
-FROM HRCredPerson hrcp
-JOIN HRCredPersonCred hrcpc ON hrcp.CredPersonId = hrcpc.CredPersonId
-LEFT JOIN HRCredPersonAuth hrcpa ON hrcpa.CredentialId = hrcpc.CredentialId
-LEFT JOIN HRCredPersonMajor hrcpmajor ON hrcpc.CredentialId = hrcpmajor.CredentialId
-LEFT JOIN HRCredPersonMinor hrcpminor ON hrcpc.CredentialId = hrcpminor.CredentialId
+FROM EscapeOnline_SLUSD.dbo.HRCredPerson hrcp
+JOIN EscapeOnline_SLUSD.dbo.HRCredPersonCred hrcpc ON hrcp.CredPersonId = hrcpc.CredPersonId
+LEFT JOIN EscapeOnline_SLUSD.dbo.HRCredPersonAuth hrcpa ON hrcpa.CredentialId = hrcpc.CredentialId
+LEFT JOIN EscapeOnline_SLUSD.dbo.HRCredPersonMajor hrcpmajor ON hrcpc.CredentialId = hrcpmajor.CredentialId
+LEFT JOIN EscapeOnline_SLUSD.dbo.HRCredPersonMinor hrcpminor ON hrcpc.CredentialId = hrcpminor.CredentialId
 
-LEFT JOIN HREmployment hre ON hre.NameFirst = hrcp.NameFirst
+LEFT JOIN EscapeOnline_SLUSD.dbo.HREmployment hre ON hre.NameFirst = hrcp.NameFirst
     AND hre.NameLast = hrcp.NameLast
     AND hre.DateBirth = hrcp.DateBirth
     AND hre.GenderCode = hrcp.GenderCode
@@ -32,16 +45,16 @@ AND hrcpc.DateArchived IS NULL
 --AND hrcpc.CredTitleCode IS NOT NULL
 --AND hrcp.NameLast LIKE '%Abadia%' AND hrcp.NameFirst LIKE '%Meli%'
 --AND hrcp.NameLast LIKE '%Jagr%' AND hrcp.NameFirst LIKE '%Lau%'
-```
+`
 
-async function updateCredentials() {
+async function updateCredentials(data: CredentialEscapeResponse[]) {
 
     const fs = require("fs");
     const csv = require("csv-parser");
     const { PrismaClient } = require("@prisma/client");
 
     const prisma = new PrismaClient();
-    const data = [];
+    // const data = [];
     const errorList = [];
     const table = prisma.teacherCredential;
     const supportEmail = "support@slusd.us";
@@ -162,15 +175,17 @@ async function updateCredentials() {
     }
 }
 
-export async function GET({ request }) {
+export async function GET(request: Request) {
     const sql = require("mssql");
     let conn
     try {
         conn = await sql.connect(escapeConfig);
 
-        const result = await conn.query("SELECT top 10 * FROM [EscapeOnline_SLUSD].[dbo].[HREmployment]");
+        const result:CredentialEscapeResponse[] = await conn.query(credentialQuery);
+        // const result = await conn.query("SELECT top 10 * FROM EscapeOnline_SLUSD.dbo.HREmployment");
         console.log(result);
         await conn.close();
+        updateCredentials(result)
         return NextResponse.json({
             schools: result
             })
