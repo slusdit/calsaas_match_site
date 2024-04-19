@@ -185,9 +185,9 @@ export async function GET(request: Request) {
         // const result = await conn.query("SELECT top 10 * FROM EscapeOnline_SLUSD.dbo.HREmployment");
         console.log(result);
         await conn.close();
-        updateCredentials(result)
+        await updateCredentials(result)
         return NextResponse.json({
-            schools: result
+            result
             })
     } catch (err) {
         console.error("SQL error: ", err);

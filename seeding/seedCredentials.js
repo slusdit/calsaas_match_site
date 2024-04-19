@@ -1,4 +1,4 @@
-export async function main() {
+async function main() {
   const fs = require("fs");
   const csv = require("csv-parser");
   const { PrismaClient } = require("@prisma/client");
