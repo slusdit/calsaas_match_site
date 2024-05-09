@@ -1,3 +1,4 @@
+'use client'
 import TeacherCard from "@/app/components/cards/TeacherCard"
 import { PrismaClient } from "@prisma/client"
 import { notFound } from "next/navigation"
@@ -6,6 +7,8 @@ import { TeacherCard as CardWithForm } from "./components/TeacherCard"
 import { ModeToggle } from "../components/buttons/ModeToggle"
 import TeacherTabs from "../components/teacherSearch/TeacherTabs"
 import TeacherData from "./components/TeacherData"
+// import { testEscapeQuery } from "@/lib/escape"
+import { Button } from "@/components/ui/button"
 
 const prisma = new PrismaClient()
 const testPage = async () => {
@@ -80,13 +83,11 @@ const teacher = await fetchTeacher({seid})
 const teachers = await fetchTeachers()
   
   return (
-    <>
-    <ModeToggle />
-      <div className="">
-      {/* <TeacherTabs teachers={teachers}/> */}
-      <TeacherData />
+    <div className="flex w-dvw h-full justify-center items-center">
+
+      <div className="text-2xl">Test Page</div>
+    
     </div>
-    </>
   )
 }
 
