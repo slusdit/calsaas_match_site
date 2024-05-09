@@ -13,6 +13,7 @@ import UnauthorizedButton from "../buttons/UnauthorizedButton";
 import { credentialAuthMatch, jp } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import TeacherListList from "./TeacherListList";
+import TeacherListDataTable from "./TeacherListDatatable";
 
 
 export default function TeacherSearch() {
@@ -78,6 +79,16 @@ export default function TeacherSearch() {
             title: 'List',
             tabContent: <TeacherListList 
                 key="list" 
+                teachers={teachers} 
+                doHighlight={doHighlight} 
+                completeSwitch={completeSwitch}
+                errorSwitch={errorSwitch}
+            />
+        },
+        {
+            title: 'Data Table',
+            tabContent: <TeacherListDataTable 
+                key="datatable" 
                 teachers={teachers} 
                 doHighlight={doHighlight} 
                 completeSwitch={completeSwitch}
