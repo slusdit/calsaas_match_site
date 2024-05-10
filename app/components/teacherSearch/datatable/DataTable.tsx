@@ -69,9 +69,9 @@ export function DataTable<TData, TValue>({
     }
   })
 
- 
 
- 
+
+
   const table = useReactTable<TeacherCardType>({
     // @ts-ignore
     data, columns,
@@ -98,7 +98,7 @@ export function DataTable<TData, TValue>({
   function handleScFilterChange(e: any) {
     return table.getColumn("sc")?.setFilterValue(e.target.value)
   }
-  function handleFilterChange(e: any, col:string) {
+  function handleFilterChange(e: any, col: string) {
     return table.getColumn(col)?.setFilterValue(e.target.value)
   }
 
@@ -116,7 +116,7 @@ export function DataTable<TData, TValue>({
 
     return Array.from(uniqueValues);
   }
- 
+
 
   return (
     <div>
@@ -127,31 +127,56 @@ export function DataTable<TData, TValue>({
           <div className="p-4">
             <h2 className="text-lg font-bold">Filters</h2>
           </div>
-          <div className="px-4 py-2">
-            <Input
-              placeholder="Filter by seid..."
-              value={(table.getColumn("seid")?.getFilterValue() as string) ?? ""}
-              onChange={e => handleSeidFilterChange(e)}
-              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
-            />
-            <Input
-              placeholder="Filter by SC"
-              value={(table.getColumn("sc")?.getFilterValue() as string) ?? ""}
-              onChange={e => handleFilterChange(e, "sc")}
-              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
-            />
-            <Input
-              placeholder="Filter by First Name"
-              value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
-              onChange={e => handleFilterChange(e, "firstName")}
-              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
-            />
-            <Input
-              placeholder="Filter by Last Name"
-              value={(table.getColumn("lastName")?.getFilterValue() as string) ?? ""}
-              onChange={e => handleFilterChange(e, "lastName")}
-              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
-            />
+          <div className="flex flex-col">
+            {/* Filter Group */}
+            <div className="flex gap-2">
+
+              
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  <Label htmlFor="first-name-filter"> First Name</Label>
+                  <Input
+                    id="first-name-filter"
+                    placeholder="Filter by First Name"
+                    value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
+                    onChange={e => handleFilterChange(e, "firstName")}
+                    className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <Label htmlFor="last-name-filter"> Last Name</Label>
+                  <Input
+                    id="last-name-filter"
+                    placeholder="Filter by Last Name"
+                    value={(table.getColumn("lastName")?.getFilterValue() as string) ?? ""}
+                    onChange={e => handleFilterChange(e, "lastName")}
+                    className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  <Label htmlFor="sc-filter"> SC</Label>
+                  <Input
+                    id="sc-filter"
+                    placeholder="Filter by SC"
+                    value={(table.getColumn("sc")?.getFilterValue() as string) ?? ""}
+                    onChange={e => handleFilterChange(e, "sc")}
+                    className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <Label htmlFor="seid-filter"> SEID</Label>
+                  <Input
+                    id="seid-filter"
+                    placeholder="Filter by seid..."
+                    value={(table.getColumn("seid")?.getFilterValue() as string) ?? ""}
+                    onChange={e => handleSeidFilterChange(e)}
+                    className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+                  />
+                </div>
+              </div>
+            </div>
 
 
             {/* <DataTableEmailFilter /> */}
