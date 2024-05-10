@@ -70,9 +70,9 @@ export function DataTable<TData, TValue>({
   })
 
   console.log({ existingTeachers })
-  console.log({ data })
+  console.log({ data }) 
 
-
+ 
   const table = useReactTable<TeacherCardType>({
     // @ts-ignore
     data, columns,
@@ -108,7 +108,7 @@ export function DataTable<TData, TValue>({
 
     return Array.from(uniqueValues);
   }
-
+  console.log(table.getColumn("matchCountBadges")?.getFacetedUniqueValues())
 
   return (
     <div>

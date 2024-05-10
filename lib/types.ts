@@ -1,8 +1,14 @@
 import { Teacher, Section, TeacherCredential } from "prisma/prisma-client"
 
+export type Counts = {
+  matchCount: number
+  noMatchCount: number
+  errorCount: number
+}
 export type TeacherCardType = Teacher & {
     sections?: Section[]
     credentials?: TeacherCredential[]
+    counts?: Counts 
   }
 
 

@@ -1,7 +1,7 @@
 'use client'
 import { Label } from "@/components/ui/label";
 import TeacherListGrid from "./TeacherListGrid";
-import { TeacherCardType } from "@/lib/types"
+import { ExpandRecursively, TeacherCardType } from "@/lib/types"
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from "react";
 import SchoolSelector from "../SchoolSelector";
@@ -17,6 +17,41 @@ import TeacherListDataTable from "./TeacherListDatatable";
 import GlobalFilterControls from "./GlobalFilterControls";
 import { School } from "lucide-react";
 
+export const countMatches = (teacher: TeacherCardType) => {
+    let matchCount = 0
+    let noMatchCount = 0
+    let errorCount = 0
+    if (teacher.sections) {
+        teacher.sections.forEach((section) => {
+            const matched = credentialAuthMatch({
+                credentials: teacher.credentials,
+                stateCourseAuth: section.course.authTableId
+            })
+
+
+            if (matched === 'match') {
+                matchCount++
+            }
+            if (matched === 'noAuth' || matched === 'noCredentials') {
+                errorCount++
+            }
+            if (matched === 'noMatch') {
+                noMatchCount++
+            }
+        });
+
+        return {
+            matchCount: matchCount,
+            noMatchCount: noMatchCount,
+            errorCount: errorCount
+        };
+    }
+    return {
+        matchCount: 0,
+        noMatchCount: 0,
+        errorCount: 99
+    }
+}
 
 export default function TeacherSearch() {
     const [teachers, setTeachers] = useState<TeacherCardType[]>([]);
@@ -57,8 +92,10 @@ export default function TeacherSearch() {
                     return {
                         ...teacher,
                         sections: updatedSections,
+                        counts: countMatches(teacher)
                     }
                 })
+                console.log(updatedTeachers)
                 setTeachers(updatedTeachers)
             }
         };
