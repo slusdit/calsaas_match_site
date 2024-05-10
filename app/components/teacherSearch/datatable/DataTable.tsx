@@ -95,6 +95,16 @@ export function DataTable<TData, TValue>({
   function handleSeidFilterChange(e: any) {
     return table.getColumn("seid")?.setFilterValue(e.target.value)
   }
+  function handleScFilterChange(e: any) {
+    return table.getColumn("sc")?.setFilterValue(e.target.value)
+  }
+  function handleFilterChange(e: any, col:string) {
+    return table.getColumn(col)?.setFilterValue(e.target.value)
+  }
+
+
+
+
 
   function getUniqueValues(data: [], key: string) {
     const uniqueValues = new Set()
@@ -122,6 +132,24 @@ export function DataTable<TData, TValue>({
               placeholder="Filter by seid..."
               value={(table.getColumn("seid")?.getFilterValue() as string) ?? ""}
               onChange={e => handleSeidFilterChange(e)}
+              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+            />
+            <Input
+              placeholder="Filter by SC"
+              value={(table.getColumn("sc")?.getFilterValue() as string) ?? ""}
+              onChange={e => handleFilterChange(e, "sc")}
+              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+            />
+            <Input
+              placeholder="Filter by First Name"
+              value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
+              onChange={e => handleFilterChange(e, "firstName")}
+              className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
+            />
+            <Input
+              placeholder="Filter by Last Name"
+              value={(table.getColumn("lastName")?.getFilterValue() as string) ?? ""}
+              onChange={e => handleFilterChange(e, "lastName")}
               className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
             />
 

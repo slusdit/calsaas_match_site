@@ -63,6 +63,30 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         enableHiding: false,
     },
     {
+        accessorKey: 'sc',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    SEID
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+            return (
+                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
+
+                <div className="text-center">
+                    {row.original.sc}
+                </div>
+                </Link>
+            )
+        }
+    },
+    {
         accessorKey: 'seid',
         header: ({ column }) => {
             return (

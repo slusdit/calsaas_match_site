@@ -47,6 +47,9 @@ run `node fileName.mjs`
   - [ ] Add filter
   - [ ] Replace `Loading...` with `<Skeleton />`
 
+- [ ] DataTable
+  - [ ] Replace SC col with school logo?
+
 - [ ] Exporter
   - [ ] explode CALSASS Counts to columns
   - [ ] Export to CSV
