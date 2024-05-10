@@ -1,6 +1,7 @@
 
-import { Table } from '@tanstack/react-table'
-import xlsx, { IJsonSheet } from 'json-as-xlsx'
+import { Row, Table } from '@tanstack/react-table'
+import xlsx, { IContent, IJsonSheet } from 'json-as-xlsx'
+import { TeacherCardType } from './types'
 export function downloadToExcel(
     table: Table<any>,
     // exportAll: boolean
@@ -10,7 +11,7 @@ export function downloadToExcel(
     const { rowSelection, columnFilters, columnVisibility } = table.options.state
     // console.log(exportAll)
 
-    let filteredData = table.getRowModel().rows.map((row) => row.original)
+    let filteredData= table.getRowModel().rows.map((row:Row<any>) => row.original)
 
     // if (!exportAll) {
 
@@ -26,10 +27,10 @@ export function downloadToExcel(
             console.log(rowSelection)
             filteredData = table.getSelectedRowModel()
                 .rows.map((row) => row.original)
+            }
+            // }
+            
             console.log({ filteredData })
-        }
-    // }
-
 
     let columns: IJsonSheet[] = [
         {
@@ -38,8 +39,11 @@ export function downloadToExcel(
                 { label: 'SEID', value: 'seid' },
                 { label: 'Last Name', value: 'lastName' },
                 { label: 'First Name', value: 'firstName' },
-                { label: 'Credential Count', value: 'credentialCount' },
-                { label: 'Section Count', value: 'sectionCount' },
+                { label: 'Credential Count', value: 'credentials.length' },
+                { label: 'Section Count', value: 'sections.length' },
+                { label: 'Error', value: 'counts.errorCount' },
+                { label: 'Warning', value: 'counts.noMatchCount' },
+                { label: 'Complete', value: 'counts.matchCount' },
                 { label: 'Match Count', value: (row) => (row?.matchCountBadges?.matchCount ? row.matchCountBadges.matchCount : 'matchCountBadges') },
 
                 // { label: 'Date', value: (row: any) => row.date ? new Date(row.date).toLocaleDateString() : '' },

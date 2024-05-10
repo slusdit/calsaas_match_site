@@ -240,7 +240,7 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
     },
     {
         accessorKey: 'completeCount',
-        header: 'Complete Count',
+        header: 'C Count',
 
         cell: ({ row }) => {
             const teacher = row.original;

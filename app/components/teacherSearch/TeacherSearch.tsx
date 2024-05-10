@@ -92,7 +92,8 @@ export default function TeacherSearch() {
                     return {
                         ...teacher,
                         sections: updatedSections,
-                        counts: countMatches(teacher)
+                        counts: countMatches(teacher),
+                        sc: teacher.sections?.[0]?.sc
                     }
                 })
                 console.log(updatedTeachers)
