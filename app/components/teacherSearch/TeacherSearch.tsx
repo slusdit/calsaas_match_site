@@ -14,6 +14,8 @@ import { credentialAuthMatch, jp } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import TeacherListList from "./TeacherListList";
 import TeacherListDataTable from "./TeacherListDatatable";
+import GlobalFilterControls from "./GlobalFilterControls";
+import { School } from "lucide-react";
 
 
 export default function TeacherSearch() {
@@ -66,6 +68,16 @@ export default function TeacherSearch() {
 
     const tabsContent: TabContent[] = [
         {
+            title: 'Data Table',
+            tabContent: <TeacherListDataTable
+                key="datatable"
+                teachers={teachers}
+                doHighlight={doHighlight}
+                completeSwitch={completeSwitch}
+                errorSwitch={errorSwitch}
+            />
+        },
+        {
             title: 'Grid',
             tabContent: <TeacherListGrid
                 key="grid"
@@ -77,89 +89,51 @@ export default function TeacherSearch() {
         },
         {
             title: 'List',
-            tabContent: <TeacherListList 
-                key="list" 
-                teachers={teachers} 
-                doHighlight={doHighlight} 
+            tabContent: <TeacherListList
+                key="list"
+                teachers={teachers}
+                doHighlight={doHighlight}
                 completeSwitch={completeSwitch}
                 errorSwitch={errorSwitch}
             />
         },
-        {
-            title: 'Data Table',
-            tabContent: <TeacherListDataTable 
-                key="datatable" 
-                teachers={teachers} 
-                doHighlight={doHighlight} 
-                completeSwitch={completeSwitch}
-                errorSwitch={errorSwitch}
-            />
-        }
     ]
 
     return (
         <div className="flex flex-col">
-            <div className="search-bar p-6 m-auto">
-                <div className=" flex w-full items-center gap-10">
-                    <div>
+            {/* <GlobalFilterControls
+                searchString={searchString}
+                handleInputChange={handleInputChange}
+                doHighlight={doHighlight}
+                setDoHighlight={setDoHighlight}
+                setCompleteSwitch={setCompleteSwitch}
+                setSelectedSchool={setSelectedSchool}
+            /> */}
+            <div>
 
-                        <Label htmlFor="searchOption">
-                            Search for Teachers:
-                        </Label>
-                        <Input
-                            id="searchOption"
-                            type="text"
-                            value={searchString}
-                            onChange={handleInputChange}
-                            placeholder="Last name / SEID"
-                        />
-                    </div>
-                    <div>
-                        <SchoolSelector onSchoolChange={setSelectedSchool} />
-                    </div>
-                </div>
-                <div className="p-2 flex flex-col min-w-full gap-5 justify-center">
+                {session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user?.role?.includes(role)) ?
+                    <div className="m-auto">
+                        <SchoolSelector
 
-                    <div className="align-middle text-center flex">
-                        <Switch
-                            id="highlight-switch"
-                            checked={doHighlight}
-                            onCheckedChange={() => setDoHighlight(current => !current)}
-                            aria-readonly
+                            onSchoolChange={setSelectedSchool}
                         />
-                        <div className="ml-4">
-                            <Label htmlFor="highlight-switch">
-                                Highlight
-                            </Label>
-                        </div>
+                         {/* <GlobalFilterControls
+                searchString={searchString}
+                handleInputChange={handleInputChange}
+                doHighlight={doHighlight}
+                setDoHighlight={setDoHighlight}
+                setCompleteSwitch={setCompleteSwitch}
+                setSelectedSchool={setSelectedSchool}
+            /> */}
+                        <TeacherTabs tabs={tabsContent} />
                     </div>
-                    <div className="align-middle text-center flex">
-                        <Switch
-                            id="complete-switch"
-                            checked={doHighlight}
-                            onCheckedChange={() => setCompleteSwitch(current => !current)}
-                            aria-readonly
-                        />
-                        <div className="ml-4">
-                            <Label htmlFor="complete-switch">
-                                Show Complete
-                            </Label>
-                        </div>
+                    :
+                    <div className="float text-center">
+                        <UnauthorizedButton role={{ authorizedRoles: authorizedRoles, adminRoles: adminRoles }} />
                     </div>
-                </div>
 
+                }
             </div>
-            {session?.status === 'authenticated' && authorizedRoles.some(role => session?.data?.user?.role?.includes(role)) ?
-                <div className="m-auto">
-
-                    <TeacherTabs tabs={tabsContent} />
-                </div>
-                :
-                <div className="float text-center">
-                    <UnauthorizedButton role={{ authorizedRoles: authorizedRoles, adminRoles: adminRoles }} />
-                </div>
-
-            }
         </div>
     );
 }

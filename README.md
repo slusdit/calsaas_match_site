@@ -44,7 +44,18 @@ run `node fileName.mjs`
 ## TODO
 
 - [ ] Frontend
-  -[ ] Fix `Loading...`
+  - [ ] Add filter
+  - [ ] Replace `Loading...` with `<Skeleton />`
+
+- [ ] Exporter
+  - [ ] explode CALSASS Counts to columns
+  - [ ] Export to CSV
+  - [X] Take in filtered data
+  - [X] Export to XLSX
+
+  - [X] Fix `Loading...`
+  - [X] Add search bar
+
   - Highlight Switch
   - [ ] CRUD for teacher demographics
   - [X] Teacher List page

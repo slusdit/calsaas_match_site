@@ -4,6 +4,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { Suspense } from "react"
 
 
 export interface TabContent {
@@ -56,11 +57,13 @@ export default function TeacherTabs({ tabs }: { tabs?: TabContent[] }) {
             </TabsTrigger>
           ))}
         </TabsList>
-      {tabs.map((tab, key) => (
-        <TabsContent key={key} value={tab.title} className="w-full">
-          {tab.tabContent}
-        </TabsContent>
-      ))}
+        {tabs.map((tab, key) => (
+          <TabsContent key={key} value={tab.title} className="w-full">
+            <Suspense fallback={<div>Loading...</div>}>
+              {tab.tabContent}
+            </Suspense>
+          </TabsContent>
+        ))}
       </div>
 
     </Tabs>

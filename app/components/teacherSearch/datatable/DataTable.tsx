@@ -94,8 +94,8 @@ export function DataTable<TData, TValue>({
   console.log({ rowSelection })
   console.log({ table })
 
-  function handleEmailFilterChange(e: any) {
-    return table.getColumn("email")?.setFilterValue(e.target.value)
+  function handleSeidFilterChange(e: any) {
+    return table.getColumn("seid")?.setFilterValue(e.target.value)
   }
 
   function getUniqueValues(data: [], key: string) {
@@ -121,9 +121,9 @@ export function DataTable<TData, TValue>({
           </div>
           <div className="px-4 py-2">
             <Input
-              placeholder="Filter by email..."
-              value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-              onChange={e => handleEmailFilterChange(e)}
+              placeholder="Filter by seid..."
+              value={(table.getColumn("seid")?.getFilterValue() as string) ?? ""}
+              onChange={e => handleSeidFilterChange(e)}
               className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
             />
 
@@ -213,6 +213,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="group"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

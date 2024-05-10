@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { DataTable } from './datatable/DataTable';
 import { columns } from './datatable/columns';
 import { type TeacherCardType } from '@/lib/types';
@@ -19,7 +20,9 @@ export default async function TeacherListDatatable({
     return (
         <section className='pt-6'>
             <div className="container">
+            {/* <Suspense fallback={<div>Loading...</div>}> */}
                 <DataTable columns={columns} data={teachers}  />
+            {/* </Suspense> */}
             </div>
         </section>
     )

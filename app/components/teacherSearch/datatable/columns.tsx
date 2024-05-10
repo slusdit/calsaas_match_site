@@ -19,6 +19,7 @@ import { credentialAuthMatch, jp } from "@/lib/utils";
 import { type TeacherCardType } from "@/lib/types"
 import { type Teacher } from "@prisma/client"
 import MatchCountBadges from "../../cards/MatchCountBadges"
+import Link from "next/link"
 
 // export type Payment = {
 //     id: string
@@ -109,9 +110,12 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         },
         cell: ({ row }) => {
             return (
+                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
+
                 <div className="text-center">
                     {row.original.seid}
                 </div>
+                </Link>
             )
         }
     },
@@ -130,9 +134,9 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         },
         cell: ({ row }) => {
             return (
-                <div className="text-center">
+                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
                     {row.original.lastName}
-                </div>
+                </Link>
             )
         }
     },
@@ -151,9 +155,12 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         },
         cell: ({ row }) => {
             return (
-                <div className="text-center">
-                    {row.original.firstName}
-                </div>
+                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
+
+                    <div className="text-center">
+                        {row.original.firstName}
+                    </div>
+                </Link>
             )
         }
     },
@@ -172,10 +179,14 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         },
 
         cell: ({ row }) => {
+            const noCredentials = row.original.credentials?.length === 0 ? 'bg-destructive text-destructive-foreground rounded-2xl w-8 m-auto' : ''
             return (
-                <div className="text-center">
-                    {row.original.credentials?.length}
-                </div>
+                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
+
+                    <div className={`text-center ${noCredentials}`}>
+                        {row.original.credentials?.length}
+                    </div>
+                </Link>
             )
         }
     },
@@ -195,10 +206,13 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
 
         cell: ({ row }) => {
             return (
-                <div className="text-center">
-                    {row.original.sections?.length}
+                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
 
-                </div>
+                    <div className="text-center">
+                        {row.original.sections?.length}
+
+                    </div>
+                </Link>
             )
 
         }
@@ -209,16 +223,16 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         header: 'CALSAAS Check',
 
         cell: ({ row }) => {
-            console.log({row})
             const teacher = row.original;
             const counts = countMatches(teacher);
+            console.log({ counts })
             return (
                 <span className="text-center">
 
                     <MatchCountBadges
                         counts={counts}
                         courseCount={teacher.sections?.length as number}
-                        />
+                    />
                 </span>
             )
 

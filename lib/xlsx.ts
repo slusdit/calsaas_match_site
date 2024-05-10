@@ -35,11 +35,12 @@ export function downloadToExcel(
         {
             sheet: 'Plex Requests',
             columns: [
-                { label: 'SEID', value: 'title' },
+                { label: 'SEID', value: 'seid' },
                 { label: 'Last Name', value: 'lastName' },
                 { label: 'First Name', value: 'firstName' },
-                // { label: 'Credential Count', value: 'credentialCount' },
-                // { label: 'Section Count', value: 'sectionCount' },
+                { label: 'Credential Count', value: 'credentialCount' },
+                { label: 'Section Count', value: 'sectionCount' },
+                { label: 'Match Count', value: (row) => (row?.matchCountBadges?.matchCount ? row.matchCountBadges.matchCount : 'matchCountBadges') },
 
                 // { label: 'Date', value: (row: any) => row.date ? new Date(row.date).toLocaleDateString() : '' },
             ],
