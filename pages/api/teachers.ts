@@ -75,7 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       res.status(200).json(teachers);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error Try failed' });
+      res.status(500).json({ error: `Internal Server Error. Error ${error}` });
     }
   } else {
     res.status(405).end(); // Method Not Allowed

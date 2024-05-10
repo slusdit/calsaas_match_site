@@ -209,12 +209,16 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         header: 'CALSAAS Check',
 
         cell: ({ row }) => {
+            console.log({row})
+            const teacher = row.original;
+            const counts = countMatches(teacher);
             return (
                 <span className="text-center">
 
-                    {/* <MatchCountBadges
-                        counts={}
-                        /> */}
+                    <MatchCountBadges
+                        counts={counts}
+                        courseCount={teacher.sections?.length as number}
+                        />
                 </span>
             )
 
