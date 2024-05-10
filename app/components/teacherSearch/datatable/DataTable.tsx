@@ -53,24 +53,23 @@ export function DataTable<TData, TValue>({
 
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>([])
   // const [plexRequests, setPlexRequests] = useState<ColumnFiltersState>([])
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
   useEffect(() => {
-    setColumnVisibility({ requested: true })
+    setColumnVisibility({ errorCount: false, completeCount: false, warningCount: false })
     setColumnFilters([{ id: "requested", value: true }])
   }, [])
 
   const existingTeachers = data.filter(t => {
-    console.log(t.seid)
+
     if (t.seid != null) {
-      console.log(t.empId)
+
       return t
     }
   })
 
-  console.log({ existingTeachers })
-  console.log({ data }) 
+ 
 
  
   const table = useReactTable<TeacherCardType>({
@@ -91,8 +90,7 @@ export function DataTable<TData, TValue>({
       rowSelection,
     }
   })
-  console.log({ rowSelection })
-  console.log({ table })
+
 
   function handleSeidFilterChange(e: any) {
     return table.getColumn("seid")?.setFilterValue(e.target.value)
@@ -108,7 +106,7 @@ export function DataTable<TData, TValue>({
 
     return Array.from(uniqueValues);
   }
-  console.log(table.getColumn("matchCountBadges")?.getFacetedUniqueValues())
+ 
 
   return (
     <div>

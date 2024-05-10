@@ -191,7 +191,7 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
 
         cell: ({ row }) => {
             const teacher = row.original;
-            const counts = countMatches(teacher);
+            const counts = row.original.counts
             console.log({ counts })
             return (
                 <span className="text-center">
@@ -206,7 +206,71 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         }
 
     },
+    {
+        accessorKey: 'needsReview',
+        header: 'Final',
 
+        cell: ({ row }) => {
+            const teacher = row.original;
+            const counts = teacher.counts
+            return (
+                <span className="text-center">
+                    { teacher.counts && teacher.counts?.errorCount > 0 || teacher.counts && teacher.counts?.noMatchCount > 0 ? 'Needs Review' : 'Complete'}
+                </span>
+            )
+
+        }
+
+    },
+    {
+        accessorKey: 'errorCount',
+        header: 'Error Count',
+
+        cell: ({ row }) => {
+            const teacher = row.original;
+            const counts = teacher.counts
+            return (
+                <span className="text-center">
+                    { counts?.errorCount}
+                </span>
+            )
+
+        }
+
+    },
+    {
+        accessorKey: 'completeCount',
+        header: 'Complete Count',
+
+        cell: ({ row }) => {
+            const teacher = row.original;
+            const counts = teacher.counts
+            return (
+                <span className="text-center">
+                    { counts?.matchCount}
+                </span>
+            )
+
+        }
+
+    },
+    {
+        accessorKey: 'warningCount',
+        header: 'Warning Count',
+
+        cell: ({ row }) => {
+            const teacher = row.original;
+            const counts = teacher.counts
+            return (
+                <span className="text-center">
+                    { counts?.noMatchCount}
+                </span>
+            )
+
+        }
+
+    },
+    
     // {
     //     accessorKey: 'status',
     //     header: 'Status'
