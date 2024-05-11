@@ -247,6 +247,22 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
 
     },
     {
+        accessorKey: 'complete',
+        header: 'Complete',
+
+        cell: ({ row }) => {
+            const teacher = row.original;
+            const counts = teacher.counts
+            return (
+                <span className="text-center">
+                    { teacher.counts && teacher.counts?.errorCount === 0 && teacher.counts?.noMatchCount === 0 ? true: false}
+                </span>
+            )
+
+        }
+
+    },
+    {
         accessorKey: 'errorCount',
         header: 'Error Count',
 

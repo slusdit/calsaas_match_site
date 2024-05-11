@@ -48,6 +48,7 @@ run `node fileName.mjs`
   - [ ] Replace `Loading...` with `<Skeleton />`
 
 - [ ] DataTable
+  - [ ] Fix `Error Only` filter
   - [ ] Replace SC col with school logo?
 
 - [ ] Exporter

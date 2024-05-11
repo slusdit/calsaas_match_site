@@ -57,7 +57,12 @@ export function DataTable<TData, TValue>({
   // const [plexRequests, setPlexRequests] = useState<ColumnFiltersState>([])
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
   useEffect(() => {
-    setColumnVisibility({ errorCount: false, completeCount: false, warningCount: false })
+    setColumnVisibility({
+       errorCount: false,
+      completeCount: false, 
+      warningCount: false, 
+      complete: false
+    })
     setColumnFilters([{ id: "requested", value: true }])
   }, [])
 
@@ -98,10 +103,28 @@ export function DataTable<TData, TValue>({
   function handleScFilterChange(e: any) {
     return table.getColumn("sc")?.setFilterValue(e.target.value)
   }
-  function handleFilterChange(e: any, col: string) {
+  function handleStringFilterChange(e: any, col: string) {
     return table.getColumn(col)?.setFilterValue(e.target.value)
   }
 
+  function handleBooleanFilterChange(e: any, col: string) {
+        
+    if( !table.getColumn(col)?.setFilterValue()){
+      console.log({e})
+      console.log(e.target)
+      table.getColumn(col)?.setFilterValue(e.target)
+      return
+    }
+    table.getColumn(col)?.setFilterValue(false)
+    
+  }
+  // (e) => {
+  //   if (table.getColumn("requested")?.getFilterValue() as boolean) {
+  //     table.getColumn('requested')?.setFilterValue(undefined)
+  //     return
+  //   }
+  //   table.getColumn('requested')?.setFilterValue(true)
+  // }
 
 
 
@@ -139,7 +162,7 @@ export function DataTable<TData, TValue>({
                     id="first-name-filter"
                     placeholder="Filter by First Name"
                     value={(table.getColumn("firstName")?.getFilterValue() as string) ?? ""}
-                    onChange={e => handleFilterChange(e, "firstName")}
+                    onChange={(e) => handleStringFilterChange(e, "firstName")}
                     className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
                   />
                 </div>
@@ -149,7 +172,7 @@ export function DataTable<TData, TValue>({
                     id="last-name-filter"
                     placeholder="Filter by Last Name"
                     value={(table.getColumn("lastName")?.getFilterValue() as string) ?? ""}
-                    onChange={e => handleFilterChange(e, "lastName")}
+                    onChange={e => handleStringFilterChange(e, "lastName")}
                     className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
                   />
                 </div>
@@ -161,7 +184,7 @@ export function DataTable<TData, TValue>({
                     id="sc-filter"
                     placeholder="Filter by SC"
                     value={(table.getColumn("sc")?.getFilterValue() as string) ?? ""}
-                    onChange={e => handleFilterChange(e, "sc")}
+                    onChange={e => handleStringFilterChange(e, "sc")}
                     className="max-w-sm shadow-sm rounded-md border-gray-300 px-3 py-2"
                   />
                 </div>
@@ -181,17 +204,11 @@ export function DataTable<TData, TValue>({
 
             {/* <DataTableEmailFilter /> */}
             <div className="flex items-center mt-4">
-              <Label className="ml-2" htmlFor="request-filter">Errors Only</Label>
+              <Label className="ml-2" htmlFor="error-only-filter">Errors Only</Label>
               <Switch
-                id="request-filter"
-                // checked={(table.getColumn("requested")?.getFilterValue() as boolean) ?? false}
-                // onCheckedChange={(e) => {
-                //   if (table.getColumn("requested")?.getFilterValue() as boolean) {
-                //     table.getColumn('requested')?.setFilterValue(undefined)
-                //     return
-                //   }
-                //   table.getColumn('requested')?.setFilterValue(true)
-                // }}
+                id="error-only-filter"
+                checked={(table.getColumn("complete")?.getFilterValue() as boolean) ?? false}
+                onCheckedChange={e => handleBooleanFilterChange(e, "complete")}
                 className="ml-2 rounded-full ring-2 ring-primary"
               />
             </div>
