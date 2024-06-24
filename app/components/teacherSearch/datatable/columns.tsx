@@ -125,8 +125,11 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         },
         cell: ({ row }) => {
             return (
-                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
-                    {row.original.lastName}
+                <Link href={`/teacher/${row.original.seid}`} className="group-hover:underline">
+                    <div className="text-center capitalize">
+
+                    {row.original.lastName.toLowerCase()}
+                    </div>
                 </Link>
             )
         }
@@ -146,10 +149,10 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
         },
         cell: ({ row }) => {
             return (
-                <Link href={`/teacher/${row.original.seid}`} className="text-center group-hover:underline">
+                <Link href={`/teacher/${row.original.seid}`} className="group-hover:underline">
 
-                    <div className="text-center">
-                        {row.original.firstName}
+                    <div className="text-center capitalize">
+                        {row.original.firstName.toLocaleLowerCase()}
                     </div>
                 </Link>
             )
@@ -232,7 +235,7 @@ export const columns: ColumnDef<TeacherCardType, unknown>[] = [
     },
     {
         accessorKey: 'needsReview',
-        header: 'Final',
+        header: 'Status',
 
         cell: ({ row }) => {
             const teacher = row.original;
