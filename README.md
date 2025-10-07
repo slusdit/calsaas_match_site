@@ -33,6 +33,12 @@ run `node fileName.mjs`
 
 ## Seed Order
 
+For a fresh database, run from the seeding directory:
+
+```js
+  node .\resetAndSeed.js
+```
+
 - School
 - Course
 - Auth

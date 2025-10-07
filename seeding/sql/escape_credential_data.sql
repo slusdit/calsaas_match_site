@@ -26,6 +26,7 @@ LEFT JOIN HREmployment hre ON hre.NameFirst = hrcp.NameFirst
 
 WHERE 1=1
 AND hrcpc.DateArchived IS NULL
+AND hrcp.CredPersonStatusCode = 'A'
 --AND hrcpc.CredTitleCode IS NOT NULL
 --AND hrcp.NameLast LIKE '%Abadia%' AND hrcp.NameFirst LIKE '%Meli%'
 --AND hrcp.NameLast LIKE '%Jagr%' AND hrcp.NameFirst LIKE '%Lau%'

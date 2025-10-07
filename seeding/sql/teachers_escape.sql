@@ -7,3 +7,4 @@ SELECT distinct [CredPersonId] as 'credPersonId'
       ,[CALTIDESNumId] as 'caltidesNumId'
   FROM [EscapeOnline_SLUSD].[dbo].[HRCredPerson]
   WHERE CALTIDESNumId is not null
+  and CredPersonStatusCode = 'A'
