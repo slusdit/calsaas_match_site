@@ -25,7 +25,7 @@ export default function MainHeader() {
                 <Button asChild variant="link" className="text-xl text-title-foreground font-bold hover">
 
                     <Link href="/">
-                        Calsaas Early Warning
+                        SLUSD Credential Match
                     </Link>
                 </Button>
             </div>

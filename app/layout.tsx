@@ -14,8 +14,8 @@ import MainFooter from './components/layout/MainFooter'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Calsaas Early Warning',
-  description: 'Calasas Early Warning',
+  title: 'SLUSD Credential Match',
+  description: 'SLUSD Credential Match',
 }
 
 export default async function RootLayout({
